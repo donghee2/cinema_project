@@ -55,11 +55,11 @@ public class MainController {
 		int result = nservice.insertNonMember(ndto);
 		ndto = nservice.nonMemberLogin(ndto);
 		if(ndto != null) {
-			session.setAttribute("nlogin", true);
+			session.setAttribute("login", true);
 			session.setAttribute("ndto", ndto);
 			return "redirect:/";
 		} else {
-			session.setAttribute("nlogin", false);
+			session.setAttribute("login", false);
 			return "nonmember_login";
 		}
 	}
