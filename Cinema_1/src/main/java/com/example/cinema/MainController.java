@@ -6,14 +6,18 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import com.example.cinema.dto.MemberDTO;
+import com.example.cinema.dto.NonMemberDTO;
 import com.example.cinema.service.MemberService;
+import com.example.cinema.service.NonMemberService;
 
 @Controller
 public class MainController {
 	private MemberService service;
+	private NonMemberService nservice;
 
-	public MainController(MemberService service) {
+	public MainController(MemberService service, NonMemberService nservice) {
 		this.service = service;
+		this.nservice = nservice;
 	}
 	
 	@RequestMapping("/")
@@ -38,6 +42,25 @@ public class MainController {
 		} else {
 			session.setAttribute("login", false);
 			return "login";
+		}
+	}
+	
+	@RequestMapping("/nonMemberLoginView.do")
+	public String nonMemberLoginView() {
+		return "nonmember_login";
+	}
+	
+	@RequestMapping("/nonMemberLogin.do")
+	public String nonMemberLogin(NonMemberDTO ndto, HttpSession session) {
+		int result = nservice.insertNonMember(ndto);
+		ndto = nservice.nonMemberLogin(ndto);
+		if(ndto != null) {
+			session.setAttribute("nlogin", true);
+			session.setAttribute("ndto", ndto);
+			return "redirect:/";
+		} else {
+			session.setAttribute("nlogin", false);
+			return "nonmember_login";
 		}
 	}
 	

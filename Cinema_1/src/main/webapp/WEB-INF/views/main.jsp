@@ -22,6 +22,9 @@
 		<form action="loginView.do">
 			<button>로그인</button>
 		</form>
+		<form action="nonMemberLoginView.do">
+			<button>비회원 로그인</button>
+		</form>
 	<%	
 	}
 %>
