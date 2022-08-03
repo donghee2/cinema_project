@@ -2,12 +2,12 @@ package com.example.cinema.dto;
 
 import org.apache.ibatis.type.Alias;
 
-@Alias("nonmember")
-public class NonMemberDTO {
+@Alias("guest")
+public class GuestDTO {
 	private String nEmail;
 	private String nName;
 
-	public NonMemberDTO(String nEmail, String nName) {
+	public GuestDTO(String nEmail, String nName) {
 		this.nEmail = nEmail;
 		this.nName = nName;
 	}

@@ -5,19 +5,19 @@ import javax.servlet.http.HttpSession;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 
+import com.example.cinema.dto.GuestDTO;
 import com.example.cinema.dto.MemberDTO;
-import com.example.cinema.dto.NonMemberDTO;
+import com.example.cinema.service.GuestService;
 import com.example.cinema.service.MemberService;
-import com.example.cinema.service.NonMemberService;
 
 @Controller
 public class MainController {
 	private MemberService service;
-	private NonMemberService nservice;
+	private GuestService gservice;
 
-	public MainController(MemberService service, NonMemberService nservice) {
+	public MainController(MemberService service, GuestService gservice) {
 		this.service = service;
-		this.nservice = nservice;
+		this.gservice = gservice;
 	}
 	
 	@RequestMapping("/")
@@ -51,12 +51,12 @@ public class MainController {
 	}
 	
 	@RequestMapping("/nonMemberLogin.do")
-	public String nonMemberLogin(NonMemberDTO ndto, HttpSession session) {
-		int result = nservice.insertNonMember(ndto);
-		ndto = nservice.nonMemberLogin(ndto);
-		if(ndto != null) {
+	public String nonMemberLogin(GuestDTO gdto, HttpSession session) {
+		int result = gservice.insertGuest(gdto);
+		gdto = gservice.guestLogin(gdto);
+		if(gdto != null) {
 			session.setAttribute("login", true);
-			session.setAttribute("ndto", ndto);
+			session.setAttribute("ndto", gdto);
 			return "redirect:/";
 		} else {
 			session.setAttribute("login", false);
