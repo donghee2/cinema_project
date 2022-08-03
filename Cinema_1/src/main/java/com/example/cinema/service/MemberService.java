@@ -35,6 +35,13 @@ public class MemberService {
 		return mapper.deleteMember(userEmail, userPasswd);
 	}
 
+	public MemberDTO selectUserEmail(String userName, int userTel) {
+		Map<String, Object> map = new HashMap<String, Object>();
+		map.put("userName", userName);
+		map.put("userTel", userTel);
+		return mapper.selectUserEmail(map);
+	}
+
 
 
 

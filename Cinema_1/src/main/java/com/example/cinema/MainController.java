@@ -3,6 +3,7 @@ package com.example.cinema;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import com.example.cinema.dto.GuestDTO;
@@ -102,6 +103,21 @@ public class MainController {
 		service.deleteMamber(userEmail, userPasswd);
 		session.invalidate();
 		return "redirect:/";
+	}
+	
+	@RequestMapping("/findIdView.do")
+	public String findIdView() {
+		return "find_id";
+	}
+	
+	@RequestMapping("findId.do")
+	public String findId(String userName, int userTel, Model model) {
+//		MemberDTO dto = 
+		service.selectUserEmail(userName, userTel); 
+		System.out.println(userTel);
+		System.out.println(userName);
+//		model.addAttribute("find", dto.getUserEmail());
+		return "find_id";
 	}
 	
 	
