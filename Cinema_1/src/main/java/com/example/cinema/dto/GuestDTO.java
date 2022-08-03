@@ -4,34 +4,36 @@ import org.apache.ibatis.type.Alias;
 
 @Alias("guest")
 public class GuestDTO {
-	private String nEmail;
-	private String nName;
+	private String gEmail;
+	private String gName;
 
-	public GuestDTO(String nEmail, String nName) {
-		this.nEmail = nEmail;
-		this.nName = nName;
+	public GuestDTO(String gEmail, String gName) {
+		this.gEmail = gEmail;
+		this.gName = gName;
 	}
 
-	public String getnEmail() {
-		return nEmail;
+	public String getgEmail() {
+		return gEmail;
 	}
 
-	public void setnEmail(String nEmail) {
-		this.nEmail = nEmail;
+	public void setgEmail(String gEmail) {
+		this.gEmail = gEmail;
 	}
 
-	public String getnName() {
-		return nName;
+	public String getgName() {
+		return gName;
 	}
 
-	public void setnName(String nName) {
-		this.nName = nName;
+	public void setgName(String gName) {
+		this.gName = gName;
 	}
 
 	@Override
 	public String toString() {
-		return "NonMemberDTO [nEmail=" + nEmail + ", nName=" + nName + "]";
+		return "GuestDTO [gEmail=" + gEmail + ", gName=" + gName + "]";
 	}
+
+	
 	
 	
 }
