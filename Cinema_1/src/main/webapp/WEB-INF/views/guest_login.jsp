@@ -9,7 +9,7 @@
 <body>
 	<section>
 		<h2>비회원 예매</h2>
-		<form action="nonMemberLogin.do">
+		<form action="guestLogin.do">
 			<label for="nEmail">이메일</label>
 			<input type="text" name="nEmail">
 			<label for="nName">이름</label>

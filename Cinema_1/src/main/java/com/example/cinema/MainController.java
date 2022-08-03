@@ -45,12 +45,12 @@ public class MainController {
 		}
 	}
 	
-	@RequestMapping("/nonMemberLoginView.do")
+	@RequestMapping("/guestLoginView.do")
 	public String nonMemberLoginView() {
-		return "nonmember_login";
+		return "guest_login";
 	}
 	
-	@RequestMapping("/nonMemberLogin.do")
+	@RequestMapping("/guestLogin.do")
 	public String nonMemberLogin(GuestDTO gdto, HttpSession session) {
 		int result = gservice.insertGuest(gdto);
 		gdto = gservice.guestLogin(gdto);
@@ -60,7 +60,7 @@ public class MainController {
 			return "redirect:/";
 		} else {
 			session.setAttribute("login", false);
-			return "nonmember_login";
+			return "guest_login";
 		}
 	}
 	
