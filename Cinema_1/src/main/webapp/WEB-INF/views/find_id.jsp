@@ -7,6 +7,15 @@
 <meta charset="UTF-8">
 <title>Insert title here</title>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<script type="text/javascript">
+	$(function() {
+		$("#btn_find").click(function(){
+			$(".find_result").html("<input type='text' name='userEmail' placeholder='${requestScope.find.userEmail }'>");
+			location.reload();
+		})
+
+	});
+</script>
 </head>
 <body>
 	<section>
@@ -16,10 +25,10 @@
 			<input type="text" name="userName">
 			<label for="userTel">핸드폰 번호</label>
 			<input type="text" name="userTel">
-			<button>아이디 찾기</button>
+			<button id="btn_find">아이디 찾기</button>
 		</form>
-		<div>
-			<input type="text" name="userEmail" placeholder="${requestScope.find.userEmail }">
+		<div class="find_result">
+			<!--<input type="text" name="userEmail" placeholder="${requestScope.find.userEmail }">  -->
 		</div>
 	</section>
 </body>

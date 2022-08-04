@@ -112,14 +112,23 @@ public class MainController {
 	
 	@RequestMapping("findId.do")
 	public String findId(String userName, int userTel, Model model) {
-//		MemberDTO dto = 
-		service.selectUserEmail(userName, userTel); 
+		MemberDTO dto =	service.selectUserEmail(userName, userTel); 
 		System.out.println(userTel);
 		System.out.println(userName);
-//		model.addAttribute("find", dto.getUserEmail());
+		model.addAttribute("find", dto);
 		return "find_id";
 	}
 	
+	@RequestMapping("/findPasswdView.do")
+	public String findPasswdView() {
+		return "find_passwd";
+	}
+	
+	@RequestMapping("findPasswd.do")
+	public String findPasswd(String userEmail, String userName, int userTel) {
+		MemberDTO dto = service.selectUserPasswd(userEmail, userName, userTel);
+		return "find_passwd";
+	}
 	
 }
 

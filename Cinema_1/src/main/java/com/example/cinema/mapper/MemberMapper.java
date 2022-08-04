@@ -18,5 +18,7 @@ public interface MemberMapper {
 	int deleteMember(String userEmail, String userPasswd);
 	// 아이디찾기
 	MemberDTO selectUserEmail(Map<String, Object> map);
+	// 비밀번호찾기
+	MemberDTO selectUserPasswd(Map<String, Object> map);
 	
 }

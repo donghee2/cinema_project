@@ -42,6 +42,14 @@ public class MemberService {
 		return mapper.selectUserEmail(map);
 	}
 
+	public MemberDTO selectUserPasswd(String userEmail, String userName, int userTel) {
+		Map<String, Object> map = new HashMap<String, Object>();
+		map.put("userEmail", userEmail);
+		map.put("userName", userName);
+		map.put("userTel", userTel);
+		return mapper.selectUserPasswd(map);
+	}
+
 
 
 

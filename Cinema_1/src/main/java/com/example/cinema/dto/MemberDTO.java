@@ -23,7 +23,6 @@ public class MemberDTO {
 		this.address = address;
 	}
 	
-
 	public String getUserEmail() {
 		return userEmail;
 	}
