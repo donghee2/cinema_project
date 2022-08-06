@@ -12,17 +12,11 @@ public class MemberDTO {
 	private String address;
 	private int point;
 	
-	public MemberDTO(String userEmail, String userPasswd, String userName, String userNick, int userTel,
-			String address) {
-		super();
-		this.userEmail = userEmail;
-		this.userPasswd = userPasswd;
-		this.userName = userName;
-		this.userNick = userNick;
-		this.userTel = userTel;
-		this.address = address;
-	}
 	
+	
+	public MemberDTO() {
+	}
+
 	public String getUserEmail() {
 		return userEmail;
 	}

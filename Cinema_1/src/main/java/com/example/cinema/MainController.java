@@ -1,7 +1,10 @@
 package com.example.cinema;
 
+import java.util.List;
+
 import javax.servlet.http.HttpSession;
 
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -111,12 +114,11 @@ public class MainController {
 	}
 	
 	@RequestMapping("findId.do")
-	public String findId(String userName, int userTel, Model model) {
-		MemberDTO dto =	service.selectUserEmail(userName, userTel); 
+	public ResponseEntity<List<MemberDTO>> findId(String userName, int userTel) {
+		List<MemberDTO> list = service.selectUserEmail(userName, userTel);
 		System.out.println(userTel);
 		System.out.println(userName);
-		model.addAttribute("find", dto);
-		return "find_id";
+		return ResponseEntity.ok(list);
 	}
 	
 	@RequestMapping("/findPasswdView.do")
@@ -125,11 +127,17 @@ public class MainController {
 	}
 	
 	@RequestMapping("findPasswd.do")
-	public String findPasswd(String userEmail, String userName, int userTel) {
-		MemberDTO dto = service.selectUserPasswd(userEmail, userName, userTel);
-		return "find_passwd";
+	public ResponseEntity<List<MemberDTO>> findPasswd(String userEmail, String userName, int userTel) {
+		List<MemberDTO> list = service.selectUserPasswd(userEmail, userName, userTel);
+		System.out.println(list.toString());
+		return ResponseEntity.ok(list);
 	}
 	
+	@RequestMapping("/updatePasswd.do")
+	public String updatePasswd(String userEmail, String userPasswd) {
+		service.updatePasswd(userEmail, userPasswd);
+		return "login";
+	}
 }
 
 

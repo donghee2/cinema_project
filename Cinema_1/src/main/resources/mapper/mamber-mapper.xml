@@ -30,4 +30,14 @@
 		where user_email = #{userEmail} and user_name = #{userName} and user_tel = #{userTel}
 	</select>
 	
+	<update id="updatePasswd" parameterType="map">
+		update member set user_passwd = ${userPasswd} where user_email = #{userEmail} 
+	</update>
 </mapper>
+
+
+
+
+
+
+

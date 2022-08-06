@@ -1,6 +1,7 @@
 package com.example.cinema.service;
 
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 import org.springframework.stereotype.Service;
@@ -35,20 +36,28 @@ public class MemberService {
 		return mapper.deleteMember(userEmail, userPasswd);
 	}
 
-	public MemberDTO selectUserEmail(String userName, int userTel) {
+	public List<MemberDTO> selectUserEmail(String userName, int userTel) {
 		Map<String, Object> map = new HashMap<String, Object>();
 		map.put("userName", userName);
 		map.put("userTel", userTel);
 		return mapper.selectUserEmail(map);
 	}
 
-	public MemberDTO selectUserPasswd(String userEmail, String userName, int userTel) {
+	public List<MemberDTO> selectUserPasswd(String userEmail, String userName, int userTel) {
 		Map<String, Object> map = new HashMap<String, Object>();
 		map.put("userEmail", userEmail);
 		map.put("userName", userName);
 		map.put("userTel", userTel);
 		return mapper.selectUserPasswd(map);
 	}
+
+	public int updatePasswd(String userEmail, String userPasswd) {
+		Map<String, Object> map = new HashMap<String, Object>();
+		map.put("userEmail", userEmail);
+		map.put("userPasswd", userPasswd);
+		return mapper.updatePasswd(map);
+	}
+
 
 
 
