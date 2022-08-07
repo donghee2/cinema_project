@@ -128,6 +128,7 @@ public class MainController {
 	
 	@RequestMapping("findPasswd.do")
 	public ResponseEntity<List<MemberDTO>> findPasswd(String userEmail, String userName, int userTel) {
+		
 		List<MemberDTO> list = service.selectUserPasswd(userEmail, userName, userTel);
 		System.out.println(list.toString());
 		return ResponseEntity.ok(list);
