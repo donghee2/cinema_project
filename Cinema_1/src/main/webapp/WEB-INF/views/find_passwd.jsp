@@ -20,10 +20,10 @@
 				success: function(r){
 					console.log(r);
 					var tag = "";
-					tag += '<form aution="updetePasswd.do"><input type="hidden" name="userEmail" value=""><br>'
+					tag += '<form aution="updetePasswd.do"><input type="hidden" name="userEmail" value=""><br>';
 					tag += '<input type="password" name="userPasswd" placeholder="새 비밀번호 입력"><br>';
 					tag += '<input type="password" name="userPasswdChk" placeholder="비밀번호 확인"><br>';
-					tag += '<button>비밀번호 변경<button></form>'
+					tag += '<button>비밀번호 변경<button></form>';
 					$(".find_result").html(tag);
 				}
 			})
