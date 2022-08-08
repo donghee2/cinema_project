@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.cinema.mapper.TheaterMapper">
+	<select id="selectMovieScheduleList" parameterType="map" resultType="theater">
+		select ms.sno, (select tname from theater where tno = ms.tno) as tname,
+		(select mname from movie_info where mno = ms.mno) as mname,
+		ms.sdate, ms.sprice from
+		MOVIE_SCHEDULE ms, (select tno from theater where cno = #{cno}) th
+		where th.tno = ms.tno and ms.sdate like '22/07/22' || '%' order by sdate asc
+	</select>
+	<insert id="insertReservation" parameterType="map">
+		insert into reservation VALUES(RESERVATION_SEQ.NEXTVAL, #{sno}, #{id}, SYSDATE, #{seat})
+	</insert>
+	<select id="selectSeat" parameterType="String" resultType="theater">
+		select tname, seatx, seaty from theater th, (select tno from movie_schedule where sno = #{sno}) ms where ms.tno = th.tno
+	</select>
+</mapper>
