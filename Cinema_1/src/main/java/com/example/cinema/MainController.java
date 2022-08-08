@@ -139,6 +139,15 @@ public class MainController {
 		service.updatePasswd(userEmail, userPasswd);
 		return "login";
 	}
+	
+	@RequestMapping("/allMemberView.do")
+	public String allMemberView(Model model) {
+		List<MemberDTO> list = service.selectAllMember();
+		System.out.println(list.toString());
+		model.addAttribute("list", list);
+		return "all_member_view";
+	}
+	
 }
 
 

@@ -58,6 +58,10 @@ public class MemberService {
 		return mapper.updatePasswd(map);
 	}
 
+	public List<MemberDTO> selectAllMember() {
+		return mapper.selectAllMember();
+	}
+
 
 
 

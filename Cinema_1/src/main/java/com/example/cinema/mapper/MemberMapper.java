@@ -23,5 +23,7 @@ public interface MemberMapper {
 	List<MemberDTO> selectUserPasswd(Map<String, Object> map);
 	// 비밀번호 변경
 	int updatePasswd(Map<String, Object> map);
+	// 회원정보 전체조회
+	List<MemberDTO> selectAllMember();
 	
 }
