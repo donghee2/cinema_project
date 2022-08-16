@@ -148,6 +148,11 @@ public class MainController {
 		return "all_member_view";
 	}
 	
+//	@RequestMapping("/insertComment.do")
+//	public void insertComment() {
+//		
+//		
+//	}
 }
 
 
