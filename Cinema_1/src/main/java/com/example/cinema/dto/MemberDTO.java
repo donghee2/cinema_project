@@ -17,6 +17,7 @@ public class MemberDTO {
 	public MemberDTO() {
 	}
 
+
 	public String getUserEmail() {
 		return userEmail;
 	}

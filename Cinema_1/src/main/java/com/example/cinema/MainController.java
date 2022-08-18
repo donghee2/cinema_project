@@ -35,7 +35,8 @@ public class MainController {
 	}
 	
 	@RequestMapping("/login.do")
-	public String login(String userEmail, String userPasswd, HttpSession session) {
+	public String login(String id, String email, String userPasswd, HttpSession session) {
+		String userEmail = id + email;
 		MemberDTO dto = service.login(userEmail, userPasswd);
 		System.out.println(userEmail + " " + userPasswd);
 		System.out.println(dto);
@@ -80,7 +81,13 @@ public class MainController {
 	}
 	
 	@RequestMapping("/register.do") 
-	public String register(MemberDTO dto) {
+	public String register(MemberDTO dto, String id, String email, String address1, String address2, String address3) {
+		String userEmail = id + email;
+		System.out.println(userEmail);
+		String address = address1 + " " + address2 + " " + address3;
+		dto.setUserEmail(userEmail);
+		dto.setAddress(address);
+		System.out.println(dto.toString());
 		service.insertMember(dto);
 		return "login";
 	}

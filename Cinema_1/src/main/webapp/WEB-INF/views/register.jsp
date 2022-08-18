@@ -6,7 +6,7 @@
 <meta charset="UTF-8">
 <title>회원가입</title>
 <script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
-<link rel="stylesheet" type="text/css" media="screen" href="../template/sign_up.css">
+<link rel="stylesheet" href="../template/sign_up.css">
 <script>
          window.onload = function(){
             var nav = document.querySelector('nav');
@@ -221,10 +221,10 @@
                     <li class="border_bottom">
                         <input type="text" name="id" id="id" placeholder="아이디를 입력하세요">
                         <span class="sub_txt"><select name="email">
-                        	<option value="google.com">google.com</option>
-                        	<option value="naver.com">naver.com</option>
-                        	<option value="hanmail.net">hanmail.net</option>
-                        	<option value="nate.com">nate.com</option>
+                        	<option value="@google.com">google.com</option>
+                        	<option value="@naver.com">naver.com</option>
+                        	<option value="@hanmail.net">hanmail.net</option>
+                        	<option value="@nate.com">nate.com</option>
                         </select></span>
                     </li>
                     <li class="id_result"></li>
@@ -238,7 +238,7 @@
                         <input type="password" name="userPasswd" id="pass" placeholder="비밀번호(8~32자리)">
                     </li>
                     <li class="border_bottom">
-                        <input type="password" id="userPasswd_chk" placeholder="비밀번호 재입력">
+                        <input type="password" id="pass_chk" placeholder="비밀번호 재입력">
                     </li>
                     <li class="pass_check"></li>
                     <li><label for="name">이름</label></li>
@@ -251,12 +251,12 @@
                     </li>
                     <li class="member address">
                     <h4>우편번호</h4>
-                    <span class="input_area"><input type="text" name="address" class="postcodify_postcode5 border_bottom" id="sample6_postcode"></span>
+                    <span class="input_area"><input type="text" name="address1" class="postcodify_postcode5 border_bottom" id="sample6_postcode"></span>
                     <input type="button" id="address_btn" onclick="sample6_execDaumPostcode()" value="우편번호 검색"><br>
                     <h4>도로명주소</h4>
-                    <span class="input_area"><input type="text" name="address" id="sample6_address" class="postcodify_address border_bottom"></span>
+                    <span class="input_area"><input type="text" name="address2" id="sample6_address" class="postcodify_address border_bottom"></span>
                     <h4>상세주소</h4>
-                    <span class="input_area"><input type="text" name="address" id="sample6_detailAddress" class="postcodify_details border_bottom"></span>
+                    <span class="input_area"><input type="text" name="address3" id="sample6_detailAddress" class="postcodify_details border_bottom"></span>
                     
                     </li>
                     <li><label for="tel">전화번호</label></li>
@@ -268,7 +268,7 @@
                     </li> -->
                    
                     <li>
-                        <button class="btn_next" type="button">회원가입</button>
+                        <button class="btn_next" type="submit">회원가입</button>
                     </li>
     
                 </ul>
