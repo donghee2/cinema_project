@@ -10,7 +10,6 @@
 <script type="text/javascript">
 	$(function(){
 		$("#btn_find").click(function(){
-			console.log("dd");
 			var d = "userEmail=" + $("#id").val() + $("#email").val() + "&userName=" + $("#userName").val() + "&userTel=" + $("#userTel").val();
 			console.log(d);
 			$.ajax({
@@ -19,11 +18,12 @@
 				dataType: "json",
 				success: function(r){
 					console.log(r);
+					console.log(r[0].userEmail);
 					var tag = "";
-					tag += '<form aution="updetePasswd.do"><input type="hidden" name="userEmail" value="'+ r.userEmail +'"><br>';
+					tag += '<form action="updatePasswd.do" method="post"><input type="text" name="userEmail" value="'+ r[0].userEmail +'"><br>';
 					tag += '<input type="password" name="userPasswd" placeholder="새 비밀번호 입력"><br>';
 					tag += '<input type="password" name="userPasswdChk" placeholder="비밀번호 확인"><br>';
-					tag += '<button type="submit">비밀번호 변경<button></form>';
+					tag += '<button type="submit">비밀번호 변경</button></form>';
 					$(".find_result").html(tag);
 				}
 			})
@@ -35,7 +35,7 @@
 	<section>
 		<h2>아이디 찾기</h2>
 		<form action="findPasswd.do">
-			<label for="userEmail">이메일</label>
+			<label for="id">이메일</label>
 			<input type="text" name="id" id="id">
 			<select name="email" id="email">
 				<option value="@google.com">@google.com</option>

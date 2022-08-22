@@ -36,7 +36,7 @@
 	</select>
 	
 	<update id="updatePasswd" parameterType="map">
-		update member set user_passwd = ${userPasswd} where user_email = #{userEmail} 
+		update member set user_passwd = #{userPasswd} where user_email = #{userEmail} 
 	</update>
 	
 	<select id="selectAllMember" resultType="member">

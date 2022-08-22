@@ -36,7 +36,6 @@ public class MainController {
 	
 	@RequestMapping("/login.do")
 	public String login(String userEmail, String userPasswd, HttpSession session) {
-//		String userEmail = id + email;
 		MemberDTO dto = service.login(userEmail, userPasswd);
 		System.out.println(userEmail + " " + userPasswd);
 		System.out.println(dto);
@@ -61,7 +60,7 @@ public class MainController {
 		gdto = gservice.guestLogin(gdto);
 		if(gdto != null) {
 			session.setAttribute("login", true);
-			session.setAttribute("ndto", gdto);
+			session.setAttribute("gdto", gdto);
 			return "redirect:/";
 		} else {
 			session.setAttribute("login", false);
@@ -139,15 +138,21 @@ public class MainController {
 	}
 	
 	@RequestMapping("findPasswd.do")
-	public ResponseEntity<List<MemberDTO>> findPasswd(String id, String email, String userName, int userTel) {
-		String userEmail = id + email;
+	public ResponseEntity<List<MemberDTO>> findPasswd(String userEmail, String userName, int userTel) {
+//		System.out.println(userEmail);
+//		System.out.println(userName);
+//		System.out.println(userTel);
 		List<MemberDTO> list = service.selectUserPasswd(userEmail, userName, userTel);
-		System.out.println(list.toString());
+		if(list.size() > -1) {
+			list = service.selectUserPasswd(userEmail, userName, userTel);
+		}
+//		System.out.println(list.toString());
 		return ResponseEntity.ok(list);
 	}
 	
 	@RequestMapping("/updatePasswd.do")
 	public String updatePasswd(String userEmail, String userPasswd) {
+		System.out.println("updatePasswd.do " + userEmail + " " + userPasswd);
 		service.updatePasswd(userEmail, userPasswd);
 		return "login";
 	}
