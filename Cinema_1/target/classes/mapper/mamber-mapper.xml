@@ -14,9 +14,9 @@
 		, #{address}, 1000)
 	</insert>
 	
-	<update id="updateMember" parameterType="String">
-		update member set #{userPasswd}, #{userName}, #{userNick}, #{userTel}, #{address}
-		where user_email = #{userEmail}
+	<update id="updateMember" parameterType="member">
+		update member set user_passwd = #{userPasswd}, user_name = #{userName}, user_nick = #{userNick}, 
+		user_tel = #{userTel}, user_address = #{address} where user_email = #{userEmail}
 	</update>
 	
 	<delete id="deleteMember" parameterType="String">

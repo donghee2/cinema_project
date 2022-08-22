@@ -35,8 +35,8 @@ public class MainController {
 	}
 	
 	@RequestMapping("/login.do")
-	public String login(String id, String email, String userPasswd, HttpSession session) {
-		String userEmail = id + email;
+	public String login(String userEmail, String userPasswd, HttpSession session) {
+//		String userEmail = id + email;
 		MemberDTO dto = service.login(userEmail, userPasswd);
 		System.out.println(userEmail + " " + userPasswd);
 		System.out.println(dto);
@@ -98,9 +98,13 @@ public class MainController {
 	}
 	
 	@RequestMapping("/update.do")
-	public String update(String userEmail) {
-		service.updateMember(userEmail);
-		return "member_view";
+	public String update(MemberDTO dto, String userEmail, String address1, String address2, String address3, int userTel) {
+		String address = address1 + " " + address2 + " " + address3;
+		dto.setAddress(address);
+		dto.setUserTel(userTel);
+		System.out.println(dto);
+		service.updateMember(dto);
+		return "redirect:/";
 	}
 	
 	@RequestMapping("/deleteView.do")
@@ -109,7 +113,8 @@ public class MainController {
 	}
 	
 	@RequestMapping("/delete.do")
-	public String delete(String userEmail, String userPasswd, HttpSession session) {
+	public String delete(String id, String email, String userPasswd, HttpSession session) {
+		String userEmail = id + email;
 		service.deleteMamber(userEmail, userPasswd);
 		session.invalidate();
 		return "redirect:/";
@@ -134,8 +139,8 @@ public class MainController {
 	}
 	
 	@RequestMapping("findPasswd.do")
-	public ResponseEntity<List<MemberDTO>> findPasswd(String userEmail, String userName, int userTel) {
-		
+	public ResponseEntity<List<MemberDTO>> findPasswd(String id, String email, String userName, int userTel) {
+		String userEmail = id + email;
 		List<MemberDTO> list = service.selectUserPasswd(userEmail, userName, userTel);
 		System.out.println(list.toString());
 		return ResponseEntity.ok(list);

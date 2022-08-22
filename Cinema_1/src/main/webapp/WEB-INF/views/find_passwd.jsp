@@ -11,7 +11,7 @@
 	$(function(){
 		$("#btn_find").click(function(){
 			console.log("dd");
-			var d = "userEmail=" + $("#userEmail").val() + "&userName=" + $("#userName").val() + "&userTel=" + $("#userTel").val();
+			var d = "userEmail=" + $("#id").val() + $("#email").val() + "&userName=" + $("#userName").val() + "&userTel=" + $("#userTel").val();
 			console.log(d);
 			$.ajax({
 				url: "findPasswd.do",
@@ -23,7 +23,7 @@
 					tag += '<form aution="updetePasswd.do"><input type="hidden" name="userEmail" value="'+ r.userEmail +'"><br>';
 					tag += '<input type="password" name="userPasswd" placeholder="새 비밀번호 입력"><br>';
 					tag += '<input type="password" name="userPasswdChk" placeholder="비밀번호 확인"><br>';
-					tag += '<button>비밀번호 변경<button></form>';
+					tag += '<button type="submit">비밀번호 변경<button></form>';
 					$(".find_result").html(tag);
 				}
 			})
@@ -36,7 +36,13 @@
 		<h2>아이디 찾기</h2>
 		<form action="findPasswd.do">
 			<label for="userEmail">이메일</label>
-			<input type="text" name="userEmail" id="userEmail">
+			<input type="text" name="id" id="id">
+			<select name="email" id="email">
+				<option value="@google.com">@google.com</option>
+				<option value="@naver.com">@naver.com</option>
+				<option value="@nate.com">@nate.com</option>
+				<option value="@hanmail.net">@hanmail.net</option>
+			</select>
 			<label for="userName">이름</label>
 			<input type="text" name="userName" id="userName">
 			<label for="userTel">핸드폰 번호</label>

@@ -28,8 +28,8 @@ public class MemberService {
 		return mapper.insertMember(dto);
 	}
 
-	public int updateMember(String userEmail) {
-		return mapper.updateMember(userEmail);
+	public int updateMember(MemberDTO dto) {
+		return mapper.updateMember(dto);
 	}
 
 	public int deleteMamber(String userEmail, String userPasswd) {

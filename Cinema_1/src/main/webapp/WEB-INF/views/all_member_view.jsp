@@ -30,7 +30,7 @@
 					<td><input type="text" name="userTel" value="${m.userTel}"></td>
 					<td><input type="text" name="address" value="${m.address}"></td>
 					<td><input type="text" name="point" value="${m.point}"></td>
-					<td><button>수정</button> / <button>회원탈퇴</button></td>
+					<td><button class="btn_update">수정</button> / <button class="btn_delete">회원탈퇴</button></td>
 				</tr>
 			</c:forEach>
 	</section>

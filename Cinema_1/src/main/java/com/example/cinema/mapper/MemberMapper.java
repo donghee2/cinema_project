@@ -14,7 +14,7 @@ public interface MemberMapper {
 	// 회원가입
 	int insertMember(MemberDTO dto);
 	// 회원정보수정
-	int updateMember(String userEmail);
+	int updateMember(MemberDTO dto);
 	// 회원탈퇴
 	int deleteMember(String userEmail, String userPasswd);
 	// 아이디찾기
