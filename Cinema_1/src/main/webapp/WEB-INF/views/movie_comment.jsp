@@ -35,7 +35,6 @@
 	<c:if test="${sessionScope.login == true }">
 		<div class="comment_form">
 			<form id="comment">
-				<input type="hidden" name="bno" value="${ }">
 				<input type="hidden" name="writer" value="${sessionScope.userEmail }">
 				<span class="writer">${sessionScope.userEmail }</span>
 				<textarea name="content" maxlength="500"></textarea>
