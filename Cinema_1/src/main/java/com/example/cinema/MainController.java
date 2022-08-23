@@ -1,19 +1,27 @@
 package com.example.cinema;
 
+import java.util.List;
+
 import javax.servlet.http.HttpSession;
 
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 
+import com.example.cinema.dto.GuestDTO;
 import com.example.cinema.dto.MemberDTO;
+import com.example.cinema.service.GuestService;
 import com.example.cinema.service.MemberService;
 
 @Controller
 public class MainController {
 	private MemberService service;
+	private GuestService gservice;
 
-	public MainController(MemberService service) {
+	public MainController(MemberService service, GuestService gservice) {
 		this.service = service;
+		this.gservice = gservice;
 	}
 	
 	@RequestMapping("/")
@@ -41,6 +49,25 @@ public class MainController {
 		}
 	}
 	
+	@RequestMapping("/guestLoginView.do")
+	public String nonMemberLoginView() {
+		return "guest_login";
+	}
+	
+	@RequestMapping("/guestLogin.do")
+	public String nonMemberLogin(GuestDTO gdto, HttpSession session) {
+		int result = gservice.insertGuest(gdto);
+		gdto = gservice.guestLogin(gdto);
+		if(gdto != null) {
+			session.setAttribute("login", true);
+			session.setAttribute("gdto", gdto);
+			return "redirect:/";
+		} else {
+			session.setAttribute("login", false);
+			return "guest_login";
+		}
+	}
+	
 	@RequestMapping("/logout.do")
 	public String logout(HttpSession session) {
 		session.invalidate();
@@ -53,7 +80,13 @@ public class MainController {
 	}
 	
 	@RequestMapping("/register.do") 
-	public String register(MemberDTO dto) {
+	public String register(MemberDTO dto, String id, String email, String address1, String address2, String address3) {
+		String userEmail = id + email;
+		System.out.println(userEmail);
+		String address = address1 + " " + address2 + " " + address3;
+		dto.setUserEmail(userEmail);
+		dto.setAddress(address);
+		System.out.println(dto.toString());
 		service.insertMember(dto);
 		return "login";
 	}
@@ -64,9 +97,13 @@ public class MainController {
 	}
 	
 	@RequestMapping("/update.do")
-	public String update(String userEmail) {
-		service.updateMember(userEmail);
-		return "member_view";
+	public String update(MemberDTO dto, String userEmail, String address1, String address2, String address3, int userTel) {
+		String address = address1 + " " + address2 + " " + address3;
+		dto.setAddress(address);
+		dto.setUserTel(userTel);
+		System.out.println(dto);
+		service.updateMember(dto);
+		return "redirect:/";
 	}
 	
 	@RequestMapping("/deleteView.do")
@@ -75,13 +112,64 @@ public class MainController {
 	}
 	
 	@RequestMapping("/delete.do")
-	public String delete(String userEmail, String userPasswd, HttpSession session) {
+	public String delete(String id, String email, String userPasswd, HttpSession session) {
+		String userEmail = id + email;
 		service.deleteMamber(userEmail, userPasswd);
 		session.invalidate();
 		return "redirect:/";
 	}
 	
+	@RequestMapping("/findIdView.do")
+	public String findIdView() {
+		return "find_id";
+	}
 	
+	@RequestMapping("findId.do")
+	public ResponseEntity<List<MemberDTO>> findId(String userName, int userTel) {
+		List<MemberDTO> list = service.selectUserEmail(userName, userTel);
+		System.out.println(userTel);
+		System.out.println(userName);
+		return ResponseEntity.ok(list);
+	}
+	
+	@RequestMapping("/findPasswdView.do")
+	public String findPasswdView() {
+		return "find_passwd";
+	}
+	
+	@RequestMapping("findPasswd.do")
+	public ResponseEntity<List<MemberDTO>> findPasswd(String userEmail, String userName, int userTel) {
+//		System.out.println(userEmail);
+//		System.out.println(userName);
+//		System.out.println(userTel);
+		List<MemberDTO> list = service.selectUserPasswd(userEmail, userName, userTel);
+		if(list.size() > -1) {
+			list = service.selectUserPasswd(userEmail, userName, userTel);
+		}
+//		System.out.println(list.toString());
+		return ResponseEntity.ok(list);
+	}
+	
+	@RequestMapping("/updatePasswd.do")
+	public String updatePasswd(String userEmail, String userPasswd) {
+		System.out.println("updatePasswd.do " + userEmail + " " + userPasswd);
+		service.updatePasswd(userEmail, userPasswd);
+		return "login";
+	}
+	
+	@RequestMapping("/allMemberView.do")
+	public String allMemberView(Model model) {
+		List<MemberDTO> list = service.selectAllMember();
+		System.out.println(list.toString());
+		model.addAttribute("list", list);
+		return "all_member_view";
+	}
+	
+//	@RequestMapping("/insertComment.do")
+//	public void insertComment() {
+//		
+//		
+//	}
 }
 
 

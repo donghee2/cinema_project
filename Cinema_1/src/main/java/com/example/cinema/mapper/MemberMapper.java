@@ -1,5 +1,6 @@
 package com.example.cinema.mapper;
 
+import java.util.List;
 import java.util.Map;
 
 import org.apache.ibatis.annotations.Mapper;
@@ -13,8 +14,16 @@ public interface MemberMapper {
 	// 회원가입
 	int insertMember(MemberDTO dto);
 	// 회원정보수정
-	int updateMember(String userEmail);
+	int updateMember(MemberDTO dto);
 	// 회원탈퇴
 	int deleteMember(String userEmail, String userPasswd);
+	// 아이디찾기
+	List<MemberDTO> selectUserEmail(Map<String, Object> map);
+	// 비밀번호찾기
+	List<MemberDTO> selectUserPasswd(Map<String, Object> map);
+	// 비밀번호 변경
+	int updatePasswd(Map<String, Object> map);
+	// 회원정보 전체조회
+	List<MemberDTO> selectAllMember();
 	
 }
