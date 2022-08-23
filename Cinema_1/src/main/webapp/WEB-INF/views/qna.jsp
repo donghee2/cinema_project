@@ -8,27 +8,8 @@
 <title>Insert title here</title>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
 <link rel="stylesheet" href="../template/qna.css">
-<script type="text/javascript">
+<script>
 window.onload = function(){
-    var nav = document.querySelector('nav');
-    console.log(nav.offsetHeight);       
-    var sub_menu_container = document.querySelector('#sub_menu_container');         
-    var sub_menu_height = sub_menu_container.scrollHeight;
-    sub_menu_height += "px";
-    console.log(sub_menu_height);
-
-    nav.onmouseenter = () => {
-        sub_menu_container.style.height = sub_menu_height;
-    }
-    nav.onmouseleave = () => {
-        sub_menu_container.style.height = "0px";
-    }
-    var sub_menu_li = document.querySelectorAll('#sub_menu_container a');
-    for(i=0;i<sub_menu_li.length;i++){
-        sub_menu_li[i].onclick = () => {
-            sub_menu_container.style.height = "0px";
-        }
-    }
     var area = document.querySelector('#area');
             var theater = document.querySelector('#theater');
             var gg = document.querySelectorAll('.gg');
@@ -89,7 +70,7 @@ window.onload = function(){
 </head>
 <body>
 	  <h2>문의</h2>
-                <form action="qnaView.do">
+                <form action="qnaWrite.do">
                     <table>
                         <caption>* 필수</caption>
                         <tr>
@@ -130,7 +111,7 @@ window.onload = function(){
                             <td><input type="text" name="name" id="name" required></td>
                             <th>이메일 <span>*</span></th>
                             <td>
-                                <input type="text" name="id" id="email" required> @ <select name="email" id="mail">
+                                <input type="text" name="id" id="email" required><select name="email" id="mail">
                                     <option value="@gmail.com">@gmail.com</option>
                                     <option value="@naver.com">@naver.com</option>
                                     <option value="@hanmail.net">@hanmail.net</option>

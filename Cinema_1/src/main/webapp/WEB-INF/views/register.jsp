@@ -221,7 +221,7 @@
                     <li class="border_bottom">
                         <input type="text" name="id" id="id" placeholder="아이디를 입력하세요">
                         <span class="sub_txt"><select name="email">
-                        	<option value="@google.com">google.com</option>
+                        	<option value="@gmail.com">gmail.com</option>
                         	<option value="@naver.com">naver.com</option>
                         	<option value="@hanmail.net">hanmail.net</option>
                         	<option value="@nate.com">nate.com</option>
