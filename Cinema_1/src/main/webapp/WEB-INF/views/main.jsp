@@ -15,7 +15,7 @@
 	if(flag){
 	%>
 	${sessionScope.dto.userName }님이 로그인 하셨습니다.<br>
-	<a href="logout.do">로그아웃</a> | <a href="updateView.do">회원정보수정</a>		
+	<a href="logout.do">로그아웃</a> | <a href="updateView.do">회원정보수정</a> / <a href="qnaWriteView.do">글쓰기</a>		
 	<%
 	} else {
 %>	

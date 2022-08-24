@@ -11,22 +11,28 @@ import org.springframework.web.bind.annotation.RequestMapping;
 
 import com.example.cinema.dto.GuestDTO;
 import com.example.cinema.dto.MemberDTO;
+import com.example.cinema.dto.QnADTO;
 import com.example.cinema.service.GuestService;
 import com.example.cinema.service.MemberService;
+import com.example.cinema.service.QnAService;
 
 @Controller
 public class MainController {
 	private MemberService service;
 	private GuestService gservice;
+	private QnAService qnaservice;
 
-	public MainController(MemberService service, GuestService gservice) {
+	
+	
+	public MainController(MemberService service, GuestService gservice, QnAService qnaservice) {
 		this.service = service;
 		this.gservice = gservice;
+		this.qnaservice = qnaservice;
 	}
-	
+
 	@RequestMapping("/")
 	public String main() {
-		return "qna";
+		return "main";
 	}
 	
 	@RequestMapping("/loginView.do")
@@ -42,6 +48,7 @@ public class MainController {
 		if(dto != null) {
 			session.setAttribute("login", true);
 			session.setAttribute("dto", dto);
+			session.setAttribute("userEmail", dto.getUserEmail());
 			return "redirect:/";
 		} else {
 			session.setAttribute("login", false);
@@ -53,6 +60,7 @@ public class MainController {
 	public String nonMemberLoginView() {
 		return "guest_login";
 	}
+	
 	
 	@RequestMapping("/guestLogin.do")
 	public String nonMemberLogin(GuestDTO gdto, HttpSession session) {
@@ -165,11 +173,18 @@ public class MainController {
 		return "all_member_view";
 	}
 	
-//	@RequestMapping("/insertComment.do")
-//	public void insertComment() {
-//		
-//		
-//	}
+	@RequestMapping("qnaWriteView.do")
+	public String qnaWriteView() {
+		return "qna";
+	}
+	
+	@RequestMapping("/qnaWrite.do")
+	public String insertContent(QnADTO dto, HttpSession session) {
+		dto.setQnaWriter((String) session.getAttribute("userEmail"));
+		System.out.println(dto);
+		qnaservice.insertQnA(dto);
+		return "qna";
+	}
 }
 
 

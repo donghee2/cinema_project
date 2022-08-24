@@ -76,9 +76,9 @@ window.onload = function(){
                         <tr>
                             <th>문의지점 <span>*</span></th>
                             <td colspan="3">
-                                <input type="radio" name="point" id="point" checked >
+                                <input type="radio" name="qnaPoint" id="point" checked >
                                 <label for="point">지점문의</label>
-                                <select name="area" id="area">
+                                <select name="qnaArea" id="area">
                                     <option value="0" selected>지역선택</option>
                                     <option value="seoul">서울</option>
                                     <option value="gyunggi">경기</option>
@@ -98,7 +98,7 @@ window.onload = function(){
                         <tr>
                             <th>문의유형 <span>*</span></th>
                             <td colspan="3">
-                                <select name="quiryType" id="quiryType">
+                                <select name="qnaQuiryType" id="quiryType">
                                     <option value="0" selected>문의유형 선택</option>
                                     <option value="1">일반문의</option>
                                     <option value="2">불만</option>
@@ -108,7 +108,7 @@ window.onload = function(){
                         </tr>
                         <tr>
                             <th>이름 <span>*</span></th>
-                            <td><input type="text" name="name" id="name" required></td>
+                            <td><input type="text" name="userName" id="name" required></td>
                             <th>이메일 <span>*</span></th>
                             <td>
                                 <input type="text" name="id" id="email" required><select name="email" id="mail">
@@ -127,13 +127,13 @@ window.onload = function(){
                         </tr>
                         <tr>
                             <th>제목 <span>*</span></th>
-                            <td colspan="3"><input type="text" name="title" id="title" required></td>
+                            <td colspan="3"><input type="text" name="qnaTitle" id="title" required></td>
                         </tr>
                         <tr>
                             <th>내용 <span>*</span></th>
                             <td colspan="3">
                                 <div class="textarea_container">
-                                    <textarea name="content" id="content" cols="30" rows="10" placeholder="※ 불편사항이나 문의사항을 남겨주시면 최대한 신속하게 답변드리겠습니다                        ※ 문의 내용에 개인정보(이름, 연락처, 카드번호 등)가 포함되지 않도록 유의하시기 바랍니다." required></textarea>
+                                    <textarea name="qnaContent" id="content" cols="30" rows="10" placeholder="※ 불편사항이나 문의사항을 남겨주시면 최대한 신속하게 답변드리겠습니다                        ※ 문의 내용에 개인정보(이름, 연락처, 카드번호 등)가 포함되지 않도록 유의하시기 바랍니다." required></textarea>
                                     <div class="length_container">
                                         <p><span class="length">0 / 2000</span></p>
                                     </div>
@@ -148,7 +148,6 @@ window.onload = function(){
                         </tr>
                     </table>
                 </form>
-            </article>
-        </section>
+
 </body>
 </html>
