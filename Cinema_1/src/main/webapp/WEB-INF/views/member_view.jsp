@@ -7,6 +7,7 @@
 <meta charset="UTF-8">
 <title>Insert title here</title>
 <script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 <link rel="stylesheet" href="../template/sign_up.css">
 <script>
          window.onload = function(){
@@ -190,6 +191,28 @@
                 else if(!checkTel)
                     e.preventDefault();
             }
+            
+            $('.btn_next').click(function(){
+            	console.log("dd");
+                $('.popup_box').css('display', 'block');
+                $('.blur').css('display', 'block');
+            });
+            
+            $('.close').click(function(){
+                $('.popup_box').css('display', 'none');
+                $('.blur').css('display', 'none');
+            });
+            
+            $('.popup_cancle').click(function(){
+                $('.popup_box').css('display', 'none');
+                $('.blur').css('display', 'none');
+            });
+            
+            $('.popup_update').click(function(){
+                $('.popup_box').css('display', 'none');
+                $('.blur').css('display', 'none');
+                alert('회원정보가 수정되었습니다.');
+            });
         }
     </script>
 </head>
@@ -245,12 +268,25 @@
                     </li> -->
                    
                     <li>
-                        <button class="btn_next" type="submit">회원정보수정</button>
+                        <button class="btn_next">회원정보수정</button>
                     </li>
     
                 </ul>
             </form>
             <a href="deleteView.do">회원탈퇴</a>
 	</section>
+	<div class="blur"></div>
+    <div class="popup_box">
+        <div class="close_box">
+            <a href="#" class="close">X</a>
+        </div>
+        <div>
+            <p>회원정보를 수정하시겠습니까?</p>
+        </div>
+        <div class="popup_btn">
+            <button class="popup_update">수정</button>
+            <button class="popup_cancle">취소</button>
+        </div>  
+    </div>
 </body>
 </html>

@@ -108,15 +108,10 @@ window.onload = function(){
                         </tr>
                         <tr>
                             <th>이름 <span>*</span></th>
-                            <td><input type="text" name="userName" id="name" required></td>
+                            <td><input type="text" name="userName" id="name" value="${sessionScope.dto.userName }" readonly></td>
                             <th>이메일 <span>*</span></th>
                             <td>
-                                <input type="text" name="id" id="email" required><select name="email" id="mail">
-                                    <option value="@gmail.com">@gmail.com</option>
-                                    <option value="@naver.com">@naver.com</option>
-                                    <option value="@hanmail.net">@hanmail.net</option>
-                                    <option value="@nate.com">@nate.com</option>
-                                </select>
+                                <input type="text" name="userEmail" id="email" value="${sessionScope.userEmail }" readonly>
                             </td>
                         </tr>
                         <tr>

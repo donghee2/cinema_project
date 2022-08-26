@@ -61,7 +61,7 @@ public class MainController {
 		return "guest_login";
 	}
 	
-	
+	// 쿼츠 이용해서 게스트 정보 삭제해야함
 	@RequestMapping("/guestLogin.do")
 	public String nonMemberLogin(GuestDTO gdto, HttpSession session) {
 		int result = gservice.insertGuest(gdto);
