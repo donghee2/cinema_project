@@ -81,6 +81,7 @@
 					<td><button class="btn_update">수정</button> / <button class="btn_delete">회원탈퇴</button></td>
 				</tr>
 			</c:forEach>
+		</table>
 	</section>
 </body>
 </html>
