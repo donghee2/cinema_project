@@ -9,7 +9,7 @@
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 <script type="text/javascript">
 	function add_event_update(){   
-		$(".btnUpdate").click(function(){
+		$(".btn_update").click(function(){
 			var arr = $(this).parent().parent().find("input");
 			var d = "";
 			$.each(arr,function(i,obj){
@@ -31,7 +31,7 @@
 		});
 	}
 	function add_event_delete(){
-		$(".btnDelete").click(function(){
+		$(".btn_delete").click(function(){
 			var d = "id="+ $(this).parent().parent().find("input[name=userEmail]").val();
 			$.ajax({
 				url:"memberDelete.do",
