@@ -7,6 +7,52 @@
 <meta charset="UTF-8">
 <title>Insert title here</title>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<script type="text/javascript">
+	function add_event_update(){   
+		$(".btnUpdate").click(function(){
+			var arr = $(this).parent().parent().find("input");
+			var d = "";
+			$.each(arr,function(i,obj){
+				d += $(obj).attr("name") + "=" + $(obj).val() + "&";
+			});
+			$.ajax({
+				url:"memberUpdate.do",
+				data : d,
+				type: "post",
+				success:function(r){
+					console.log(d)
+					if(r == 1)
+						alert("회원 정보 수정 완료");
+					else 
+						alert("회원 정보 수정 실패");
+					location.reload();
+				}
+			});
+		});
+	}
+	function add_event_delete(){
+		$(".btnDelete").click(function(){
+			var d = "id="+ $(this).parent().parent().find("input[name=userEmail]").val();
+			$.ajax({
+				url:"memberDelete.do",
+				data : d,
+				type: "post",
+				success:function(r){
+					if(r == 1)
+						alert("회원 정보 삭제 완료");
+					else 
+						alert("회원 정보 삭제 실패");
+					location.reload();
+				}
+			});
+		});
+	}
+	
+	$(function(){
+		add_event_update();
+		add_event_delete();
+	});
+</script>
 </head>
 <body>
 	<section>
