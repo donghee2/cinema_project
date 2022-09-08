@@ -32,7 +32,7 @@
 	}
 	function add_event_delete(){
 		$(".btn_delete").click(function(){
-			var d = "id="+ $(this).parent().parent().find("input[name=userEmail]").val();
+			var d = "userEmail="+ $(this).parent().parent().find("input[name=userEmail]").val();
 			$.ajax({
 				url:"memberDelete.do",
 				data : d,
