@@ -17,18 +17,18 @@
 <body>
 	<jsp:include page="template/header.jsp" flush="false"></jsp:include>
 	<div id="container">
-		<table class="board">
+		<table class="screen">
 			<tr>
 				<th>영화관번호</th>
 				<th>영화관명</th>
 			</tr>
 		<c:forEach var="c" items="${requestScope.list }">
 			<tr>
-				<td>${c.cno }</td>
-				<td><a href="schedule.do?cno=${c.cno}">${c.cname}</a></td>
+				<td>${c.screenCode }</td>
+				<td>${c.cinemaName }</td>
+				<td><a href="movieListView.do?screenCode=${c.screenCode}">${c.screenName}</a></td>
 			</tr>
 		</c:forEach>
-			
 		</table>
 	</div>
 	<jsp:include page="template/footer.jsp" flush="false"></jsp:include>
