@@ -91,12 +91,12 @@
 }
 
 .reserve-date {
-    padding-top: 5px;
+    padding-top: 10px;
     display: flex;
     flex-direction: column;
     align-items: center;
     height: 770px;
-    overflow: scroll;
+    overflow: hidden;
     overflow-x: hidden;
 }
 
@@ -200,6 +200,7 @@
 .screen-list-active > input {
     color: rgb(220,248,54);
     font-weight: bold;
+    border-radius: 10px;
 }
 
 .time-title{
@@ -222,6 +223,35 @@
     border: 1px solid white;
     padding: 5px;
 }
+.time-list-hidden{
+	color: #abb7c4;
+    background-color: rgb(2,13,24);
+    margin-left: 5px;
+    border: 1px solid white;
+    padding: 5px;
+}
+.today-word{
+	color: white;
+}
+.today{
+	margin-top: 20px;
+	color: white;
+	font-size: 70px;
+}
+.box_layer{
+	position:absolute;
+	width:350px;
+	height:150px;
+	overflow:auto;
+	background:#eaeaea;
+	right:0px;
+	top:0px;
+	z-index:999;
+	border:2px solid #0084dc;
+	-webkit-border-radius:10px;
+	-moz-border-radius:10px;
+	border-radius:10px;
+}
 </style>
 </head>
 <body>
@@ -234,7 +264,7 @@
 	<!-- Header 끝 부분 -->
 	
 	<!-- content section 시작 부분 -->
-
+	
 	<div class="buster-light">
 		<div class="hero common-hero">
 			<div class="container">
@@ -246,6 +276,8 @@
 								<li class="active"><a href="#">Home</a></li>
 								<li><span class="ion-ios-arrow-right"></span>movie reservation</li>
 							</ul>
+							<h2 class="today-word">TODAY</h2>
+							<h3 class="today"></h3>
 						</div>
 					</div>
 				</div>
@@ -304,11 +336,16 @@
         // console.log(date.getFullYear());
         const lastDay = new Date(date.getFullYear(), date.getMonth() + 1, 0);
         const reserveDate = document.querySelector(".reserve-date");
-
+		console.log(date.getDate());
+		console.log(lastDay.getDate());
+		$(".today").html(date.getFullYear() +"/"+ date.getMonth() +"/"+ date.getDate());
+		console.log(date.getFullYear() +"/"+ date.getMonth() +"/"+ date.getDate());
       
             const weekOfDay = ["일", "월", "화", "수", "목", "금", "토"]
             const year = date.getFullYear();
-            const month = date.getMonth();
+            const month = date.getMonth() + 1;
+            console.log(month);
+            var count = 0;
             for (i = date.getDate(); i <= lastDay.getDate(); i++) {
 
                 const button = document.createElement("button");
@@ -338,9 +375,61 @@
                 button.append(spanDay);
                 //button.append(i);
                 reserveDate.append(button);
+                count++;
 
             }
+            if(count <= 20){
+            	const lastDay = new Date(date.getFullYear(), date.getMonth() + 1, 1);
+            	console.log(lastDay.getDate());
+            	for (i = lastDay.getDate(); i <= lastDay.getDate() + 20 - count; i++) {
+					
+                    const button = document.createElement("button");
+                    const spanWeekOfDay = document.createElement("span");
+                    const spanDay = document.createElement("span");
+                    const year = lastDay.getFullYear();
+                    const month = lastDay.getMonth() + 1;
+                    //class넣기
+                    button.classList = "movie-date-wrapper"
+                    spanWeekOfDay.classList = "movie-week-of-day";
+                    spanDay.classList = "movie-day";
+
+                    //weekOfDay[new Date(2020-03-날짜)]
+                    const dayOfWeek = weekOfDay[new Date(year + "-" + month + "-" + i).getDay()];
+
+                    //요일 넣기
+                    if (dayOfWeek === "토") {
+                        spanWeekOfDay.classList.add("saturday");
+                        spanDay.classList.add("saturday");
+                    } else if (dayOfWeek === "일") {
+                        spanWeekOfDay.classList.add("sunday");
+                        spanDay.classList.add("sunday");
+                    }
+                    spanWeekOfDay.innerHTML = dayOfWeek;
+                    button.append(spanWeekOfDay);
+                    //날짜 넣기
+                    spanDay.innerHTML = i;
+                    button.append(spanDay);
+                    //button.append(i);
+                    reserveDate.append(button);
+
+                }
+            	
+            }
+            
+            var screenfirst = 0;
+           	var moviefirst = 0;
+            var datefirst = 0;
+            
         $(document).on("click",".movie-date-wrapper",function(){
+        	datefirst = 1;
+        	if(moviefirst == 0){
+        		alert("영화를 먼저 선택해주세요");
+        		return;
+        	}else if(screenfirst == 0){
+        		alert("극장을 먼저 선택해주세요");
+        		return;
+        	}
+        	$(".time-part").html("<div class='reserve-title'>시간</div>");
                 const movieDateWrapperActive = document.querySelectorAll(".movie-date-wrapper-active");
                 movieDateWrapperActive.forEach((list) => {
                     list.classList.remove("movie-date-wrapper-active");
@@ -360,16 +449,16 @@
     				success:function(r){
     					var tag = "<div class='reserve-title'>시간</div>";
     					for(i=0;i<r.length;i++){
-    						
+    							
     							if(r[i].screenName.toString() == old){
-    								tag += "<div class='time-list'><input class='time-list-wrapper' type='button' value='" + r[i].startTime + "'><input class='time-list-wrapper' type='button' value='" + r[i].endTime + "'>";
+    								tag += "<div class='time-list'><input class='time-list-wrapper' type='button' value='" + r[i].startTime + "'><input class='time-list-hidden' type='hidden' name='endTime' value='상영 종료 시간 : " + r[i].endTime + "'>";
     								tag += "<input type='hidden' name='screencode' value='" + r[i].screenCode + "'>";
     								tag += "<input type='hidden' name='timecode' value='" + r[i].timeCode + "'>";
     								tag += "<input type='hidden' name='mcode' value='" + r[i].mcode + "'></div>";
     							}
     							else{
     								tag += "<div class='time-title'><span class='time-title-wrapper'>" + r[i].screenName + "</span></div>";
-    								tag += "<div class='time-list'><input class='time-list-wrapper' type='button' value='" + r[i].startTime + "'><input class='time-list-wrapper' type='button' value='" + r[i].endTime + "'>";
+    								tag += "<div class='time-list'><input class='time-list-wrapper' type='button' value='" + r[i].startTime + "'><input class='time-list-hidden' type='hidden' name='endTime' value='상영 종료 시간 : " + r[i].endTime + "'>";
     								tag += "<input type='hidden' name='screencode' value='" + r[i].screenCode + "'>";
     								tag += "<input type='hidden' name='timecode' value='" + r[i].timeCode + "'>";
     								tag += "<input type='hidden' name='mcode' value='" + r[i].mcode + "'></div>";
@@ -385,6 +474,10 @@
         });
         
         $(document).on("click",".movie-list",function(){
+        		moviefirst = 1;
+        		screenfirst = 0;
+        		datefirst = 0;
+        		$(".time-part").html("<div class='reserve-title'>시간</div>");
             	const movieListActive = document.querySelectorAll(".movie-list-active");
         		movieListActive.forEach((list) => {
                     list.classList.remove("movie-list-active");
@@ -413,6 +506,12 @@
         });
         
         $(document).on("click",".screen-list",function(){ 
+        	screenfirst = 1;
+        	if(moviefirst == 0){
+        		alert("영화를 먼저 선택해주세요");
+        		return;
+        	}
+        	screenfirst++;
         		const screenListActive = document.querySelectorAll("screen-list-active");
         		screenListActive.forEach((list) => {
                 list.classList.remove("screen-list-active");
@@ -422,6 +521,7 @@
         
         
         $(document).on("click",".time-list",function(){
+        	
         	var d = "screenCode=" + $(this).find("input[name='screencode']").val();
         		d += "&timeCode=" + $(this).find("input[name='timecode']").val();
         		d += "&mcode=" + $(this).find("input[name='mcode']").val();
@@ -435,7 +535,25 @@
 			});
         	
         });
-        
+        $(document).on("mouseover",".time-list",function(){
+    		
+			var obj = $(this);
+			var tX = (obj.position().left + 30);
+			var tY = (obj.position().top - 25);
+
+	 		if($(this).find("input[name='endTime']").css("display") == "none"){
+	 			$(this).find("input[name='endTime']").attr("type", "button");
+	 				$(this).find("input[name='endTime']").css({
+	 					"top" : tY
+	 					,"left" : tX
+	 					,"position" : "absolute"
+	 				}).show();
+	 		}
+	 			
+	 	});
+     	$(document).on("mouseout",".time-list",function(){
+			$(this).find("input[name='endTime']").attr("type", "hidden");
+		});
 				
     </script>
 </body>
