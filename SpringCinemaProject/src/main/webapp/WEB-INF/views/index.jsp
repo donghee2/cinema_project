@@ -107,6 +107,7 @@
     padding: 5px 2px;
     color: #abb7c4;
     background-color: rgb(7,24,41);
+    border-radius: 10px;
 }
 
 .movie-week-of-day {
@@ -138,6 +139,8 @@
 .movie-date-wrapper-active {
     background-color: rgb(7,24,41);
     border: 2px solid rgb(220,248,54);
+    border-radius: 10px;
+    
 }
 
 .movie-date-wrapper-active>* {
@@ -156,6 +159,7 @@
     justify-content: flex-start;
     align-items: center;
     border: 2px solid rgb(2,13,24);
+    border-radius: 10px;
 }
 
 .movie-list-active {
@@ -187,6 +191,7 @@
 .screen-list-active {
     background-color: rgb(7,24,41);
     border: 2px solid rgb(220,248,54);
+    border-radius: 10px;
 }
 
 .screen-list-wrapper {
@@ -205,6 +210,7 @@
 
 .time-title{
     margin: 20px;
+    width: 100%;
 }
 
 .time-title-wrapper{
@@ -212,8 +218,17 @@
     background-color: rgb(2,13,24);
 }
 
+.time-flex{
+	display: flex;
+	flex-flow: row wrap;
+}
+
 .time-list{
 	margin-left: 10px;
+	margin-bottom: 5px;
+	width: calc(calc(100% / 5) - 15px);
+	text-align: center;
+	
 }
 
 .time-list-wrapper{
@@ -222,6 +237,7 @@
     margin-left: 5px;
     border: 1px solid white;
     padding: 5px;
+    border-radius: 10px;
 }
 .time-list-hidden{
 	color: #abb7c4;
@@ -447,7 +463,7 @@
     				data : data,
     				dataType:"json",
     				success:function(r){
-    					var tag = "<div class='reserve-title'>시간</div>";
+    					var tag = "<div class='reserve-title'>시간</div><div class='time-flex'>";
     					for(i=0;i<r.length;i++){
     							
     							if(r[i].screenName.toString() == old){
@@ -466,6 +482,7 @@
     							var old = r[i].screenName.toString();
     							console.log(old);
     					}
+    								tag += "</div>";
     					$(".time-part").html(tag);
     					}
     			});
