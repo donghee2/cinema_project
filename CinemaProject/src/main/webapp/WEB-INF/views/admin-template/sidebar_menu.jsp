@@ -38,13 +38,12 @@
 							<li><a href="../members/members-list.html">영화 등록</a></li>
 							<li><a href="../members/member-profile.html">등록된 영화 목록</a></li>
 						</ul></li>
-					<li class="treeview"><a href="#"><i class="icon-people"></i><span>샘플 메뉴</span><span
+					<li class="treeview"><a href="#"><i class="icon-people"></i><span>회원관리</span><span
 							class="pull-right-container"><i
 								class="fa fa-angle-right pull-right"></i></span></a>
 					<ul class="treeview-menu">
-							<li><a href="blank.do">빈 샘플 메뉴</a></li>
-							<li><a href="blank.do">빈 샘플 메뉴</a></li>
-							<li><a href="blank.do">빈 샘플 메뉴</a></li>
+							<li><a href="blank.do">전체 회원관리</a></li>
+							<li><a href="blank.do">전체 문의내역</a></li>
 						</ul></li>
 					<li class="treeview"><a href="#"><i class="icon-people"></i><span>샘플 메뉴</span><span
 							class="pull-right-container"><i
