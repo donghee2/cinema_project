@@ -214,6 +214,13 @@ public class MainController {
 		return "qna";
 	}
 	
+	@RequestMapping("/faqView.do")
+	public String faqView(Model model) {
+		model.addAttribute("page", "faq.jsp");
+		return "faq";
+	}
+	
+	
 
 }
 

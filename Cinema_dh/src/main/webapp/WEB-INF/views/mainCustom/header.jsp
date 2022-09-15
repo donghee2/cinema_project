@@ -153,7 +153,7 @@
 								class="fa fa-angle-down" aria-hidden="true"></i></a>
 						<ul class="dropdown-menu level1">
 								<li><a href="qnaWriteView.do">1:1문의</a></li>
-								<li><a href="bloggrid.html">자주 묻는 질문</a></li>
+								<li><a href="faqView.do">자주 묻는 질문</a></li>
 							</ul></li>
 						
 					</ul>
