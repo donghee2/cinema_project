@@ -46,13 +46,13 @@
                     <li class="member address">
                    	 <label>우편번호</label>
                     <div class="address_box">
-                    <span class="input_area"><input type="text" name="address1" class="postcodify_postcode5 border_bottom" id="sample6_postcode"></span>
+                    <span class="input_area"><input type="text" name="address1" class="postcodify_postcode5 border_bottom" id="sample6_postcode" value="${sessionScope.address1 }"></span>
                     <input type="button" id="address_btn" onclick="sample6_execDaumPostcode()" value="우편번호 검색"><br>
                     </div>
                     <label>도로명주소</label>
-                    <span class="input_area"><input type="text" name="address2" id="sample6_address" class="postcodify_address border_bottom"></span>
+                    <span class="input_area"><input type="text" name="address2" id="sample6_address" class="postcodify_address border_bottom" value="${sessionScope.address2 }">></span>
                     <label>상세주소</label>
-                    <span class="input_area"><input type="text" name="address3" id="sample6_detailAddress" class="postcodify_details border_bottom"></span>
+                    <span class="input_area"><input type="text" name="address3" id="sample6_detailAddress" class="postcodify_details border_bottom" value="${sessionScope.address3 }">></span>
                     
                     </li>
                     <li><label for="tel">전화번호</label></li>

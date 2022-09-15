@@ -7,51 +7,17 @@
 <meta charset="UTF-8">
 <title>Insert title here</title>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-<script type="text/javascript">
-	$(function(){
-		$("#btn_find").click(function(){
-			var d = "userEmail=" + $("#id").val() + $("#email").val() + "&userName=" + $("#userName").val() + "&userTel=" + $("#userTel").val();
-			console.log(d);
-			$.ajax({
-				url: "findPasswd.do",
-				data: d,
-				dataType: "json",
-				success: function(r){
-					console.log(r);
-					console.log(r[0].userEmail);
-					var tag = "";
-					tag += '<form action="updatePasswd.do" method="post"><input type="text" name="userEmail" value="'+ r[0].userEmail +'"><br>';
-					tag += '<input type="password" name="userPasswd" placeholder="새 비밀번호 입력"><br>';
-					tag += '<input type="password" name="userPasswdChk" placeholder="비밀번호 확인"><br>';
-					tag += '<button type="submit">비밀번호 변경</button></form>';
-					$(".find_result").html(tag);
-				}
-			})
-		})
-	});
-</script>
+<link rel="stylesheet" href="../template/find.css">
+<link rel="stylesheet" href="css/plugins.css">
+<link rel="stylesheet" href="css/style.css">
 </head>
 <body>
-	<section>
-		<h2>아이디 찾기</h2>
-		<form action="findPasswd.do">
-			<label for="id">이메일</label>
-			<input type="text" name="id" id="id">
-			<select name="email" id="email">
-				<option value="@google.com">@google.com</option>
-				<option value="@naver.com">@naver.com</option>
-				<option value="@nate.com">@nate.com</option>
-				<option value="@hanmail.net">@hanmail.net</option>
-			</select>
-			<label for="userName">이름</label>
-			<input type="text" name="userName" id="userName">
-			<label for="userTel">핸드폰 번호</label>
-			<input type="text" name="userTel" id="userTel">
-		</form>
-			<button id="btn_find">비밀번호 찾기</button>
-		<div class="find_result">
-			
-		</div>
-	</section>
+	<jsp:include page="mainCustom/header.jsp"></jsp:include>
+	<jsp:include page="mainCustom/find-passwd.jsp"></jsp:include>
+	<jsp:include page="mainCustom/footer.jsp"></jsp:include>
+	<script src="js/jquery.js"></script>
+	<script src="js/plugins.js"></script>
+	<script src="js/plugins2.js"></script>
+	<script src="js/custom.js"></script>
 </body>
 </html>

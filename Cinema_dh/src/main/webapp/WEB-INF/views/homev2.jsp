@@ -22,7 +22,7 @@
 </head>
 <body>
 	<!-- begin header -->
-	<jsp:include page="mainCustom/login.jsp"></jsp:include>
+	<jsp:include page="mainCustom/header.jsp"></jsp:include>
 	<!-- end header -->
 	<div class="slider sliderv2">
 		<div class="container">

@@ -32,7 +32,7 @@
 </head>
 <body>
 	<!-- begin header -->
-	<jsp:include page="mainCustom/login.jsp"></jsp:include>
+	<jsp:include page="mainCustom/header.jsp"></jsp:include>
 	<!-- END | Header -->
 	<jsp:include page="mainCustom/register.jsp"></jsp:include>
 	<!-- footer v2 section-->

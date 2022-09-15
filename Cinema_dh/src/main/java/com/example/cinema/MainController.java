@@ -32,11 +32,12 @@ public class MainController {
 
 	@RequestMapping("/")
 	public String main() {
-		return "homev2";
+		return "main_index";
 	}
 	
 	@RequestMapping("/loginView.do")
-	public String loginView() {
+	public String loginView(Model model) {
+		model.addAttribute("page", "login.jsp");
 		return "memberlogin";
 	}
 	
@@ -56,7 +57,7 @@ public class MainController {
             session.setAttribute("access_Token", access_Token);
             session.setAttribute("kakaoLogin", true);
         }
-    return "homev2";
+    return "main_index";
 }
  @RequestMapping(value="/logout")
     public String logout(HttpSession session) {
@@ -71,24 +72,31 @@ public class MainController {
             System.out.println("access_Token is null");
             return "redirect:/";
         }
-        return "homev2";
+        return "main_index";
         
     }
 	
 	@RequestMapping("/memberlogin.do")
 	public String login(String userEmail, String userPasswd, HttpSession session) {
 		MemberDTO dto = service.login(userEmail, userPasswd);
-		System.out.println(userEmail + " " + userPasswd);
-		System.out.println(dto);
+//		System.out.println(userEmail + " " + userPasswd);
+//		System.out.println(dto);
 		if(dto != null) {
+			String[] arr = dto.getAddress().split("/");
+			String address1 = arr[0];
+			String address2 = arr[1];
+			String address3 = arr[2];
 			session.setAttribute("login", true);
 			session.setAttribute("dto", dto);
 			session.setAttribute("userEmail", dto.getUserEmail());
 			session.setAttribute("userName", dto.getUserName());
+			session.setAttribute("address1", address1);
+			session.setAttribute("address2", address2);
+			session.setAttribute("address3", address3);
 			return "redirect:/";
 		} else {
 			session.setAttribute("login", false);
-			return "homev2";
+			return "main_index";
 		}
 	}
 	
@@ -110,7 +118,7 @@ public class MainController {
 		String userEmail = id + email;
 		System.out.println(userEmail);
 		System.out.println(dto.getUserBirth());
-		String address = address1 + " " + address2 + " " + address3;
+		String address = address1 + "/" + address2 + "/" + address3;
 		dto.setUserEmail(userEmail);
 		dto.setAddress(address);
 		System.out.println(dto.toString());
@@ -125,7 +133,7 @@ public class MainController {
 	
 	@RequestMapping("/update.do")
 	public String update(MemberDTO dto, String userEmail, String address1, String address2, String address3, int userTel) {
-		String address = address1 + " " + address2 + " " + address3;
+		String address = address1 + "/" + address2 + "/" + address3;
 		dto.setAddress(address);
 		dto.setUserTel(userTel);
 		System.out.println(dto);
@@ -193,7 +201,8 @@ public class MainController {
 	}
 	
 	@RequestMapping("qnaWriteView.do")
-	public String qnaWriteView() {
+	public String qnaWriteView(Model model) {
+		model.addAttribute("page", "qna.jsp");
 		return "qna";
 	}
 	

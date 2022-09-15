@@ -127,69 +127,38 @@
 						<li class="hidden"><a href="#page-top"></a></li>
 						<li class="dropdown first"><a
 							class="btn btn-default dropdown-toggle lv1"
-							data-toggle="dropdown" data-hover="dropdown">Home <i
+							data-toggle="dropdown" data-hover="dropdown">movies <i
 								class="fa fa-angle-down" aria-hidden="true"></i></a>
 						<ul class="dropdown-menu level1">
-								<li><a href="index.html">Home 01</a></li>
-								<li><a href="homev2.html">Home 02</a></li>
-								<li><a href="homev3.html">Home 03</a></li>
+								<li><a href="index.html">현재 상영작</a></li>
+								<li><a href="homev2.html">상영 예정작</a></li>
+								<li><a href="homev3.html">무비차트</a></li>
 							</ul></li>
 						<li class="dropdown first"><a
 							class="btn btn-default dropdown-toggle lv1"
-							data-toggle="dropdown" data-hover="dropdown"> movies<i
+							data-toggle="dropdown" data-hover="dropdown"> 극장<i
 								class="fa fa-angle-down" aria-hidden="true"></i></a>
 						<ul class="dropdown-menu level1">
 								<!-- <li class="dropdown"><a href="#">about us <i class="fa fa-caret-right" aria-hidden="true"></i></a><ul class="dropdown-menu level2"><li><a href="aboutv1.html">About Us 01</a></li><li><a href="aboutv2.html">About Us 02</a></li></ul></li>-->
-								<li><a href="moviegrid.html">Movie grid</a></li>
-								<li><a href="moviegridfw.html">movie grid full width</a></li>
-								<li><a href="movielist.html">Movie list</a></li>
-								<li class="it-last"><a href="moviesingle.html">Movie
-										single</a></li>
+								<li><a href="moviegrid.html">극장 소개</a></li>
+								<li><a href="moviegridfw.html">지점 찾기</a></li>
 							</ul></li>
 						<li class="dropdown first"><a
 							class="btn btn-default dropdown-toggle lv1"
-							data-toggle="dropdown" data-hover="dropdown"> celebrities <i
-								class="fa fa-angle-down" aria-hidden="true"></i></a>
-						<ul class="dropdown-menu level1">
-								<li><a href="celebritygrid01.html">celebrity grid 01</a></li>
-								<li><a href="celebritygrid02.html">celebrity grid 02 </a></li>
-								<li><a href="celebritylist.html">celebrity list</a></li>
-								<li class="it-last"><a href="celebritysingle.html">celebrity
-										single</a></li>
-							</ul></li>
+							data-toggle="dropdown" data-hover="dropdown"> 예매</a>
+						</li>
 						<li class="dropdown first"><a
 							class="btn btn-default dropdown-toggle lv1"
-							data-toggle="dropdown" data-hover="dropdown"> news <i
+							data-toggle="dropdown" data-hover="dropdown"> 고객센터 <i
 								class="fa fa-angle-down" aria-hidden="true"></i></a>
 						<ul class="dropdown-menu level1">
-								<li><a href="bloglist.html">blog List</a></li>
-								<li><a href="bloggrid.html">blog Grid</a></li>
-								<li class="it-last"><a href="blogdetail.html">blog
-										Detail</a></li>
+								<li><a href="qnaWriteView.do">1:1문의</a></li>
+								<li><a href="bloggrid.html">자주 묻는 질문</a></li>
 							</ul></li>
-						<li class="dropdown first"><a
-							class="btn btn-default dropdown-toggle lv1"
-							data-toggle="dropdown" data-hover="dropdown"> community <i
-								class="fa fa-angle-down" aria-hidden="true"></i></a>
-						<ul class="dropdown-menu level1">
-								<li><a href="userfavoritegrid.html">user favorite grid</a></li>
-								<li><a href="userfavoritelist.html">user favorite list</a></li>
-								<li><a href="userprofile.html">user profile</a></li>
-								<li class="it-last"><a href="userrate.html">user rate</a></li>
-							</ul></li>
+						
 					</ul>
 					<ul class="nav navbar-nav flex-child-menu menu-right">
-						<li class="dropdown first"><a
-							class="btn btn-default dropdown-toggle lv1"
-							data-toggle="dropdown" data-hover="dropdown"> pages <i
-								class="fa fa-angle-down" aria-hidden="true"></i></a>
-						<ul class="dropdown-menu level1">
-								<li><a href="landing.html">Landing</a></li>
-								<li><a href="404.html">404 Page</a></li>
-								<li class="it-last"><a href="comingsoon.html">Coming
-										soon</a></li>
-							</ul></li>
-						<li><a href="#">Help</a></li>
+						
 						<%
 						boolean flag = false;
 						boolean kflag = false;
@@ -200,7 +169,7 @@
 						}
 						if(flag){
 						%>
-						<li><a>${sessionScope.dto.userName }님이 로그인 하셨습니다.</a></li>
+						<li><a><span>${sessionScope.dto.userName }</span>님의 마이페이지</a></li>
 						<c:if test="${sessionScope.userEmail == 'test' }">
 							<li><a href="memberlogout.do">로그아웃</a></li>
 							<li><a href="allMemberView.do">전체회원관리</a></li>
@@ -208,12 +177,11 @@
 						<c:if test="${sessionScope.userEmail != 'test' }">
 							<li><a href="memberlogout.do">로그아웃</a></li>
 							<li><a href="updateView.do">회원정보수정</a></li>
-							<li><a href="qnaWriteView.do">글쓰기</a></li>	
 						</c:if>
 						<%
 						} else if(kflag) {
 						%>	
-							<li><a>${sessionScope.userId }님이 로그인 하셨습니다.</a></li>
+							<li><a><span>${sessionScope.userId }님이 로그인 하셨습니다.</span></a></li>
 							<li><a href="logout">로그아웃</a></li>
 						<% 
 						} else {

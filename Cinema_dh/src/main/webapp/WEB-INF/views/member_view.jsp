@@ -14,7 +14,7 @@
 
 </head>
 <body>
-	<jsp:include page="mainCustom/login.jsp"></jsp:include>
+	<jsp:include page="mainCustom/header.jsp"></jsp:include>
 	<jsp:include page="mainCustom/member_update.jsp"></jsp:include>
 	<jsp:include page="mainCustom/footer.jsp"></jsp:include>
 	<script src="js/jquery.js"></script>
