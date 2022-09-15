@@ -11,10 +11,8 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
-import com.example.cinema.dto.GuestDTO;
 import com.example.cinema.dto.MemberDTO;
 import com.example.cinema.dto.QnADTO;
-import com.example.cinema.service.GuestService;
 import com.example.cinema.service.MemberService;
 import com.example.cinema.service.QnAService;
 import com.example.cinema.service.kakaoAPI;
@@ -22,14 +20,12 @@ import com.example.cinema.service.kakaoAPI;
 @Controller
 public class MainController {
 	private MemberService service;
-	private GuestService gservice;
 	private QnAService qnaservice;
 	private kakaoAPI kakaoAPI; 
 	
 	
-	public MainController(MemberService service, GuestService gservice, QnAService qnaservice, kakaoAPI kakaoAPI) {
+	public MainController(MemberService service, QnAService qnaservice, kakaoAPI kakaoAPI) {
 		this.service = service;
-		this.gservice = gservice;
 		this.qnaservice = qnaservice;
 		this.kakaoAPI = kakaoAPI;
 	}
@@ -96,28 +92,6 @@ public class MainController {
 		}
 	}
 	
-	@RequestMapping("/guestLoginView.do")
-	public String nonMemberLoginView() {
-		return "guest_login";
-	}
-	
-	// 쿼츠 이용해서 게스트 정보 삭제해야함
-	@RequestMapping("/guestLogin.do")
-	public String nonMemberLogin(GuestDTO gdto, HttpSession session) {
-		System.out.println(gdto);
-		gservice.insertGuest(gdto);
-//		System.out.println("123456" + gdto);
-		gdto = gservice.guestLogin(gdto);
-//		System.out.println("asdasd" + gdto);
-		if(gdto != null) {
-			session.setAttribute("login", true);
-			session.setAttribute("gdto", gdto);
-			return "redirect:/";
-		} else {
-			session.setAttribute("login", false);
-			return "guest_login";
-		}
-	}
 	
 	@RequestMapping("/memberlogout.do")
 	public String memberlogout(HttpSession session) {
@@ -126,7 +100,8 @@ public class MainController {
 	}
 	
 	@RequestMapping("/registerView.do")
-	public String registerView() {
+	public String registerView(Model model) {
+		model.addAttribute("page", "register.jsp");
 		return "register";
 	}
 	
