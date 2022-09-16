@@ -142,8 +142,9 @@ public class MainController {
 	}
 	
 	@RequestMapping("/deleteView.do")
-	public String deleteView() {
-		return "check_delete";
+	public String deleteView(Model model) {
+		model.addAttribute("page", "dh/check_delete.jsp");
+		return "main_index";
 	}
 	
 	@RequestMapping("/delete.do")
@@ -155,8 +156,9 @@ public class MainController {
 	}
 	
 	@RequestMapping("/findIdView.do")
-	public String findIdView() {
-		return "find_id";
+	public String findIdView(Model model) {
+		model.addAttribute("page", "dh/find-id.jsp");
+		return "main_index";
 	}
 	
 	@RequestMapping("findId.do")
@@ -168,8 +170,9 @@ public class MainController {
 	}
 	
 	@RequestMapping("/findPasswdView.do")
-	public String findPasswdView() {
-		return "find_passwd";
+	public String findPasswdView(Model model) {
+		model.addAttribute("page", "dh/find-passwd.jsp");
+		return "main_index";
 	}
 	
 	@RequestMapping("findPasswd.do")
@@ -189,7 +192,7 @@ public class MainController {
 	public String updatePasswd(String userEmail, String userPasswd) {
 		System.out.println("updatePasswd.do " + userEmail + " " + userPasswd);
 		service.updatePasswd(userEmail, userPasswd);
-		return "login";
+		return "main_index";
 	}
 	
 	@RequestMapping("/allMemberView.do")

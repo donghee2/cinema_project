@@ -44,9 +44,10 @@ public class MainController {
 	public String index(Model model) {
 		return "admin_index";
 	}
-	@RequestMapping("/blank.do")
+	@RequestMapping("/main")
 	public String blank(Model model) {
-		return "blank";
+		model.addAttribute("page", "main_body.jsp");
+		return "main_index";
 	}
 	
 	
@@ -57,8 +58,8 @@ public class MainController {
 		
 	@RequestMapping("/loginView.do")
 	public String loginView(Model model) {
-		model.addAttribute("page", "login.jsp");
-		return "memberlogin";
+		model.addAttribute("page", "dh/login.jsp");
+		return "main_index";
 	}
 	
 	@RequestMapping(value="/login")
@@ -99,20 +100,17 @@ public class MainController {
 	@RequestMapping("/memberlogin.do")
 	public String login(String userEmail, String userPasswd, HttpSession session) {
 		MemberDTO dto = service.login(userEmail, userPasswd);
-//		System.out.println(userEmail + " " + userPasswd);
-//		System.out.println(dto);
+		System.out.println(userEmail + " " + userPasswd);
+		System.out.println(dto);
 		if(dto != null) {
 			String[] arr = dto.getAddress().split("/");
-			String address1 = arr[0];
-			String address2 = arr[1];
-			String address3 = arr[2];
 			session.setAttribute("login", true);
 			session.setAttribute("dto", dto);
 			session.setAttribute("userEmail", dto.getUserEmail());
 			session.setAttribute("userName", dto.getUserName());
-			session.setAttribute("address1", address1);
-			session.setAttribute("address2", address2);
-			session.setAttribute("address3", address3);
+			session.setAttribute("address1", arr[0]);
+			session.setAttribute("address2", arr[1]);
+			session.setAttribute("address3", arr[2]);
 			return "redirect:/";
 		} else {
 			session.setAttribute("login", false);
@@ -129,8 +127,8 @@ public class MainController {
 	
 	@RequestMapping("/registerView.do")
 	public String registerView(Model model) {
-		model.addAttribute("page", "register.jsp");
-		return "register";
+		model.addAttribute("page", "dh/register.jsp");
+		return "main_index";
 	}
 	
 	@RequestMapping("/register.do") 
@@ -143,12 +141,13 @@ public class MainController {
 		dto.setAddress(address);
 		System.out.println(dto.toString());
 		service.insertMember(dto);
-		return "homev2";
+		return "main_index";
 	}
 	
 	@RequestMapping("/updateView.do")
-	public String updateView() {
-		return "member_view";
+	public String updateView(Model model) {
+		model.addAttribute("page", "dh/member_update.jsp");
+		return "main_index";
 	}
 	
 	@RequestMapping("/update.do")
@@ -216,14 +215,15 @@ public class MainController {
 	public String allMemberView(Model model) {
 		List<MemberDTO> list = service.selectAllMember();
 		System.out.println(list.toString());
+		model.addAttribute("page", "dh/all_member_view.jsp");
 		model.addAttribute("list", list);
-		return "all_member_view";
+		return "admin-mainpage";
 	}
 	
 	@RequestMapping("qnaWriteView.do")
 	public String qnaWriteView(Model model) {
-		model.addAttribute("page", "qna.jsp");
-		return "qna";
+		model.addAttribute("page", "dh/qna.jsp");
+		return "main_index";
 	}
 	
 	@RequestMapping("/qnaWrite.do")
@@ -231,13 +231,13 @@ public class MainController {
 		dto.setQnaWriter((String) session.getAttribute("userEmail"));
 		System.out.println(dto);
 		qnaservice.insertQnA(dto);
-		return "qna";
+		return "main";
 	}
 	
 	@RequestMapping("/faqView.do")
 	public String faqView(Model model) {
-		model.addAttribute("page", "faq.jsp");
-		return "faq";
+		model.addAttribute("page", "dh/faq.jsp");
+		return "main_index";
 	}
 	
 	

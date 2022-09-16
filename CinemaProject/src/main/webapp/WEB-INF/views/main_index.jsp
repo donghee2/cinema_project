@@ -18,21 +18,15 @@
 <!-- CSS files -->
 <link rel="stylesheet" href="css/plugins.css">
 <link rel="stylesheet" href="css/style.css">
+<link rel="stylesheet" href="css//template_dh/qna.css">
+<link rel="stylesheet" href="css//template_dh/sign_up.css">
 
 </head>
 <body>
 	<!-- begin header -->
 	<jsp:include page="main-template/header.jsp"></jsp:include>
-	<!-- end header -->
-	<!-- <div class="slider sliderv2">
-		<div class="container">
-			<div class="row">
-				<div class="slider-single-item">
-				</div>
-			</div>
-		</div>
-	</div> -->
-	<jsp:include page="main-template/main_body.jsp"></jsp:include>
+	<!-- section -->
+	<jsp:include page="main-template/${page }"></jsp:include>
 	<!--end of latest new v2 section-->
 	<!-- footer v2 section-->
 	<jsp:include page="main-template/footer.jsp"></jsp:include>
