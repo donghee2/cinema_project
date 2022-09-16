@@ -30,6 +30,13 @@ public class QnAService {
 	public int countQna(String userEmail) {
 		return mapper.countQna(userEmail);
 	}
+
+	public int updateQnaResponse(int qno, String response) {
+		HashMap<Object, Object> map = new HashMap<Object, Object>();
+		map.put("qno", qno);
+		map.put("response", response);
+		return mapper.updateQnaResponse(map);
+	}
 	
 	
 	

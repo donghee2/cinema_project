@@ -7,8 +7,9 @@ public class QnADTO {
 	private int qno;
 	private String qnaTitle;
 	private String qnaArea;
-	private String qnaWriter;
+	private String userEmail;
 	private int qnaQuiryType;
+	private String qnaQuiry;
 	private String qnaContent;
 	private String response;
 	private String qnaDate;
@@ -17,6 +18,19 @@ public class QnADTO {
 	}
 	
 	
+	
+	public String getQnaQuiry() {
+		return qnaQuiry;
+	}
+
+
+
+	public void setQnaQuiry(String qnaQuiry) {
+		this.qnaQuiry = qnaQuiry;
+	}
+
+
+
 	public String getQnaDate() {
 		return qnaDate;
 	}
@@ -58,12 +72,12 @@ public class QnADTO {
 		this.qnaArea = qnaArea;
 	}
 
-	public String getQnaWriter() {
-		return qnaWriter;
+	public String getuserEmail() {
+		return userEmail;
 	}
 
-	public void setQnaWriter(String qnaWriter) {
-		this.qnaWriter = qnaWriter;
+	public void setuserEmail(String userEmail) {
+		this.userEmail = userEmail;
 	}
 
 	public int getQnaQuiryType() {
@@ -82,11 +96,16 @@ public class QnADTO {
 		this.qnaContent = qnaContent;
 	}
 
+
+
 	@Override
 	public String toString() {
-		return "QnADTO [qno=" + qno + ", qnaTitle=" + qnaTitle + ", qnaArea=" + qnaArea + ", qnaWriter=" + qnaWriter
-				+ ", qnaQuiryType=" + qnaQuiryType + ", qnaContent=" + qnaContent + "]";
+		return "QnADTO [qno=" + qno + ", qnaTitle=" + qnaTitle + ", qnaArea=" + qnaArea + ", userEmail=" + userEmail
+				+ ", qnaQuiryType=" + qnaQuiryType + ", qnaQuiry=" + qnaQuiry + ", qnaContent=" + qnaContent
+				+ ", response=" + response + ", qnaDate=" + qnaDate + "]";
 	}
+
+	
 
 	
 

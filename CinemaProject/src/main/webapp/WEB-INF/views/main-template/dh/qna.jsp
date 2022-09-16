@@ -73,7 +73,7 @@ window.onload = function(){
 	<div class="slider sliderv2">
 		<div class="qna-container">
 	 	 	<h2>문의</h2>
-                <form action="qnaWrite.do">
+                <form action="qnaWrite.do" method="post">
                     <table>
                         <caption>* 필수</caption>
                         <tr>

@@ -82,7 +82,8 @@
 					<ul class="nav nav-tabs tabstyle">
 						<li><a class="active" href="#activity" data-toggle="tab">1:1 문의
 								내역</a></li>
-						<li><a href="#settings" data-toggle="tab">회원 정보 수정</a></li>
+						<li><a href="#settings" data-toggle="tab">회원 정보 수정1:1 문의
+								내역</a></li>
 					</ul>
 					<div class="tab-content">
 						<div class="tab-pane" id="timeline">

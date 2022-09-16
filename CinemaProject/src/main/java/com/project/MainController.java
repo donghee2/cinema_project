@@ -241,7 +241,7 @@ public class MainController {
 	public String memberProfile(@RequestParam(name = "pageNo", defaultValue = "1") int pageNo, String userEmail, Model model) {
 		MemberDTO dto = service.selectMemberProfile(userEmail);
 		String[] arr = dto.getAddress().split("/");
-		
+		System.err.println(userEmail);
 		List<QnADTO> qna = qnaservice.selectQna(userEmail, pageNo);
 		System.out.println(qna.toString());
 		int count = qnaservice.countQna(userEmail);
@@ -280,11 +280,23 @@ public class MainController {
 	
 	@RequestMapping("/qnaWrite.do")
 	public String insertContent(QnADTO dto, HttpSession session, Model model) {
-		dto.setQnaWriter((String) session.getAttribute("userEmail"));
+		dto.setuserEmail((String) session.getAttribute("userEmail"));
 		System.out.println(dto);
 		qnaservice.insertQnA(dto);
 		model.addAttribute("page", "main_body.jsp");
 		return "main_index";
+	}
+	
+	@RequestMapping("/updateQnaResponse.do")
+	public void updateQnaResponse(QnADTO dto, int qno, String qnaTitle, String response, HttpServletResponse script) throws IOException {
+		int result = qnaservice.updateQnaResponse(qno, response);
+		script.setContentType("text/html;charset=utf-8");
+		if(result == 1)
+			script.getWriter().write(
+					"<script>alert('답변이 등록되었습니다.');location.href='memberProfile.do?userEmail="+dto.getuserEmail()+"';</script>");
+		else
+			script.getWriter().write(
+					"<script>alert('답변등록에 실패하였습니다.');</script>");
 	}
 	
 	@RequestMapping("/faqView.do")
