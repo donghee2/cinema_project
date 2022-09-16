@@ -62,6 +62,18 @@ public class MemberService {
 		return mapper.selectAllMember();
 	}
 
+	public int adminDeleteMember(String userEmail) {
+		return mapper.adminDeleteMember(userEmail);
+	}
+
+	public MemberDTO selectMemberProfile(String userEmail) {
+		return mapper.selectMemberProfile(userEmail);
+	}
+
+	public int adminMemberUpdate(MemberDTO dto) {
+		return mapper.adminMemberUpdate(dto);
+	}
+
 
 
 

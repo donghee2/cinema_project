@@ -25,5 +25,11 @@ public interface MemberMapper {
 	int updatePasswd(Map<String, Object> map);
 	// 회원정보 전체조회
 	List<MemberDTO> selectAllMember();
+	// 관리자페이지 회원정보 삭제
+	int adminDeleteMember(String userEmail);
+	// 관리자페이지 회원프로필 조회
+	MemberDTO selectMemberProfile(String userEmail);
+	// 관리자페이지 회원정보 수정
+	int adminMemberUpdate(MemberDTO dto);
 	
 }

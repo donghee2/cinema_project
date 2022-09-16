@@ -117,7 +117,7 @@
 							<span></span><span></span><span></span>
 						</div>
 					</div>
-					<a href="/"><img class="logo" src="images/logo1.png"
+					<a href="main"><img class="logo" src="images/logo1.png"
 						alt="" width="119" height="58"></a>
 				</div>
 				<!-- Collect the nav links, forms, and other content for toggling -->

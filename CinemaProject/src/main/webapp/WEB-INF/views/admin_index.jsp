@@ -55,7 +55,7 @@
 						<div class="box-tools pull-right">
 						</div>
 					</div>
-					<div class="box-body">This is some text within a card block.</div>
+					<div class="box-body"><jsp:include page="admin-template/${page }"></jsp:include> </div>
 					<!-- /.box-body -->
 					<div class="box-footer">Footer</div>
 					<!-- /.box-footer-->

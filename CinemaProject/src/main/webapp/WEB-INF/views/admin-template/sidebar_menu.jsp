@@ -42,8 +42,8 @@
 							class="pull-right-container"><i
 								class="fa fa-angle-right pull-right"></i></span></a>
 					<ul class="treeview-menu">
-							<li><a href="blank.do">전체 회원관리</a></li>
-							<li><a href="blank.do">전체 문의내역</a></li>
+							<li><a href="allMemberView">전체 회원관리</a></li>
+							<li><a href="allQnaView">전체 문의내역</a></li>
 						</ul></li>
 					<li class="treeview"><a href="#"><i class="icon-people"></i><span>샘플 메뉴</span><span
 							class="pull-right-container"><i

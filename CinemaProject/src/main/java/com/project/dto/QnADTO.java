@@ -10,9 +10,29 @@ public class QnADTO {
 	private String qnaWriter;
 	private int qnaQuiryType;
 	private String qnaContent;
+	private String response;
+	private String qnaDate;
 
 	public QnADTO() {
 	}
+	
+	
+	public String getQnaDate() {
+		return qnaDate;
+	}
+
+	public void setQnaDate(String qnaDate) {
+		this.qnaDate = qnaDate;
+	}
+
+	public String getResponse() {
+		return response;
+	}
+	
+	public void setResponse(String response) {
+		this.response = response;
+	}
+
 
 	public int getQno() {
 		return qno;

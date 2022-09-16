@@ -44,6 +44,21 @@
 		select user_email as userEmail, user_passwd as userPasswd, user_name as userName, 
 		user_nick as userNick, user_tel as userTel, user_address as address, user_point as point, to_char(user_birth, 'yyyy-mm-dd') as userBirth from member
 	</select>
+	
+	<delete id="adminDeleteMember" parameterType="String">
+		delete from member where user_email = #{userEmail}
+	</delete>
+	
+	<select id="selectMemberProfile" parameterType="String" resultType="member">
+		select user_email as userEmail, user_passwd as userPasswd, user_name as userName, 
+		user_nick as userNick, user_tel as userTel, user_address as address, user_point as point, to_char(user_birth, 'yyyy-mm-dd') as userBirth from member
+		where user_email = #{userEmail}
+	</select>
+	
+	<update id="adminMemberUpdate" parameterType="member">
+		update member set user_passwd = #{userPasswd}, user_name = #{userName}, user_nick = #{userNick}, 
+		user_tel = #{userTel}, user_address = #{address} where user_email = #{userEmail}
+	</update>
 </mapper>
 
 

@@ -1,5 +1,8 @@
 package com.project.mapper;
 
+import java.util.HashMap;
+import java.util.List;
+
 import org.apache.ibatis.annotations.Mapper;
 
 import com.project.dto.QnADTO;
@@ -8,5 +11,9 @@ import com.project.dto.QnADTO;
 public interface QnAMapper {
 
 	int insertQnA(QnADTO dto);
+	
+	List<QnADTO> selectQna(HashMap<Object, Object> map);
+
+	int countQna(String userEmail);
 	
 }
