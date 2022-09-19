@@ -126,5 +126,120 @@
             }).open();
         }
     </script>
+     <script>
+        function idCheck(){
+            var id = document.querySelector('#id');
+            var id_result = document.querySelector('.id_result');
+
+            if(id.value.length < 8 || id.value.length > 20){
+                id_result.innerHTML = '아이디는 글자수가 8~20글자 사이로 사용하세요';
+                if(id_result.classList.contains('true')) //true 클래스가 있는지?
+                id_result.classList.remove('true'); //true 클래스 제거
+                if(!id_result.classList.contains('false'))
+                    id_result.classList.add('false'); // false 클래스 추가
+                return false;
+            }
+            if(!isNaN(id.value)){
+                id_result.innerHTML = '아이디는 숫자만 쓸수 없습니다.';
+                if(id_result.classList.contains('true'))
+                id_result.classList.remove('true'); 
+                if(!id_result.classList.contains('false'))
+                    id_result.classList.add('false');
+                return false;
+            }
+            if(id_result.classList.contains('false'))
+                id_result.classList.remove('false');
+            if(!id_result.classList.contains('true'))
+                id_result.classList.add('true');
+            id_result.innerHTML = '아이디가 올바르게 입력되었습니다.';
+            return true;
+        }
+        function passCheck(){
+            var pass = document.querySelector('#pass');
+            var pass_chk = document.querySelector('#pass_chk');
+            var pass_check = document.querySelector('.pass_check');
+
+            var reg = /^(?=.*[A-Za-z])(?=.*\d)(?=.*[@$!%*#?&^])[A-Za-z\d@$!%*#?&^]{8,20}$/;
+            var flag = false;
+            if(!reg.test(pass.value)){
+                pass_check.innerHTML = '암호 형식에 일치하지 않습니다.'
+                flag = true;
+            }else if(pass.value != pass_chk.value){
+                pass_check.innerHTML = '암호가 일치하지 않습니다.';
+                flag = true;
+            }
+            if(flag){
+                if(pass_check.classList.contains('true'))
+                    pass_check.classList.remove('true');
+                if(!pass_check.classList.contains('false'))
+                    pass_check.classList.add('false');
+                    return false;
+            }
+            pass_check.innerHTML = '암호가 정상적으로 입력되었습니다.';
+            if(pass_check.classList.contains('false'))
+                pass_check.classList.remove('false');
+            if(!pass_check.classList.contains('true'))
+                pass_check.classList.add('true');
+                
+            return true;
+        }
+        function checkNick(){
+            var nick = document.querySelector('#nick');
+            var nick_length = document.querySelector('#nick_length');
+            if(nick.value.length > 20){
+                nick.value = nick.value.substr(0,20);
+                return false;
+            }
+            nick_length.innerHTML = `${nick.value.length}/20`;
+            return true;
+        }
+        function checkTel(){
+            var tel = document.querySelector("#tel");
+            console.log(isNaN(tel.value),tel.value.length != 10, tel.value.length != 11)
+            if(isNaN(tel.value)){
+                if(tel.classList.contains('true'))
+                    tel.classList.remove('true');
+                if(!tel.classList.contains('false'))
+                    tel.classList.add('false');
+                return false;
+            }
+            if(tel.value.length != 10 && tel.value.length != 11){
+                if(tel.classList.contains('true'))
+                    tel.classList.remove('true');
+                if(!tel.classList.contains('false'))
+                    tel.classList.add('false');
+                return false;
+            }            
+            if(tel.classList.contains('false'))
+                    tel.classList.remove('false');
+            if(!tel.classList.contains('true'))
+                tel.classList.add('true');
+            return true;
+        }
+        window.onload = () => {
+            var frm = document.querySelector("#frm");
+            var id = document.querySelector("#id");
+            var pass = document.querySelector('#pass');
+            var pass_chk = document.querySelector('#pass_chk');
+            var nick = document.querySelector('#nick');
+            var tel = document.querySelector("#tel");
+
+            id.onkeyup = idCheck;
+            pass.onkeyup = pass_chk.onkeyup = passCheck;
+            nick.onkeyup = checkNick;
+            tel.onkeyup = checkTel;
+
+            frm.onsubmit = (e) => {
+                if(!idCheck())
+                    e.preventDefault();
+                else if(!passCheck())
+                    e.preventDefault();
+                else if(!checkNick)
+                    e.preventDefault();
+                else if(!checkTel)
+                    e.preventDefault();
+            }
+        }
+    </script>
 </body>
 </html>

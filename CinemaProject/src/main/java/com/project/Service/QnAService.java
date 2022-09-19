@@ -37,6 +37,10 @@ public class QnAService {
 		map.put("response", response);
 		return mapper.updateQnaResponse(map);
 	}
+
+	public List<QnADTO> selectAllQnaView() {
+		return mapper.selectAllQnaView();
+	}
 	
 	
 	

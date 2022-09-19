@@ -17,5 +17,7 @@ public interface QnAMapper {
 	int countQna(String userEmail);
 
 	int updateQnaResponse(HashMap<Object, Object> map);
+
+	List<QnADTO> selectAllQnaView();
 	
 }

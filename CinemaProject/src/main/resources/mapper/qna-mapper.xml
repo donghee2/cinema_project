@@ -21,6 +21,12 @@
 	<update id="updateQnaResponse" parameterType="map">
 		update qna set response = #{response} where qno = #{qno}
 	</update>
+	
+	<select id="selectAllQnaView" resultType="qna">
+		select q.qno as qno, q.qna_title as qnaTitle, q.qna_area as qnaArea, user_email as userEmail,
+		qq.quirytype as qnaQuiry, q.qna_content as qnaContent, q.response as response, qna_date as qnaDate
+		from qna q, qnaquirytype qq where q.qna_quirytype = qq.quiry_no
+	</select>
 </mapper>
 
 
