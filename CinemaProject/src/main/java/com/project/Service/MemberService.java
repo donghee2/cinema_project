@@ -74,6 +74,10 @@ public class MemberService {
 		return mapper.adminMemberUpdate(dto);
 	}
 
+	public MemberDTO selectMembermypage(String userEmail) {
+		return mapper.selectMembermypage(userEmail);
+	}
+
 
 
 

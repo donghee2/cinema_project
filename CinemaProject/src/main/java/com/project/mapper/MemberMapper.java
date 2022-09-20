@@ -31,5 +31,7 @@ public interface MemberMapper {
 	MemberDTO selectMemberProfile(String userEmail);
 	// 관리자페이지 회원정보 수정
 	int adminMemberUpdate(MemberDTO dto);
+	// 회원 마이페이지
+	MemberDTO selectMembermypage(String userEmail);
 	
 }

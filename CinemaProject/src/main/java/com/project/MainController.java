@@ -149,6 +149,13 @@ public class MainController {
 		return "main_index";
 	}
 	
+	@RequestMapping("/memberMypage.do")
+	public String memberMypage(Model model, HttpSession session) {
+		String userEmail = (String) session.getAttribute("userEmail");
+		model.addAttribute("page", "dh/mypage.jsp");
+		return "main_index";
+	}
+	
 	@RequestMapping("/updateView.do")
 	public String updateView(Model model) {
 		model.addAttribute("page", "dh/member_update.jsp");

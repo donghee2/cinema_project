@@ -35,11 +35,11 @@
 						<div class="row social-states">
 							<div class="col-6 text-right">
 								<a href="#" class="link text-white"><i
-									class="ion ion-ios-people-outline"></i>254</a>
+									class="ion ion-ios-people-outline"></i>보유포인트 :</a>
 							</div>
 							<div class="col-6 text-left">
 								<a href="#" class="link text-white"><i
-									class="ion ion-images"></i>54</a>
+									class="ion"></i>${dto.point } 포인트</a>
 							</div>
 						</div>
 						<div class="row">
@@ -82,8 +82,8 @@
 					<ul class="nav nav-tabs tabstyle">
 						<li><a class="active" href="#activity" data-toggle="tab">1:1 문의
 								내역</a></li>
-						<li><a href="#settings" data-toggle="tab">회원 정보 수정1:1 문의
-								내역</a></li>
+						<li><a href="#settings" data-toggle="tab">회원 정보 수정
+								</a></li>
 					</ul>
 					<div class="tab-content">
 						<div class="tab-pane" id="timeline">

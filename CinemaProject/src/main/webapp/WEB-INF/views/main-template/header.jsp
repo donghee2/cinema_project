@@ -169,7 +169,7 @@
 						}
 						if(flag){
 						%>
-						<li><a><span>${sessionScope.dto.userName }</span>님의 마이페이지</a></li>
+						<li><a href="memberMypage.do"><span>${sessionScope.dto.userName }</span>님의 마이페이지</a></li>
 						<c:if test="${sessionScope.userEmail == 'test' }">
 							<li><a href="memberlogout.do">로그아웃</a></li>
 							<li><a href="allMemberView">전체회원관리</a></li>
