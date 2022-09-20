@@ -61,6 +61,11 @@
 		user_tel = #{userTel}, user_address = #{address} where user_email = #{userEmail}
 	</update>
 	
+	<select id="selectMembermypage" parameterType="String" resultType="member">
+		select user_email as userEmail, user_name as userName, user_nick as userNick,
+		user_tel as userTel, user_point as point
+		from member where user_email = #{userEmail}
+	</select>
 </mapper>
 
 

@@ -27,6 +27,17 @@
 		qq.quirytype as qnaQuiry, q.qna_content as qnaContent, q.response as response, qna_date as qnaDate
 		from qna q, qnaquirytype qq where q.qna_quirytype = qq.quiry_no
 	</select>
+	
+	<select id="selectQnamypage" parameterType="String" resultType="qna">
+		select rownum as no, qno, qna_title as qnaTitle, qna_date as qnaDate from qna 
+		where user_email = #{userEmail} order by no desc
+	</select>
+	
+	<select id="selectQnaDetail" parameterType="int" resultType="qna">
+		select q.qno, q.qna_title as qnaTitle, q.qna_area as qnaArea, qt.quirytype as qnaQuiry,
+		q.qna_content as qnaContent, q.response as response, q.qna_date as qnaDate
+		from qna q, qnaquirytype qt where q.qna_quirytype = qt.quiry_no and q.qno = #{qno}
+	</select>
 </mapper>
 
 

@@ -19,5 +19,9 @@ public interface QnAMapper {
 	int updateQnaResponse(HashMap<Object, Object> map);
 
 	List<QnADTO> selectAllQnaView();
+
+	List<QnADTO> selectQnamypage(String userEmail);
+
+	QnADTO selectQnaDetail(int qno);
 	
 }

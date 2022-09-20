@@ -18,6 +18,7 @@ import com.project.Service.QnAService;
 import com.project.Service.kakaoAPI;
 import com.project.Service.movieService;
 import com.project.dto.MemberDTO;
+import com.project.dto.MovieDTO;
 import com.project.dto.QnADTO;
 import com.project.vo.PaggingVO;
 
@@ -152,7 +153,19 @@ public class MainController {
 	@RequestMapping("/memberMypage.do")
 	public String memberMypage(Model model, HttpSession session) {
 		String userEmail = (String) session.getAttribute("userEmail");
+		MemberDTO mdto = service.selectMembermypage(userEmail);
+		List<QnADTO> qdto = qnaservice.selectQnamypage(userEmail);
+		model.addAttribute("mdto", mdto);
+		model.addAttribute("qdto", qdto);
 		model.addAttribute("page", "dh/mypage.jsp");
+		return "main_index";
+	}
+	
+	@RequestMapping("/qnaDetailView.do")
+	public String qnaDetailView(int qno, Model model) {
+		QnADTO qdto = qnaservice.selectQnaDetail(qno);
+		model.addAttribute("qdto", qdto);
+		model.addAttribute("page", "dh/qna-detail.jsp");
 		return "main_index";
 	}
 	

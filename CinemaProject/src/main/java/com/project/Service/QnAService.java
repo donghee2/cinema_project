@@ -41,6 +41,14 @@ public class QnAService {
 	public List<QnADTO> selectAllQnaView() {
 		return mapper.selectAllQnaView();
 	}
+
+	public List<QnADTO> selectQnamypage(String userEmail) {
+		return mapper.selectQnamypage(userEmail);
+	}
+
+	public QnADTO selectQnaDetail(int qno) {
+		return mapper.selectQnaDetail(qno);
+	}
 	
 	
 	
