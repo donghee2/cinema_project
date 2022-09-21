@@ -35,7 +35,7 @@ h1 {
     color: gray;
 }
 
-contaiter1>form>label {
+.contaiter1>form>label {
     font-weight: bold;
 }
 
@@ -44,7 +44,7 @@ contaiter1>form>label {
     width: 100%;
 }
 
-contaiter1>form>input {
+.contaiter1>form>input {
     border: none;
     outline: none;
     height: 50px;

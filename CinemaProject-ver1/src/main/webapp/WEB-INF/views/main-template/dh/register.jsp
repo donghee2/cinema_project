@@ -7,6 +7,7 @@
 <meta charset="UTF-8">
 <title>Insert title here</title>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+
 </head>
 <body>
 	<div class="slider sliderv2">
@@ -40,7 +41,7 @@
                     <li class="pass_check"></li>
                     <li><label for="name">이름</label></li>
                     <li class="border_bottom">
-                        <input type="text" name="userName" id="name" placeholder="이름을 입력하세요">
+                        <input type="text" name="userName" id="name1" placeholder="이름을 입력하세요">
                     </li>
                     <li><label for="nick">닉네임</label></li>
                     <li class="border_bottom">
@@ -63,7 +64,7 @@
                     </li>
                     <li><label for="tel">전화번호</label></li>
                     <li class="border_bottom">
-                       <input type="text" name="userTel" id="tel" placeholder="전화번호 입력하세요 -는 빼고" class="left_border">
+                       <input type="tel" name="userTel" id="tel" placeholder="전화번호 입력하세요 -는 빼고" class="left_border">
                     </li>
                     <!-- <li>
                         <button type="button" class="btn_send_no">인증번호 전송</button>
@@ -155,79 +156,41 @@
             return true;
         }
         function passCheck(){
-            var pass = document.querySelector('#pass');
-            var pass_chk = document.querySelector('#pass_chk');
-            var pass_check = document.querySelector('.pass_check');
-
+            
             var reg = /^(?=.*[A-Za-z])(?=.*\d)(?=.*[@$!%*#?&^])[A-Za-z\d@$!%*#?&^]{8,20}$/;
-            var flag = false;
-            if(!reg.test(pass.value)){
-                pass_check.innerHTML = '암호 형식에 일치하지 않습니다.'
-                flag = true;
-            }else if(pass.value != pass_chk.value){
-                pass_check.innerHTML = '암호가 일치하지 않습니다.';
-                flag = true;
+            if(!reg.test($('#pass').val())){
+                $('.pass_check').html('암호 형식에 일치하지 않습니다.');
+                $('.pass_check').removeClass('true').addClass('false');
+                return false;
+            }else if($('#pass').val() != $('#pass_chk').val()){
+                $('.pass_check').html('암호가 일치하지 않습니다.');
+                $('.pass_check').removeClass('true').addClass('false');
+                return false;
             }
-            if(flag){
-                if(pass_check.classList.contains('true'))
-                    pass_check.classList.remove('true');
-                if(!pass_check.classList.contains('false'))
-                    pass_check.classList.add('false');
-                    return false;
-            }
-            pass_check.innerHTML = '암호가 정상적으로 입력되었습니다.';
-            if(pass_check.classList.contains('false'))
-                pass_check.classList.remove('false');
-            if(!pass_check.classList.contains('true'))
-                pass_check.classList.add('true');
-                
-            return true;
+            $('.pass_check').html('암호가 정상적으로 입력되었습니다.');
+            $('.pass_check').removeClass('false').addClass('true');
+            return true;   
         }
         function checkNick(){
-            var nick = document.querySelector('#nick');
-            var nick_length = document.querySelector('#nick_length');
-            if(nick.value.length > 20){
-                nick.value = nick.value.substr(0,20);
+            if($('#nick').val().length > 20) {
+                $('#nick').val() = $('#nick').val(substr(0,20));
                 return false;
             }
-            nick_length.innerHTML = `${nick.value.length}/20`;
+            $('#nick_length').html($('#nick').val().length + '/20');
             return true;
         }
-        function checkTel(){
-            var tel = document.querySelector("#tel");
-            console.log(isNaN(tel.value),tel.value.length != 10, tel.value.length != 11)
-            if(isNaN(tel.value)){
-                if(tel.classList.contains('true'))
-                    tel.classList.remove('true');
-                if(!tel.classList.contains('false'))
-                    tel.classList.add('false');
-                return false;
-            }
-            if(tel.value.length != 10 && tel.value.length != 11){
-                if(tel.classList.contains('true'))
-                    tel.classList.remove('true');
-                if(!tel.classList.contains('false'))
-                    tel.classList.add('false');
-                return false;
-            }            
-            if(tel.classList.contains('false'))
-                    tel.classList.remove('false');
-            if(!tel.classList.contains('true'))
-                tel.classList.add('true');
-            return true;
-        }
+       
         window.onload = () => {
             var frm = document.querySelector("#frm");
             var id = document.querySelector("#id");
             var pass = document.querySelector('#pass');
             var pass_chk = document.querySelector('#pass_chk');
             var nick = document.querySelector('#nick');
-            var tel = document.querySelector("#tel");
-
+			
             id.onkeyup = idCheck;
             pass.onkeyup = pass_chk.onkeyup = passCheck;
             nick.onkeyup = checkNick;
-            tel.onkeyup = checkTel;
+
 
             frm.onsubmit = (e) => {
                 if(!idCheck())
@@ -236,8 +199,7 @@
                     e.preventDefault();
                 else if(!checkNick)
                     e.preventDefault();
-                else if(!checkTel)
-                    e.preventDefault();
+
             }
         }
     </script>

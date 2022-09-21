@@ -291,7 +291,7 @@ public class MainController {
 	}
 	
 	@RequestMapping(value="/login")
-    public String login(@RequestParam("code") String code, HttpSession session) {
+    public String login(@RequestParam("code") String code, HttpSession session, Model model) {
         System.out.println("code : " + code);
 
         String access_Token = kakaoAPI.getAccessToken(code);
@@ -299,19 +299,20 @@ public class MainController {
         
         HashMap<String, Object> userInfo = kakaoAPI.getUserInfo(access_Token);
         System.out.println("login Controller : " + userInfo);
-
+        model.addAttribute("page", "main_body.jsp");
         //    클라이언트의 이메일이 존재할 때 세션에 해당 이메일과 토큰 등록
         if (userInfo.get("email") != null) {
             session.setAttribute("userId", userInfo.get("email"));
             session.setAttribute("access_Token", access_Token);
             session.setAttribute("kakaoLogin", true);
         }
+        
     return "main_index";
 }
  @RequestMapping(value="/logout")
-    public String logout(HttpSession session) {
+    public String logout(HttpSession session, Model model) {
         String access_Token = (String)session.getAttribute("access_Token");
-
+        model.addAttribute("page", "main_body.jsp");
         if(access_Token != null && !"".equals(access_Token)){
             kakaoAPI.kakaoLogout(access_Token);
 //            session.removeAttribute("access_Token");
@@ -326,11 +327,12 @@ public class MainController {
     }
 	
 	@RequestMapping("/memberlogin.do")
-	public String login(String userEmail, String userPasswd, HttpSession session, Model model) {
+	public void login(String userEmail, String userPasswd, HttpSession session, Model model, HttpServletResponse response) throws IOException {
 		MemberDTO dto = service.login(userEmail, userPasswd);
 		System.out.println(userEmail + " " + userPasswd);
 		System.out.println(dto);
 		model.addAttribute("page", "main_body.jsp");
+		response.setContentType("text/html;charset=utf-8");
 		if(dto != null) {
 			String[] arr = dto.getAddress().split("/");
 			session.setAttribute("login", true);
@@ -340,19 +342,23 @@ public class MainController {
 			session.setAttribute("address1", arr[0]);
 			session.setAttribute("address2", arr[1]);
 			session.setAttribute("address3", arr[2]);
-			return "main_index";
+			response.getWriter().write("<script>alert('"+dto.getUserName()+"님 환영합니다.');location.href='main.do';</script>");
+//			return "main_index";
 		} else {
 			session.setAttribute("login", false);
-			return "main_index";
+			response.getWriter().write("<script>alert('이메일과 비밀번호를 확인하세요');location.href='main.do';</script>");
+//			return "main_index";
 		}
 	}
 	
 	
 	@RequestMapping("/memberlogout.do")
-	public String memberlogout(HttpSession session, Model model) {
+	public void memberlogout(HttpSession session, Model model, HttpServletResponse response) throws IOException {
 		session.invalidate();
 		model.addAttribute("page", "main_body.jsp");
-		return "main_index";
+		response.setContentType("text/html;charset=utf-8");
+		response.getWriter().write("<script>alert('로그아웃이 정상적으로 처리되었습니다');location.href='main.do';</script>");
+//		return "main_index";
 	}
 	
 	@RequestMapping("/registerView.do")
@@ -400,13 +406,14 @@ public class MainController {
 	}
 	
 	@RequestMapping("/update.do")
-	public String update(MemberDTO dto, String userEmail, String address1, String address2, String address3, int userTel) {
+	public String update(MemberDTO dto, String userEmail, String address1, String address2, String address3, int userTel, Model model) {
 		String address = address1 + "/" + address2 + "/" + address3;
 		dto.setAddress(address);
 		dto.setUserTel(userTel);
 		System.out.println(dto);
 		service.updateMember(dto);
-		return "redirect:/";
+		model.addAttribute("page", "main_body.jsp");
+		return "main_index";
 	}
 	
 	@RequestMapping("/deleteView.do")
@@ -415,11 +422,12 @@ public class MainController {
 	}
 	
 	@RequestMapping("/delete.do")
-	public String delete(String id, String email, String userPasswd, HttpSession session) {
+	public String delete(String id, String email, String userPasswd, HttpSession session, Model model) {
 		String userEmail = id + email;
 		service.deleteMamber(userEmail, userPasswd);
+		model.addAttribute("page", "main_body.jsp");
 		session.invalidate();
-		return "redirect:/";
+		return "main_index";
 	}
 	
 	@RequestMapping("/findIdView.do")
