@@ -39,6 +39,7 @@
 						<!-- User Account -->
 						
 						<!-- Control Sidebar Toggle Button -->
+						<li><a href="adminLogout.do">로그아웃</a></li>
 						<li><a href="#" data-toggle="control-sidebar"><i
 								class="fa fa-cog fa-spin"></i></a></li>
 					</ul>

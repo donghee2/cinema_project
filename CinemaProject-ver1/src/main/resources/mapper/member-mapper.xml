@@ -81,7 +81,8 @@
 	</delete>
 	
 	<select id="adminLogin" parameterType="map" resultType="admin">
-		select a.admin_id as adminId, a.admin_passwd as adminPasswd, a.admin_name as adminName, g.grade_name as gradeName from admin a, gradename g
+		select a.admin_id as adminId, a.admin_passwd as adminPasswd, a.admin_name as adminName, a.admin_grade as grade,
+		g.grade_name as gradeName from admin a, gradename g
 		where a.admin_grade = g.grade and a.admin_id = #{adminId} and a.admin_passwd = #{adminPasswd}
 	</select>
 </mapper>

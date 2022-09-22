@@ -650,7 +650,7 @@ public class MainController {
 			session.setAttribute("login", true);
 			session.setAttribute("adto", adto);
 			session.setAttribute("adminId", adto.getAdminId());
-			session.setAttribute("gradeName", adto.getGradeName());
+			session.setAttribute("grade", adto.getGrade());
 			response.getWriter().write("<script>alert('로그인 되었습니다.');location.href='admin.do';</script>");
 		} else {
 			session.setAttribute("login", false);
@@ -661,6 +661,13 @@ public class MainController {
 	@RequestMapping("/admin.do")
 	public String admin() {
 		return "admin_index";
+	}
+	
+	@RequestMapping("/adminLogout.do")
+	public void adminLogout(HttpSession session, HttpServletResponse response) throws IOException {
+		session.invalidate();
+		response.setContentType("text/html;charset=utf-8");
+		response.getWriter().write("<script>alert('로그아웃이 정상적으로 처리되었습니다');location.href='/';</script>");
 	}
 
 	/*--------------------------------------------------------------------------------------------------*/

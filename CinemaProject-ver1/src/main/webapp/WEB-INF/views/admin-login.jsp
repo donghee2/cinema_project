@@ -19,7 +19,7 @@
 			<form method="post" action="adminLogin.do">
 				<div class="row">
 					<label for="이메일">아이디 :<input type="text"
-						name="adminId" id="username" placeholder="아아디을 입력하세요" required="required" /></label>
+						name="adminId" id="username" placeholder="아이디을 입력하세요" required="required" /></label>
 				</div>
 				<div class="row">
 					<label for="password"> 비밀번호 :<input type="password"
