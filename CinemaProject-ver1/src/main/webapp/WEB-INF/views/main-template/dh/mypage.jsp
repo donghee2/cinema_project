@@ -55,7 +55,7 @@
 			</div>
 			<div>
 				<p>${requestScope.mdto.userName }님 기본정보</p>
-				<a href="update.do">회원정보수정</a> || <a href="delete.do">회원탈퇴</a>
+				<a href="updateView.do">회원정보수정</a> || <a href="deleteView.do">회원탈퇴</a>
 			</div>
 			<div>
 				<p><strong>이메일 :</strong> ${requestScope.mdto.userEmail }</p>

@@ -14,6 +14,12 @@
 		background-color: rgb(254, 229, 0);
 		border-radius: 5px;
 	}
+	#naver_id_login {
+		width: 180px;
+		height: 40px;
+		background-color: rgb(3, 199, 90);
+		border-radius: 5px;
+	}
 	
 </style>
 </head>
@@ -64,7 +70,8 @@
 				<div class="social-btn-2">
 					<a class="fb" href="https://kauth.kakao.com/oauth/authorize?client_id=7a35d3038a1822b8222b982de5e2a288&redirect_uri=http://localhost:9999/login&response_type=code&scope=account_email" id="kakaoLogin">
 					<i class="kakaoLogo"><img src="images/ico-kakao.png" style="width: 30px; height: 30px;"></i>kakao</a>
-					<a class="tw" href="#"><i class="ion-social-twitter"></i>twitter</a>
+					<a class="tw" href="https://nid.naver.com/oauth2.0/authorize?response_type=code&client_id=jgPU1Ccmjpw1Cg57ZBip&redirect_uri=http://localhost:9999/naverLogin.do" id="naver_id_login">
+					<i class="naverlogor"><img src="images/naver_icon1.png" style="width: 30px; height: 30px;"></i>naver</a>
 				</div>
 			</div>
 		</div>
@@ -163,10 +170,13 @@
 						<%
 						boolean flag = false;
 						boolean kflag = false;
+						boolean nflag = false;
 						if(session.getAttribute("login") != null) {
 							flag = (boolean)session.getAttribute("login");							
 						} else if(session.getAttribute("kakaoLogin") != null) {
 							kflag = (boolean)session.getAttribute("kakaoLogin");
+						} else if(session.getAttribute("naverLogin") != null) {
+							nflag = (boolean)session.getAttribute("naverLogin");
 						}
 						if(flag){
 						%>
@@ -183,6 +193,11 @@
 						} else if(kflag) {
 						%>	
 							<li><a><span>${sessionScope.userId }님이 로그인 하셨습니다.</span></a></li>
+							<li><a href="logout">로그아웃</a></li>
+						<% 
+						} else if(nflag) {
+						%>	
+							<li><a><span>${sessionScope.name }님이 로그인 하셨습니다.</span></a></li>
 							<li><a href="logout">로그아웃</a></li>
 						<% 
 						} else {

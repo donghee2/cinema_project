@@ -7,6 +7,7 @@ import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
+import java.io.UnsupportedEncodingException;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.util.HashMap;
@@ -23,19 +24,20 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.multipart.MultipartHttpServletRequest;
 
-import com.project.dto.BookingDTO;
-import com.project.dto.ScreenDTO;
 import com.project.Service.BookingService;
-import com.project.Service.ScreenService;
 import com.project.Service.MemberService;
+import com.project.Service.NaverAPI;
 import com.project.Service.QnAService;
+import com.project.Service.ScreenService;
 import com.project.Service.kakaoAPI;
 import com.project.Service.movieService;
+import com.project.dto.BookingDTO;
 import com.project.dto.CinemaDTO;
 import com.project.dto.FileDTO;
 import com.project.dto.MemberDTO;
 import com.project.dto.MovieDTO;
 import com.project.dto.QnADTO;
+import com.project.dto.ScreenDTO;
 import com.project.dto.ScreenMovieDTO;
 import com.project.vo.PaggingVO;
 
@@ -47,9 +49,13 @@ public class MainController {
 	private kakaoAPI kakaoAPI;
 	private ScreenService screenservice;
 	private BookingService bookingservice;
+	private NaverAPI naverAPI;
+	
+	
 	
 	public MainController(movieService movieservice, MemberService service, QnAService qnaservice,
-			com.project.Service.kakaoAPI kakaoAPI, ScreenService screenservice, BookingService bookingservice) {
+			com.project.Service.kakaoAPI kakaoAPI, ScreenService screenservice, BookingService bookingservice,
+			com.project.Service.NaverAPI naverAPI) {
 		super();
 		this.movieservice = movieservice;
 		this.service = service;
@@ -57,8 +63,9 @@ public class MainController {
 		this.kakaoAPI = kakaoAPI;
 		this.screenservice = screenservice;
 		this.bookingservice = bookingservice;
+		this.naverAPI = naverAPI;
 	}
-	
+
 	/*---------------------------------------------박홍희------------------------------------------------*/
 	@RequestMapping("/admin-mainpage.do")
 	public String admin_mainpage(Model model) {
@@ -325,6 +332,39 @@ public class MainController {
         return "main_index";
         
     }
+ 
+	 /*
+	  * 네이버 로그인
+	  */
+	 @RequestMapping("/naverLogin.do")
+	 public String naverLogin(String code, HttpSession session, Model model) throws UnsupportedEncodingException {
+	    System.out.println("naver-code : " + code);
+	
+	    String access_token = naverAPI.getAccessToken(code);
+	
+	    HashMap<String, Object> userInfo = naverAPI.getUserInfo(access_token);
+	    String nickname = (String) userInfo.get("nickname");
+	    String email = (String) userInfo.get("email");
+	    
+	    session.setAttribute("naverlogin", true);
+	    session.setAttribute("name", nickname);
+	    session.setAttribute("id", email);
+	    
+	    session.setAttribute("naverToken", access_token);
+	    
+	    model.addAttribute("page", "main_body.jsp");
+	    System.out.println("nickname : "+nickname);
+	    System.out.println("email : "+email);
+	    
+//	    int result = naverAPI.insertNaverLoginInfo(nickname, email);
+	
+//	    if (result == 0) {
+//	       System.out.println("네이버 로그인 - 이미 등록된 아이디입니다.");
+//	    }
+	    
+	    return "main_index";
+	
+	 }
 	
 	@RequestMapping("/memberlogin.do")
 	public void login(String userEmail, String userPasswd, HttpSession session, Model model, HttpServletResponse response) throws IOException {
@@ -368,7 +408,7 @@ public class MainController {
 	}
 	
 	@RequestMapping("/register.do") 
-	public String register(MemberDTO dto, String id, String email, String address1, String address2, String address3) {
+	public String register(MemberDTO dto, String id, String email, String address1, String address2, String address3, Model model) {
 		String userEmail = id + email;
 		System.out.println(userEmail);
 		System.out.println(dto.getUserBirth());
@@ -376,6 +416,7 @@ public class MainController {
 		dto.setUserEmail(userEmail);
 		dto.setAddress(address);
 		System.out.println(dto.toString());
+		model.addAttribute("page", "main_body.jsp");
 		service.insertMember(dto);
 		return "main_index";
 	}
@@ -406,7 +447,7 @@ public class MainController {
 	}
 	
 	@RequestMapping("/update.do")
-	public String update(MemberDTO dto, String userEmail, String address1, String address2, String address3, int userTel, Model model) {
+	public String update(MemberDTO dto, String userEmail, String address1, String address2, String address3, String userTel, Model model) {
 		String address = address1 + "/" + address2 + "/" + address3;
 		dto.setAddress(address);
 		dto.setUserTel(userTel);
@@ -417,8 +458,9 @@ public class MainController {
 	}
 	
 	@RequestMapping("/deleteView.do")
-	public String deleteView() {
-		return "check_delete";
+	public String deleteView(Model model) {
+		model.addAttribute("page", "dh/check_delete.jsp");
+		return "main_index";
 	}
 	
 	@RequestMapping("/delete.do")
@@ -437,7 +479,7 @@ public class MainController {
 	}
 	
 	@RequestMapping("findId.do")
-	public ResponseEntity<List<MemberDTO>> findId(String userName, int userTel) {
+	public ResponseEntity<List<MemberDTO>> findId(String userName, String userTel) {
 		List<MemberDTO> list = service.selectUserEmail(userName, userTel);
 		System.out.println(userTel);
 		System.out.println(userName);
@@ -451,7 +493,7 @@ public class MainController {
 	}
 	
 	@RequestMapping("findPasswd.do")
-	public ResponseEntity<List<MemberDTO>> findPasswd(String userEmail, String userName, int userTel) {
+	public ResponseEntity<List<MemberDTO>> findPasswd(String userEmail, String userName, String userTel) {
 //		System.out.println(userEmail);
 //		System.out.println(userName);
 //		System.out.println(userTel);

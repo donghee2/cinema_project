@@ -36,14 +36,14 @@ public class MemberService {
 		return mapper.deleteMember(userEmail, userPasswd);
 	}
 
-	public List<MemberDTO> selectUserEmail(String userName, int userTel) {
+	public List<MemberDTO> selectUserEmail(String userName, String userTel) {
 		Map<String, Object> map = new HashMap<String, Object>();
 		map.put("userName", userName);
 		map.put("userTel", userTel);
 		return mapper.selectUserEmail(map);
 	}
 
-	public List<MemberDTO> selectUserPasswd(String userEmail, String userName, int userTel) {
+	public List<MemberDTO> selectUserPasswd(String userEmail, String userName, String userTel) {
 		Map<String, Object> map = new HashMap<String, Object>();
 		map.put("userEmail", userEmail);
 		map.put("userName", userName);

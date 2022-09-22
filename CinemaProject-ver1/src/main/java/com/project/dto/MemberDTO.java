@@ -8,7 +8,7 @@ public class MemberDTO {
 	private String userPasswd;
 	private String userName;
 	private String userNick;
-	private int userTel;
+	private String userTel;
 	private String address;
 	private int point;
 	private String userBirth;
@@ -59,11 +59,11 @@ public class MemberDTO {
 		this.userNick = userNick;
 	}
 
-	public int getUserTel() {
+	public String getUserTel() {
 		return userTel;
 	}
 
-	public void setUserTel(int userTel) {
+	public void setUserTel(String userTel) {
 		this.userTel = userTel;
 	}
 

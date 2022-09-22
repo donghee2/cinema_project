@@ -7,6 +7,7 @@
 <title>Insert title here</title>
 </head>
 <body>
+<div class="slider sliderv2">
 	<section>
 		<h2>회원탈퇴</h2>
 		<form action="delete.do" method="post">
@@ -23,5 +24,6 @@
 			<button>회원탈퇴</button>
 		</form>
 	</section>
+</div>
 </body>
 </html>
