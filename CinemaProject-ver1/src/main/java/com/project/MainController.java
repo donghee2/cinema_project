@@ -86,30 +86,7 @@ public class MainController {
 //		model.addAttribute("Cinemalist", Cinemalist);
 //		return "admin_index";
 //	}
-	
-	@RequestMapping("adminLogin.do")
-	public void adminMain(String adminId, String adminPasswd, HttpSession session, Model model, HttpServletResponse response) throws IOException {
-		System.out.println("23123123"+adminPasswd);
-		AdminDTO adto = service.adminLogin(adminId, adminPasswd);
-		System.out.println(adto);
-		model.addAttribute("page", "main_body.jsp");
-		response.setContentType("text/html;charset=utf-8");
-		if(adto != null) {
-			session.setAttribute("login", true);
-			session.setAttribute("adto", adto);
-			session.setAttribute("adminId", adto.getAdminId());
-			session.setAttribute("gradeName", adto.getGradeName());
-			response.getWriter().write("<script>alert('로그인 되었습니다.');location.href='admin.do';</script>");
-		} else {
-			session.setAttribute("login", false);
-			response.getWriter().write("<script>alert('이메일과 비밀번호를 확인하세요');location.href='/';</script>");
-		}
-	}
-	
-	@RequestMapping("/admin.do")
-	public String admin() {
-		return "admin_index";
-	}
+
 
 	@RequestMapping("/main.do")
 	public String blank(Model model, HttpServletResponse response) {
@@ -660,6 +637,30 @@ public class MainController {
 		System.out.println(adminId);
 		int result = service.adminDelete(adminId);
 		return ResponseEntity.ok(result);
+	}
+	
+	@RequestMapping("adminLogin.do")
+	public void adminMain(String adminId, String adminPasswd, HttpSession session, Model model, HttpServletResponse response) throws IOException {
+		System.out.println("23123123"+adminPasswd);
+		AdminDTO adto = service.adminLogin(adminId, adminPasswd);
+		System.out.println(adto);
+		model.addAttribute("page", "main_body.jsp");
+		response.setContentType("text/html;charset=utf-8");
+		if(adto != null) {
+			session.setAttribute("login", true);
+			session.setAttribute("adto", adto);
+			session.setAttribute("adminId", adto.getAdminId());
+			session.setAttribute("gradeName", adto.getGradeName());
+			response.getWriter().write("<script>alert('로그인 되었습니다.');location.href='admin.do';</script>");
+		} else {
+			session.setAttribute("login", false);
+			response.getWriter().write("<script>alert('이메일과 비밀번호를 확인하세요');location.href='/';</script>");
+		}
+	}
+	
+	@RequestMapping("/admin.do")
+	public String admin() {
+		return "admin_index";
 	}
 
 	/*--------------------------------------------------------------------------------------------------*/
