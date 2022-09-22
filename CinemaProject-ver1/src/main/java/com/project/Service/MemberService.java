@@ -6,6 +6,7 @@ import java.util.Map;
 
 import org.springframework.stereotype.Service;
 
+import com.project.dto.AdminDTO;
 import com.project.dto.MemberDTO;
 import com.project.mapper.MemberMapper;
 
@@ -76,6 +77,25 @@ public class MemberService {
 
 	public MemberDTO selectMembermypage(String userEmail) {
 		return mapper.selectMembermypage(userEmail);
+	}
+
+	public List<AdminDTO> selectAdminView() {
+		return mapper.selectAdminView();
+	}
+
+	public int adminInsert(AdminDTO adto) {
+		return mapper.adminInsert(adto);
+	}
+
+	public int adminDelete(String adminId) {
+		return mapper.adminDelete(adminId);
+	}
+
+	public AdminDTO adminLogin(String adminId, String adminPasswd) {
+		HashMap<Object, Object> map = new HashMap<Object, Object>();
+		map.put("adminId", adminId);
+		map.put("adminPasswd", adminPasswd);
+		return mapper.adminLogin(map);
 	}
 
 

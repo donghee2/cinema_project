@@ -169,15 +169,9 @@
 						
 						<%
 						boolean flag = false;
-						boolean kflag = false;
-						boolean nflag = false;
 						if(session.getAttribute("login") != null) {
 							flag = (boolean)session.getAttribute("login");							
-						} else if(session.getAttribute("kakaoLogin") != null) {
-							kflag = (boolean)session.getAttribute("kakaoLogin");
-						} else if(session.getAttribute("naverLogin") != null) {
-							nflag = (boolean)session.getAttribute("naverLogin");
-						}
+						} 
 						if(flag){
 						%>
 						<li><a href="memberMypage.do"><span>${sessionScope.dto.userName }</span>님의 마이페이지</a></li>
@@ -190,7 +184,14 @@
 							<li><a href="updateView.do">회원정보수정</a></li>
 						</c:if>
 						<%
-						} else if(kflag) {
+						} else {
+						%>
+							<li class="loginLink"><a href="loginView.do">LOG In</a></li>
+							<li class="btn"><a href="registerView.do">sign up</a></li>
+						<%
+						}
+						%>
+						<%-- else if(kflag) {
 						%>	
 							<li><a><span>${sessionScope.userId }님이 로그인 하셨습니다.</span></a></li>
 							<li><a href="logout">로그아웃</a></li>
@@ -200,13 +201,7 @@
 							<li><a><span>${sessionScope.name }님이 로그인 하셨습니다.</span></a></li>
 							<li><a href="logout">로그아웃</a></li>
 						<% 
-						} else {
-						%>
-							<li class="loginLink"><a href="loginView.do">LOG In</a></li>
-							<li class="btn"><a href="registerView.do">sign up</a></li>
-						<%
-						}
-						%>
+						} --%>
 					</ul>
 				</div>
 				<!-- /.navbar-collapse -->

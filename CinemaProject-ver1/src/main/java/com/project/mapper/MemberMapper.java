@@ -1,10 +1,12 @@
 package com.project.mapper;
 
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
 import org.apache.ibatis.annotations.Mapper;
 
+import com.project.dto.AdminDTO;
 import com.project.dto.MemberDTO;
 
 @Mapper
@@ -33,5 +35,13 @@ public interface MemberMapper {
 	int adminMemberUpdate(MemberDTO dto);
 	// 회원 마이페이지
 	MemberDTO selectMembermypage(String userEmail);
+	// admin 페이지
+	List<AdminDTO> selectAdminView();
+	// 관리자 추가
+	int adminInsert(AdminDTO adto);
+	// 관리자 삭제
+	int adminDelete(String adminId);
+	// 관리자 로그인
+	AdminDTO adminLogin(HashMap<Object, Object> map);
 	
 }

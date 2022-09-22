@@ -66,6 +66,24 @@
 		user_tel as userTel, user_point as point
 		from member where user_email = #{userEmail}
 	</select>
+	
+	<select id="selectAdminView" resultType="admin">
+		select a.admin_id as adminId, a.admin_passwd as adminPasswd, a.admin_name as adminName, g.grade_name as gradeName from admin a, gradename g
+		where a.admin_grade = g.grade
+	</select>
+	
+	<insert id="adminInsert" parameterType="admin">
+		insert into admin values(#{adminId}, #{adminPasswd}, #{adminName}, #{grade})
+	</insert>
+	
+	<delete id="adminDelete" parameterType="String">
+		delete from admin where admin_id = #{adminId}
+	</delete>
+	
+	<select id="adminLogin" parameterType="map" resultType="admin">
+		select a.admin_id as adminId, a.admin_passwd as adminPasswd, a.admin_name as adminName, g.grade_name as gradeName from admin a, gradename g
+		where a.admin_grade = g.grade and a.admin_id = #{adminId} and a.admin_passwd = #{adminPasswd}
+	</select>
 </mapper>
 
 

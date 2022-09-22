@@ -34,6 +34,13 @@
 				<!-- sidebar menu -->
 				<ul class="sidebar-menu" data-widget="tree">
 					<li class="header nav-small-cap">000시네마 관리 메뉴</li>
+					
+					<li class="treeview"><a href="#"><i class="icon-people"></i><span>관리자 정보</span><span
+							class="pull-right-container"><i
+								class="fa fa-angle-right pull-right"></i></span></a>
+					<ul class="treeview-menu ">
+							<li class="api"><a href="adminView.do">관리자 페이지</a></li>
+						</ul></li>
 					<li class="treeview"><a href="#"><i class="icon-people"></i><span>영화 관리</span><span
 							class="pull-right-container"><i
 								class="fa fa-angle-right pull-right"></i></span></a>

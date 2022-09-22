@@ -31,6 +31,7 @@ import com.project.Service.QnAService;
 import com.project.Service.ScreenService;
 import com.project.Service.kakaoAPI;
 import com.project.Service.movieService;
+import com.project.dto.AdminDTO;
 import com.project.dto.BookingDTO;
 import com.project.dto.CinemaDTO;
 import com.project.dto.FileDTO;
@@ -73,11 +74,40 @@ public class MainController {
 	}
 
 	@RequestMapping("/")
-	public String index(Model model, String cinemacode, String name, HttpSession session) {
-		List<CinemaDTO> Cinemalist = movieservice.selectCinemaList();
-		session.setAttribute("cinemacode", cinemacode);
-		session.setAttribute("name", name);
-		model.addAttribute("Cinemalist", Cinemalist);
+	public String index() {
+		return "admin-login";
+	}
+	// 지점 관리 (은수은수은수)
+//	@RequestMapping("/adminLogin.do")
+//	public String adminMain(Model model, String cinemacode, String name, HttpSession session) {	
+//		List<CinemaDTO> Cinemalist = movieservice.selectCinemaList();
+//		session.setAttribute("cinemacode", cinemacode);
+//		session.setAttribute("name", name);
+//		model.addAttribute("Cinemalist", Cinemalist);
+//		return "admin_index";
+//	}
+	
+	@RequestMapping("adminLogin.do")
+	public void adminMain(String adminId, String adminPasswd, HttpSession session, Model model, HttpServletResponse response) throws IOException {
+		System.out.println("23123123"+adminPasswd);
+		AdminDTO adto = service.adminLogin(adminId, adminPasswd);
+		System.out.println(adto);
+		model.addAttribute("page", "main_body.jsp");
+		response.setContentType("text/html;charset=utf-8");
+		if(adto != null) {
+			session.setAttribute("login", true);
+			session.setAttribute("adto", adto);
+			session.setAttribute("adminId", adto.getAdminId());
+			session.setAttribute("gradeName", adto.getGradeName());
+			response.getWriter().write("<script>alert('로그인 되었습니다.');location.href='admin.do';</script>");
+		} else {
+			session.setAttribute("login", false);
+			response.getWriter().write("<script>alert('이메일과 비밀번호를 확인하세요');location.href='/';</script>");
+		}
+	}
+	
+	@RequestMapping("/admin.do")
+	public String admin() {
 		return "admin_index";
 	}
 
@@ -287,6 +317,12 @@ public class MainController {
 		model.addAttribute("page", "hh/insert_movie.jsp");
 		return "admin_index";
 	}
+	
+	@RequestMapping("/moviesingle.do")
+	   public String moviesingle(Model model) {
+	      model.addAttribute("page", "hh/moviesingle.jsp");
+	      return "main_index";
+	   }
 	/*--------------------------------------------------------------------------------------------------*/
 
 	/*---------------------------------------------이동희------------------------------------------------*/
@@ -306,10 +342,10 @@ public class MainController {
         
         HashMap<String, Object> userInfo = kakaoAPI.getUserInfo(access_Token);
         System.out.println("login Controller : " + userInfo);
-        model.addAttribute("page", "main_body.jsp");
+        model.addAttribute("page", "dh/simple-register.jsp");
         //    클라이언트의 이메일이 존재할 때 세션에 해당 이메일과 토큰 등록
         if (userInfo.get("email") != null) {
-            session.setAttribute("userId", userInfo.get("email"));
+            session.setAttribute("userEmail", userInfo.get("email"));
             session.setAttribute("access_Token", access_Token);
             session.setAttribute("kakaoLogin", true);
         }
@@ -347,20 +383,14 @@ public class MainController {
 	    String email = (String) userInfo.get("email");
 	    
 	    session.setAttribute("naverlogin", true);
-	    session.setAttribute("name", nickname);
-	    session.setAttribute("id", email);
+	    session.setAttribute("userName", nickname);
+	    session.setAttribute("userEmail", email);
 	    
 	    session.setAttribute("naverToken", access_token);
 	    
-	    model.addAttribute("page", "main_body.jsp");
+	    model.addAttribute("page", "dh/simple-register.jsp");
 	    System.out.println("nickname : "+nickname);
 	    System.out.println("email : "+email);
-	    
-//	    int result = naverAPI.insertNaverLoginInfo(nickname, email);
-	
-//	    if (result == 0) {
-//	       System.out.println("네이버 로그인 - 이미 등록된 아이디입니다.");
-//	    }
 	    
 	    return "main_index";
 	
@@ -608,6 +638,28 @@ public class MainController {
 		model.addAttribute("qlist", qlist);
 		model.addAttribute("page", "dh/all_qna_view.jsp");
 		return "admin_index";
+	}
+	
+	@RequestMapping("/adminView.do")
+	public String adminView(Model model) {
+		List<AdminDTO> alist = service.selectAdminView();
+		model.addAttribute("alist", alist);
+		model.addAttribute("page", "dh/all_admin_view.jsp");
+		return "admin_index";
+	}
+	
+	@RequestMapping("/adminInsert.do")
+	public ResponseEntity<Integer> adminInsert(AdminDTO adto) {
+		System.out.println(adto);
+		int result = service.adminInsert(adto);
+		return ResponseEntity.ok(result);
+	}
+	
+	@RequestMapping("/adminDelete.do")
+	public ResponseEntity<Integer> adminDelete(String adminId) {
+		System.out.println(adminId);
+		int result = service.adminDelete(adminId);
+		return ResponseEntity.ok(result);
 	}
 
 	/*--------------------------------------------------------------------------------------------------*/
