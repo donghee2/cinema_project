@@ -49,10 +49,10 @@
 									</div>
 									<div class="btn-transform transform-vertical">
 										<div>
-											<a href="moviesingle.do" class="item item-1 redbtn">more detail</a>
+											<a href="/moviesingle.do?mocode=${Movielist.mcode }" class="item item-1 redbtn">more detail</a>
 										</div>
 										<div>
-											<a href="moviesingle.do" class="item item-2 redbtn hvrbtn">more detail</a>
+											<a href="/moviesingle.do?mocode=${Movielist.mcode }" class="item item-2 redbtn hvrbtn">more detail</a>
 										</div>
 									</div>
 								</div>

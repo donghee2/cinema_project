@@ -66,5 +66,13 @@ public class BookingService {
 	public String selectSeatType(String screenCode) {
 		return mapper.selectSeatType(screenCode);
 	}
+
+	public List<String> selectBookedSeat(String timeCode) {
+		return mapper.selectBookedSeat(timeCode);
+	}
+
+	public String selectAllSeat(String screenCode) {
+		return mapper.selectAllSeat(screenCode);
+	}
 	
 }

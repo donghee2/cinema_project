@@ -192,14 +192,18 @@
     					for(i=0;i<r.length;i++){
     							
     							if(r[i].screenName.toString() == old){
-    								tag += "<div class='time-list'><input class='time-list-wrapper' type='button' value='" + r[i].startTime + "'><input class='time-list-hidden' type='hidden' name='endTime' value='상영 종료 시간 : " + r[i].endTime + "'>";
+    								tag += "<div class='time-list'><input class='time-list-wrapper' type='button' value='" + r[i].startTime + 
+    									"'><input class='time-list-hidden' type='hidden' name='endTime' value='종료 : " + r[i].endTime + "'>"
+    									+ "<span class='seat-list-wrapper'>" + r[i].remainseat + "석/" + r[i].allseat + "석" + "</span>";
     								tag += "<input type='hidden' name='screencode' value='" + r[i].screenCode + "'>";
     								tag += "<input type='hidden' name='timecode' value='" + r[i].timeCode + "'>";
     								tag += "<input type='hidden' name='mcode' value='" + r[i].mcode + "'></div>";
     							}
     							else{
     								tag += "<div class='time-title'><span class='time-title-wrapper'>" + r[i].screenName + "</span></div>";
-    								tag += "<div class='time-list'><input class='time-list-wrapper' type='button' value='" + r[i].startTime + "'><input class='time-list-hidden' type='hidden' name='endTime' value='상영 종료 시간 : " + r[i].endTime + "'>";
+    								tag += "<div class='time-list'><input class='time-list-wrapper' type='button' value='" + r[i].startTime +
+    									"'><input class='time-list-hidden' type='hidden' name='endTime' value='종료 : " + r[i].endTime + "'>"
+    									+ "<span class='seat-list-wrapper'>" + r[i].remainseat + "석/" + r[i].allseat + "석" + "</span>";
     								tag += "<input type='hidden' name='screencode' value='" + r[i].screenCode + "'>";
     								tag += "<input type='hidden' name='timecode' value='" + r[i].timeCode + "'>";
     								tag += "<input type='hidden' name='mcode' value='" + r[i].mcode + "'></div>";
@@ -272,7 +276,9 @@
 				url:"seatCreate.do",
 				data : d,
 				success:function(r){
-					location.replace("seatView.do?tag=" + r);
+					if(r == 1)
+						alert("좌석 선택창으로 이동합니다");
+						location.assign("seatView.do");
 				}
 			});
         	

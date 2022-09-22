@@ -211,9 +211,8 @@
 .time-list{
 	margin-left: 10px;
 	margin-bottom: 5px;
-	width: calc(calc(100% / 5) - 15px);
+	width: calc(calc(100% / 3) - 15px);
 	text-align: center;
-	
 }
 
 .time-list-wrapper{
@@ -231,6 +230,16 @@
     border: 1px solid white;
     padding: 5px;
 }
+
+.seat-list-wrapper{
+	color: rgb(220,248,54);
+    background-color: rgb(2,13,24);
+    margin-left: 5px;
+    border: none;
+    padding: 5px;
+    font-size: 10px;
+}
+
 .today-word{
 	color: white;
 }

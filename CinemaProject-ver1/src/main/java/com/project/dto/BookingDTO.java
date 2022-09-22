@@ -20,29 +20,12 @@ public class BookingDTO {
 	private String startTime;
 	private String endTime;
 	
+	private String allseat;
+	private String remainseat;
+	
 	public BookingDTO() {
 	}
-
-	public BookingDTO(String bookingCode, String email, String moiveDate, String screenCode, String screenName,
-			String movieCode, String seatType, String seatNo, int totalPrice, String timeCode, String title,
-			String mcode, String startTime, String endTime) {
-		super();
-		this.bookingCode = bookingCode;
-		this.email = email;
-		this.moiveDate = moiveDate;
-		this.screenCode = screenCode;
-		this.screenName = screenName;
-		this.movieCode = movieCode;
-		this.seatType = seatType;
-		this.seatNo = seatNo;
-		this.totalPrice = totalPrice;
-		this.timeCode = timeCode;
-		this.title = title;
-		this.mcode = mcode;
-		this.startTime = startTime;
-		this.endTime = endTime;
-	}
-
+	
 	public String getMcode() {
 		return mcode;
 	}
@@ -155,12 +138,29 @@ public class BookingDTO {
 		this.totalPrice = totalPrice;
 	}
 
+	public String getAllseat() {
+		return allseat;
+	}
+
+	public void setAllseat(String allseat) {
+		this.allseat = allseat;
+	}
+
+	public String getRemainseat() {
+		return remainseat;
+	}
+
+	public void setRemainseat(String remainseat) {
+		this.remainseat = remainseat;
+	}
+
 	@Override
 	public String toString() {
 		return "BookingDTO [bookingCode=" + bookingCode + ", email=" + email + ", moiveDate=" + moiveDate
 				+ ", screenCode=" + screenCode + ", screenName=" + screenName + ", movieCode=" + movieCode
 				+ ", seatType=" + seatType + ", seatNo=" + seatNo + ", totalPrice=" + totalPrice + ", timeCode="
-				+ timeCode + ", title=" + title + ", startTime=" + startTime + ", endTime=" + endTime + "]";
+				+ timeCode + ", title=" + title + ", mcode=" + mcode + ", startTime=" + startTime + ", endTime="
+				+ endTime + ", allseat=" + allseat + ", remainseat=" + remainseat + "]";
 	}
 	
 }

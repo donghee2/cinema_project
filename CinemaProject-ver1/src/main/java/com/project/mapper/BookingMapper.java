@@ -23,6 +23,9 @@ public interface BookingMapper {
 
 	void insertBookedSeat(Map<String, Object> map);
 
+	List<String> selectBookedSeat(String timeCode);
+
+	String selectAllSeat(String screenCode);
 
 
 }

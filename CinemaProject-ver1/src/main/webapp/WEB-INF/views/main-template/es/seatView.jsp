@@ -15,17 +15,42 @@
 		width: 50px;
 		height: 50px;
 		text-decoration: none;
-		color: black;
+		font-weight: bold;
+		color: white;
 		text-align: center;
+		background-color: rgb(2,13,24);
+		background-size: 50px;
+		background-image: url("images/seaticon.png");
+		background-repeat: no-repeat;
+		background-position: -2px 0px;
+		box-sizing: border-box;
+		border: 2px solid rgb(2,13,24);
+	}
+	.seat:disabled{
+		color: gray;
+		background-color: rgb(2,13,24);
+		background-size: 50px;
+		background-image: url("images/rseaticon.png");
+		background-repeat: no-repeat;
+		background-position: -2px 0px;
+		box-sizing: border-box;
+		border: 2px solid rgb(2,13,24);
 	}
 	.empty{
 		width: 50px;
 		height: 50px;
-		background-color: lightgray;
+		background-color: rgb(2,13,24);
 	}
 	.clicked {
-            background-color: lightblue;
-            color: white;
+        color: white;
+		background-color: rgb(2,13,24);
+		background-size: 50px;
+		background-image: url("images/sseaticon.png");
+		background-repeat: no-repeat;
+		background-position: -2px 0px;
+		box-sizing: border-box;
+		border: 2px solid rgb(4, 57, 152);
+		border-radius: 5px;
     }
 </style>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>

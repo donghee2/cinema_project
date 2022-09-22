@@ -28,4 +28,13 @@
 		select BOOKING_PK_SEQ.currval from dual
 		<!-- select bookingcode from booking where user_email = #{id} and timecode = #{timeCode} -->
 	</select>
+	
+	<select id="selectBookedSeat" parameterType="String" resultType="String">
+		select (select seatno from seat s where bs.seatcode = s.seatcode) as seatno
+		from booking b, booked_seats bs where b.bookingcode = bs.bookingcode and timecode = #{timeCode}
+	</select>
+	
+	<select id="selectAllSeat" parameterType="String" resultType="String">
+		select count(*) from seat where screencode = #{screenCode}
+	</select>
 </mapper>

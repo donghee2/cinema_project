@@ -5,6 +5,16 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
+<style>
+.control-sidebar, .control-sidebar-bg {
+    top: 0;
+    right: -600px;
+    width: 600px;
+    -webkit-transition: right .3s ease-in-out;
+    -o-transition: right .3s ease-in-out;
+    transition: right .3s ease-in-out;
+}
+</style>
 </head>
 <body>
 <footer class="main-footer">
@@ -33,7 +43,7 @@
 				
 				<!-- /.tab-pane -->
 				<!-- Stats tab content -->
-			
+			<jsp:include page="hh/adminroom.jsp" flush="false"/> 
 				<!-- /.tab-pane -->
 				<!-- Settings tab content -->
 				
