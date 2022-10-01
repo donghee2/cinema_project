@@ -62,7 +62,7 @@
 		select screencode,mcode,to_char(enddate,'yyyy-mm-dd')as enddate,to_char(startdate,'yyyy-mm-dd')as startdate from screen_movie where mcode = #{mcode}
 	</select> 
 	 <select id="NowshowingMovieList" resultType="movie">
-		SELECT to_char(sm.enddate,'yyyy-mm-dd') as enddate,to_char(sm.startdate,'yyyy-mm-dd') as startdate,m.mcode,title,titleEng,directorNm,directorEnNm,actorNm,actorEnNm,company,nation,genre,rating,runtime,to_char(REPRLSDATE,'yyyy-mm-dd') as REPRLSDATE,"KEYWORDS",PLOTTEXT,kmdbUrl FROM MOVIEDB m,screen_movie sm WHERE m.mcode = sm.mcode(+) AND <![CDATA[startdate < TO_CHAR(SYSDATE,'YYYYMMDD')]]> AND <![CDATA[ENDDATE > TO_CHAR(SYSDATE,'YYYYMMDD')]]> 
+		SELECT to_char(sm.enddate,'yyyy-mm-dd') as enddate,to_char(sm.startdate,'yyyy-mm-dd') as startdate,m.mcode,trailer,title,titleEng,directorNm,directorEnNm,actorNm,actorEnNm,company,nation,genre,rating,runtime,to_char(REPRLSDATE,'yyyy-mm-dd') as REPRLSDATE,"KEYWORDS",PLOTTEXT,kmdbUrl FROM MOVIEDB m,screen_movie sm WHERE m.mcode = sm.mcode(+) AND <![CDATA[startdate < TO_CHAR(SYSDATE,'YYYYMMDD')]]> AND <![CDATA[ENDDATE > TO_CHAR(SYSDATE,'YYYYMMDD')]]> 
 	</select> 
 	 <select id="ComingSoonMovieList" resultType="movie">
 		SELECT to_char(sm.enddate,'yyyy-mm-dd') as enddate,to_char(sm.startdate,'yyyy-mm-dd') 

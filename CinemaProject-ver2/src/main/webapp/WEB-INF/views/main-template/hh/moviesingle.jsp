@@ -36,7 +36,7 @@
 										Trailer</a>
 								</div>
 								<div>
-									<a href="https://www.youtube.com/embed/o-0hcF97wy0"
+									<a href="${requestScope.moviedto.trailer }"
 										class="item item-2 redbtn fancybox-media hvr-grow"><i
 										class="ion-play"></i></a>
 								</div>
@@ -117,7 +117,7 @@
 													<div class="vd-it">
 														<img class="vd-img" src="images/uploads/image4.jpg" alt=""><a
 															class="fancybox-media hvr-grow"
-															href="https://www.youtube.com/watch?v=uoUqT2AK5Qk"><img
+															href="${requestScope.moviedto.trailer }"><img
 															src="images/uploads/play-vd.png" alt=""></a>
 													</div>
 												</div>

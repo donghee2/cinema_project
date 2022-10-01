@@ -13,16 +13,16 @@
 							<div class="col-md-8 col-sm-12 col-xs-12">
 								<div class="title-in">
 									<div class="cate">
-										<span class="blue">
-										</span><span class="yell"><a href="#">${Movielist.genre }</a></span><span
-											class="orange"><a href="#">${Movielist.keywords }</a></span>
+										<span class="blue"><a >&nbsp;&nbsp;&nbsp;${Movielist.rating }</a>
+										</span><span class="yell"><a >&nbsp;${Movielist.genre }&nbsp;</a></span><span
+											class="orange"><a >&nbsp;${Movielist.keywords }&nbsp;</a></span>
 									</div>
 									<h1>
 										<a href="#">${Movielist.title }<br>
 											${Movielist.titleEng } <span>${Movielist.repRlsDate}</span></a>
 									</h1>
 									<div class="social-btn">
-										<a href="https://www.youtube.com/watch?v=mI9oyFMUlfg" class="parent-btn"><i class="ion-play"></i>Watch
+										<a href="${Movielist.trailer }" class="parent-btn fancybox-media hvr-grow"><i class="ion-play"></i>Watch
 											Trailer</a><a href="#" class="parent-btn"><i
 											class="ion-heart"></i>Add to Favorite</a>
 										<div class="hover-bnt">

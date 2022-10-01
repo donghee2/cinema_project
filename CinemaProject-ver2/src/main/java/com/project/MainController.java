@@ -281,6 +281,7 @@ public class MainController {
 		List<MovieDTO> ComingSoonMovieList = movieservice.selectComingSoonMovieList();
 		model.addAttribute("page", "main_body.jsp");
 		model.addAttribute("ComingSoonMovieList", ComingSoonMovieList);
+		
 		return "main_index";
 	}
 
