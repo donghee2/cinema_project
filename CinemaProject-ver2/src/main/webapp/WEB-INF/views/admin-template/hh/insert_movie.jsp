@@ -96,7 +96,7 @@ $(function(){
 	                  tag += "</div>"
 	            	 $("#form").attr('action','insertMovie_pop_list.do');
 	            	 $("#form").append($('<input type="hidden" class="t1" value="'+tag+'" name=tag>'));
-	            	 window.open('','POP','width=1200, height=800, resizable=yes, scrollbars=yes, status=no,left='+popupX+', top='+popupY); 
+	            	 window.open('','POP','width=1400, height=800, resizable=yes, scrollbars=yes, status=no,left='+popupX+', top='+popupY); 
 	            	 $("#form").submit();
 	             }
 	            
@@ -115,66 +115,65 @@ $(function(){
 	
 	
 	
-$("#imageFile1").on("change", function(event) {
+	$(document).on("change", "#imageFile1",function() {
+	    var file = event.target.files[0];
 
-    var file = event.target.files[0];
+	    var reader = new FileReader(); 
+	    reader.onload = function(e) {
 
-    var reader = new FileReader(); 
-    reader.onload = function(e) {
+	        $("#preview1").attr("src", e.target.result);
+	    }
 
-        $("#preview1").attr("src", e.target.result);
-    }
+	    reader.readAsDataURL(file);
+	});
+	$(document).on("change", "#imageFile2",function() {
+		console.log("asdasd")
+	    var file = event.target.files[0];
 
-    reader.readAsDataURL(file);
-});
-$("#imageFile2").on("change", function(event) {
+	    var reader = new FileReader(); 
+	    reader.onload = function(e) {
 
-    var file = event.target.files[0];
+	        $("#preview2").attr("src", e.target.result);
+	    }
 
-    var reader = new FileReader(); 
-    reader.onload = function(e) {
+	    reader.readAsDataURL(file);
+	});
+	$(document).on("change", "#imageFile3",function() {
+		console.log("asdas123d")
+	    var file = event.target.files[0];
 
-        $("#preview2").attr("src", e.target.result);
-    }
+	    var reader = new FileReader(); 
+	    reader.onload = function(e) {
 
-    reader.readAsDataURL(file);
-});
-$("#imageFile3").on("change", function(event) {
+	        $("#preview3").attr("src", e.target.result);
+	    }
 
-    var file = event.target.files[0];
+	    reader.readAsDataURL(file);
+	});
+	$(document).on("change", "#imageFile4",function() {
+		
+	    var file = event.target.files[0];
 
-    var reader = new FileReader(); 
-    reader.onload = function(e) {
+	    var reader = new FileReader(); 
+	    reader.onload = function(e) {
 
-        $("#preview3").attr("src", e.target.result);
-    }
+	        $("#preview4").attr("src", e.target.result);
+	    }
 
-    reader.readAsDataURL(file);
-});
-$("#imageFile4").on("change", function(event) {
+	    reader.readAsDataURL(file);
+	}); 
+	$(document).on("change", "#imageFile5",function() {
 
-    var file = event.target.files[0];
+	    var file = event.target.files[0];
 
-    var reader = new FileReader(); 
-    reader.onload = function(e) {
+	    var reader = new FileReader(); 
+	    reader.onload = function(e) {
 
-        $("#preview4").attr("src", e.target.result);
-    }
+	        $("#preview5").attr("src", e.target.result);
+	    }
 
-    reader.readAsDataURL(file);
-});
-$("#imageFile5").on("change", function(event) {
-
-    var file = event.target.files[0];
-
-    var reader = new FileReader(); 
-    reader.onload = function(e) {
-
-        $("#preview5").attr("src", e.target.result);
-    }
-
-    reader.readAsDataURL(file);
-});
+	    reader.readAsDataURL(file);
+	});
 });
 function isImageFile(file) {
 
@@ -184,7 +183,7 @@ function isImageFile(file) {
 }
 function isOverSize(file) {
 
-    var maxSize = 3 * 1024 * 1024; 
+    var maxSize = 15 * 1024 * 1024; 
 
     return (file.size > maxSize) ? true : false;
 }
@@ -204,6 +203,8 @@ $(function(){
 		count--;
 	});
 });
+
+
 	var flag = 0;
 function search_hide_show(){
 	if(flag == 0){
@@ -286,6 +287,12 @@ p{
 	        transition: all .5s ease;
 }
 textarea{
+position: relative;
+	font-family: "Source Sans Pro", sans-serif;
+	font-weight: 600;
+	
+}
+input[type="date"]{
 position: relative;
 	font-family: "Source Sans Pro", sans-serif;
 	font-weight: 600;
@@ -441,6 +448,21 @@ position: relative;
 	font-weight: bold;
 	margin-left: 10px;
 }
+.movie_info_container{
+	padding: 10px;
+	margin-bottom: 20px;
+	display: flex;
+	flex-wrap: wrap;
+	width: 66%;
+	gap: 16px;
+}
+.movie_flot_container{
+	padding: 10px;
+	margin-bottom: 20px;
+	display: flex;
+	flex-wrap: wrap;
+	width: 33%;
+}
   </style>
 </head>
 <body>
@@ -464,97 +486,82 @@ position: relative;
 		
 		
 		<div class="search_container">
-		
-		<section  class="layout">
+		<div class="movie_info_container">
 		<div class="form-group">
-		<input type="text" name="title" id="movie_title_kr" value="${requestScope.mdto.title }" class="form-input border-bottom" placeholder="영화 제목(한)">
-		<span class="border-bottom-animation left"></span>
-		</div>
-		<div class="form-group">
-		<input type="text" name="titleEng" id="movie_title_eng" value="${requestScope.mdto.titleEng }" class="form-input border-bottom" placeholder="영화 제목(영)">
-		<span class="border-bottom-animation left"></span>
-		</div>
-		</section>
-		<section  class="layout">
-		<div class="form-group">
-		<input type="text" id="directorNm" value="${requestScope.mdto.directorNm }"class="form-input border-bottom" placeholder="감독(한)">
+		<input type="text" name="title" id="movie_title_kr" value="${requestScope.movie.title }" class="form-input border-bottom" placeholder="영화 제목(한)">
 		<span class="border-bottom-animation left"></span>
 		</div>
 		<div class="form-group">
-		<input type="text" id="directorEnNm" value="${requestScope.mdto.directorEnNm }"class="form-input border-bottom" placeholder="감독(영)">
+		<input type="text" name="titleEng" id="movie_title_eng" value="${requestScope.movie.titleEng }" class="form-input border-bottom" placeholder="영화 제목(영)">
 		<span class="border-bottom-animation left"></span>
 		</div>
-		</section>
-		
-		<section  class="layout3">
-		
-		</section>
-		<section  class="layout1">
-		<div class="form-group" style="width: 83%">
-		<input type="text" id="actorNm" value="${requestScope.mdto.actorNm }" class="form-input border-bottom" placeholder="배우(한)">
+		<div class="form-group">
+		<input type="text" name="directorNm" id="directorNm" value="${requestScope.movie.directorNm }"class="form-input border-bottom" placeholder="감독(한)">
 		<span class="border-bottom-animation left"></span>
 		</div>
-		<div class="form-group" style="width: 83%">
-		<input type="text" id="actorEnNm" value="${requestScope.mdto.actorEnNm }" class="form-input border-bottom" placeholder="배우(영)">
+		<div class="form-group">
+		<input type="text" name="directorEnNm" id="directorEnNm" value="${requestScope.movie.directorEnNm }"class="form-input border-bottom" placeholder="감독(영)">
 		<span class="border-bottom-animation left"></span>
 		</div>
 		<div class="form-group" style="width: 83%">
-		<input type="text" id="company" value="${requestScope.mdto.company }" class="form-input border-bottom" placeholder="제작사">
+		<input type="text" name="actorNm" id="actorNm" value="${requestScope.movie.actorNm }" class="form-input border-bottom" placeholder="배우(한)">
 		<span class="border-bottom-animation left"></span>
 		</div>
 		<div class="form-group" style="width: 83%">
-		<input type="text" id="keywords" value="${requestScope.mdto.keywords }"  class="form-input border-bottom" placeholder="키워드">
+		<input type="text" name="actorEnNm" id="actorEnNm" value="${requestScope.movie.actorEnNm }" class="form-input border-bottom" placeholder="배우(영)">
 		<span class="border-bottom-animation left"></span>
 		</div>
-		</section>
-		<section  class="layout">
+		<div class="form-group" style="width: 83%">
+		<input type="text" name="company" id="company" value="${requestScope.movie.company }" class="form-input border-bottom" placeholder="제작사">
+		<span class="border-bottom-animation left"></span>
+		</div>
+		<div class="form-group" style="width: 83%">
+		<input type="text" name="keywords" id="keywords" value="${requestScope.movie.keywords }"  class="form-input border-bottom" placeholder="키워드">
+		<span class="border-bottom-animation left"></span>
+		</div>
+		<div class="form-group">
+		<input type="text"  name="nation" id="nation" value="${requestScope.movie.nation }" class="form-input border-bottom" placeholder="국가">
+		<span class="border-bottom-animation left"></span>
+		</div>
+		<div class="form-group">
+		<input type="text" name="genre" id="genre" value="${requestScope.movie.genre }" class="form-input border-bottom" placeholder="장르">
+		<span class="border-bottom-animation left"></span>
+		</div>
+		<div class="form-group">
+		<input type="text" name="runtime" id="runtime" value="${requestScope.movie.runtime }" class="form-input border-bottom" placeholder="상영시간">
+		<span class="border-bottom-animation left"></span>
+		</div>
+		<div class="form-group">
+		<input type="text" name="repRlsDate" id="repRlsDate" value="${requestScope.movie.repRlsDate }" class="form-input border-bottom" placeholder="개봉일">
+		<span class="border-bottom-animation left"></span>
+		</div>
+		<div class="form-group" style="width: 41%">
+		<input type="text" name="trailer" id="trailer" value="${requestScope.movie.trailer }" class="form-input border-bottom" placeholder="예고편 링크">
+		<span class="border-bottom-animation left"></span>
+		</div>
+		<div class="form-group">
+		<input type="date" name="startdate" id="startdate" value="${requestScope.scdto.startdate }" class="form-input border-bottom" placeholder="상영 시작 날짜">
+		<span class="border-bottom-animation left"></span>
+		</div>
+		<div class="form-group">
+		<input type="date" name="enddate" id="enddate" value="${requestScope.scdto.enddate }" class="form-input border-bottom" placeholder="상영 종료 날짜">
+		<span class="border-bottom-animation left"></span>
+		</div>
+		<div class="form-group" style="width: 41%">
+		<input type="text"  name="rating" id="rating" value="${requestScope.movie.rating }" class="form-input border-bottom" placeholder="관람 등급">
+		<span class="border-bottom-animation left"></span>
+		</div>
+		<div class="form-group" style="width: 41%">
+		<input type="text" name="kmdbUrl" id="kmdbUrl" value="${requestScope.movie.kmdbUrl }" class="form-input border-bottom" placeholder="상세보기 페이지">
+		<span class="border-bottom-animation left"></span>
+		</div>
+		</div>
+		<div class="movie_flot_container">
 		<div class="form-group" >
 		<p>줄거리</p>
-		<textarea  id="plotText" rows="12" cols="70" name="plotText"  placeholder="${requestScope.mdto.plotText }"></textarea>
+		<textarea name="plotText"  id="plotText" rows="20" cols="65" name="plotText"  placeholder="${requestScope.movie.plotText }"></textarea>
 		</div>
-		</section>
-		<section  class="layout">
-		<div class="form-group">
-		<input type="text" id="nation" value="${requestScope.mdto.nation }" class="form-input border-bottom" placeholder="국가">
-		<span class="border-bottom-animation left"></span>
 		</div>
-		<div class="form-group">
-		<input type="text" id="genre" value="${requestScope.mdto.genre }" class="form-input border-bottom" placeholder="장르">
-		<span class="border-bottom-animation left"></span>
-		</div>
-		<div class="form-group" style="width: 81%">
-		<input type="text" id="trailer" class="form-input border-bottom" placeholder="예고편 링크">
-		<span class="border-bottom-animation left"></span>
-		</div>
-		<div class="form-group" style="width: 81%">
-		<input type="text" id="rating" value="${requestScope.mdto.rating }" class="form-input border-bottom" placeholder="관람 등급">
-		<span class="border-bottom-animation left"></span>
-		</div>
-		</section>
-		<section  class="layout">
-		<div class="form-group">
-		<input type="text" id="runtime" value="${requestScope.mdto.runtime }" class="form-input border-bottom" placeholder="상영시간">
-		<span class="border-bottom-animation left"></span>
-		</div>
-		<div class="form-group">
-		<input type="text" id="repRlsDate" value="${requestScope.mdto.repRlsDate }" class="form-input border-bottom" placeholder="개봉일">
-		<span class="border-bottom-animation left"></span>
-		</div>
-		<div class="form-group">
-		<input type="text" id="startdate" class="form-input border-bottom" placeholder="상영 시작 날짜">
-		<span class="border-bottom-animation left"></span>
-		</div>
-		<div class="form-group">
-		<input type="text" id="enddate" class="form-input border-bottom" placeholder="상영 종료 날짜">
-		<span class="border-bottom-animation left"></span>
-		</div>
-		<div class="form-group" style="width: 81%">
-		<input type="text" id="kmdbUrl" class="form-input border-bottom" placeholder="상세보기 페이지">
-		<span class="border-bottom-animation left"></span>
-		</div>
-		</section>
-		<section  class="layout">
-		</section>
 		
 		<section  class="layout">
 		<div class="setimgcontainer">

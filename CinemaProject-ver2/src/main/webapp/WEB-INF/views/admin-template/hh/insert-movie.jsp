@@ -1,17 +1,122 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-
 <!DOCTYPE html>
 <html>
 <head>
 <meta charset="UTF-8">
 <title>pop_title</title>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
-<%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn" %> 
+
+<script type="text/javascript">
+
+</script>
 <script>
 $(function(){
-	$(document).on("change", "#imageFile1",function() {
+	$(".search_btn").click(function() {
+	    var s;
+	    var popupX = (window.screen.width / 2) - (1200 / 2);
+	 	var popupY = (window.screen.height / 2) - (800 / 2);
+	 	console.log(popupX);
+	 	console.log(popupY);
+	    s = "&releaseDts"+'='+$("#releaseDts").val();
+	    s += "&title"+'='+$("#title").val();
+	    console.log(s);
+	       $.ajax({
+	          url : 'http://api.koreafilm.or.kr/openapi-data2/wisenut/search_api/search_json2.jsp?collection=kmdb_new2&detail=Y&ServiceKey=94TY52485SP98PB338TU'+s,
+	           type:'get',
+	          dataType:'json',
+	          success:function(r){
+	             console.log(r);
+	             console.log(r.TotalCount);
+	             if(r.TotalCount == 1){
+	             var actorNm = "";
+	             var actorEnNm = "";
+	             var title = r.Data[0].Result[0].title.replace('!HS', '');
+	             title = title.replace('!HE', '');
+	             title = title.replace(/ /g, "");
+	             $('#movie_title_kr').val(title);
+	             $('#movie_title_eng').val(r.Data[0].Result[0].titleEng);
+	             $('#directorNm').val(r.Data[0].Result[0].directors.director[0].directorNm);
+	             $('#directorEnNm').val(r.Data[0].Result[0].directors.director[0].directorEnNm);
+	             for(y=0;y<r.Data[0].Result[0].actors.actor.length;y++){
+	                   if(y>8)break;
+	                   actorNm += r.Data[0].Result[0].actors.actor[y].actorNm + " ,";
+	                }
+	             actorNm = actorNm.slice(0, -1);
+	             $('#actorNm').val(actorNm);
+	             for(y=0;y<r.Data[0].Result[0].actors.actor.length;y++){
+	                   if(y>8)break;
+	                   actorEnNm += r.Data[0].Result[0].actors.actor[y].actorEnNm + " ,";
+	                }
+	             actorEnNm = actorEnNm.slice(0, -1);
+	             $('#actorEnNm').val(actorEnNm);
+	             $('#company').val(r.Data[0].Result[0].company);
+	             $('#nation').val(r.Data[0].Result[0].nation);
+	             $('#genre').val(r.Data[0].Result[0].genre);
+	             $('#rating').val(r.Data[0].Result[0].rating);
+	             $('#runtime').val(r.Data[0].Result[0].runtime);
+	             $('#repRlsDate').val(r.Data[0].Result[0].repRlsDate);
+	             $('#keywords').val(r.Data[0].Result[0].keywords);
+	             $('#kmdbUrl').val(r.Data[0].Result[0].kmdbUrl);
+	             $('#plotText').val(r.Data[0].Result[0].plots.plot[0].plotText);
+	             }else if(r.TotalCount > 1){
+	            	 var tag = "<div id=test1>";
+	                 tag += "<form id=test action=insert_movie.do?close=close method=post>";  
+	                 
+	             for(i=0;i<r.Data[0].Result.length;i++){
+	                 tag += "<tr id=Line>";
+	                 tag += "<td><button id=data1 >선택하기</button></td>";
+	                tag += "<td name=title>"+r.Data[0].Result[i].title+"</td>";
+	                tag += "<td name='titleEng'>"+r.Data[0].Result[i].titleEng+"</td>";
+	                tag += "<td name='directorNm'>"+r.Data[0].Result[i].directors.director[0].directorNm+"</td>";
+	                tag += "<td name='directorEnNm'>"+r.Data[0].Result[i].directors.director[0].directorEnNm+"</td>";
+	                tag += "<td>";
+	                for(y=0;y<r.Data[0].Result[i].actors.actor.length;y++){
+	                   if(y>10)break;
+	                   tag += r.Data[0].Result[i].actors.actor[y].actorNm + " ,";
+	                }
+	                tag += "</td>";
+	                tag += "<td>";
+	                for(y=0;y<r.Data[0].Result[i].actors.actor.length;y++){
+	                   if(y>10)break;
+	                   tag += r.Data[0].Result[i].actors.actor[y].actorEnNm + " ,";
+	                }
+	                tag += "</td>";
+	                tag += "<td>"+r.Data[0].Result[i].company+"</td>";
+	                tag += "<td>"+r.Data[0].Result[i].nation+"</td>";
+	                tag += "<td>"+r.Data[0].Result[i].rating+"</td>";
+	                tag += "<td>"+r.Data[0].Result[i].runtime+"</td>";
+	                tag += "<td>"+r.Data[0].Result[i].repRlsDate+"</td>";
+	                tag += "<td style=display:none>" + r.Data[0].Result[i].plots.plot[0].plotText + "</td>";
+	                tag += "<td style=display:none>" + r.Data[0].Result[i].keywords + "</td>";
+	                tag += "<td style=display:none>" + r.Data[0].Result[i].genre + "</td>";
+	                tag += "</tr>";
+	          }
+	                  tag += "</form>"; 
+	                  tag += "</div>"
+	            	 $("#form").attr('action','insertMovie_pop_list.do');
+	            	 $("#form").append($('<input type="hidden" class="t1" value="'+tag+'" name=tag>'));
+	            	 window.open('','POP','width=1400, height=800, resizable=yes, scrollbars=yes, status=no,left='+popupX+', top='+popupY); 
+	            	 $("#form").submit();
+	             }
+	            
+	          },
+	          error:function(xhr, textStaus, errorThrow){
+	             /* console.log("code : ",xhr.status);
+	             console.log("message : ",xhr.responseText);
+	             console.log("error : ",errorThrow);
+	             console.log("textStaus : ",textStaus);
+	             var tag = "<tr><td colspan='6' style='text-align:center'>"
+	                                     +xhr.responseText+"</td></tr>";
+	             $("tbody").html(tag); */
+	          }
+	       });
+	    });
+	
+	
+	
+$("#imageFile1").on("change", function(event) {
+
     var file = event.target.files[0];
 
     var reader = new FileReader(); 
@@ -22,8 +127,8 @@ $(function(){
 
     reader.readAsDataURL(file);
 });
-$(document).on("change", "#imageFile2",function() {
-	console.log("asdasd")
+$("#imageFile2").on("change", function(event) {
+
     var file = event.target.files[0];
 
     var reader = new FileReader(); 
@@ -34,8 +139,8 @@ $(document).on("change", "#imageFile2",function() {
 
     reader.readAsDataURL(file);
 });
-$(document).on("change", "#imageFile3",function() {
-	console.log("asdas123d")
+$("#imageFile3").on("change", function(event) {
+
     var file = event.target.files[0];
 
     var reader = new FileReader(); 
@@ -46,8 +151,8 @@ $(document).on("change", "#imageFile3",function() {
 
     reader.readAsDataURL(file);
 });
-$(document).on("change", "#imageFile4",function() {
-	
+$("#imageFile4").on("change", function(event) {
+
     var file = event.target.files[0];
 
     var reader = new FileReader(); 
@@ -57,8 +162,8 @@ $(document).on("change", "#imageFile4",function() {
     }
 
     reader.readAsDataURL(file);
-}); 
-$(document).on("change", "#imageFile5",function() {
+});
+$("#imageFile5").on("change", function(event) {
 
     var file = event.target.files[0];
 
@@ -84,12 +189,12 @@ function isOverSize(file) {
     return (file.size > maxSize) ? true : false;
 }
 $(function(){
-	var count = ${fn:length(Filepath)};
-		 $(document).on("click","button[id=plus]",function(){
+	var count = 3;
+	$("#plus").click(function(){
 		console.log(count);
 		if(count == 5) return;
 		count++;
-		$(".setimgcontainer").append("<div><img id=preview"+count+"><br><input type='file' id=imageFile"+count+" name=newfile><input type='hidden' name='newfileindex' value="+count+"></div>");
+		$(".setimgcontainer").append("<div><img id=preview"+count+"><br><input type='file' id=imageFile"+count+" name=file></div>");
 	});
 	$("#minus").click(function(){
 		console.log(count);
@@ -99,9 +204,21 @@ $(function(){
 		count--;
 	});
 });
+	var flag = 0;
+function search_hide_show(){
+	if(flag == 0){
+	document.getElementById("layout").style.display = "";
+	document.getElementById("title").focus();
+		flag=1;
+	}
+	else{
+		document.getElementById("layout").style.display = "none";	
+		flag=0;
+	}
+} 
+
 </script>
   <style>
- 
     li {
       list-style: none;
     }
@@ -169,6 +286,12 @@ p{
 	        transition: all .5s ease;
 }
 textarea{
+position: relative;
+	font-family: "Source Sans Pro", sans-serif;
+	font-weight: 600;
+	
+}
+input[type="date"]{
 position: relative;
 	font-family: "Source Sans Pro", sans-serif;
 	font-weight: 600;
@@ -287,21 +410,6 @@ position: relative;
 	width: 1600px;
 	
 }
-.movie_info_container{
-	padding: 10px;
-	margin-bottom: 20px;
-	display: flex;
-	flex-wrap: wrap;
-	width: 66%;
-	gap: 16px;
-}
-.movie_flot_container{
-	padding: 10px;
-	margin-bottom: 20px;
-	display: flex;
-	flex-wrap: wrap;
-	width: 33%;
-}
 .search_hide{
 	display: flex;
 	align-items: center;
@@ -318,7 +426,7 @@ position: relative;
 	margin-left: 10px;
 }
 #plus{
-	background-color: rgba(0, 0, 0, .1);
+	background-color: rgba(0, 0, 0, .2);
 	border-radius: 50%;
 	font-size: 16px;
 	width:30px;
@@ -329,7 +437,7 @@ position: relative;
 	margin-left: 10px;
 }
 #minus{
-	background-color: rgba(0, 0, 0, .1);
+	background-color: rgba(0, 0, 0, .2);
 	border-radius: 50%;
 	font-size: 16px;
 	width:30px;
@@ -339,11 +447,42 @@ position: relative;
 	font-weight: bold;
 	margin-left: 10px;
 }
+.movie_info_container{
+	padding: 10px;
+	margin-bottom: 20px;
+	display: flex;
+	flex-wrap: wrap;
+	width: 66%;
+	gap: 16px;
+}
+.movie_flot_container{
+	padding: 10px;
+	margin-bottom: 20px;
+	display: flex;
+	flex-wrap: wrap;
+	width: 33%;
+}
   </style>
 </head>
 <body>
-<h2>영화 상세 정보 페이지</h2>
 		<form id="file_form" action="uploadmovie.do" method="post" enctype="multipart/form-data">
+		<div class="search_container">
+		<div class="search_hide" style="width: 100%">
+		<h2>검색해서 정보 넣기</h2><div><a onclick="search_hide_show()" href="#">+</a></div>
+		</div>
+		<section id="layout" class="layout1" style="display: none">
+		<div class="form-group">
+		<input type="text" id="title" class="form-input border-bottom" placeholder="영화 제목">
+		<span class="border-bottom-animation left"></span>
+		</div>
+		<div class="form-group">
+		<input type="text" id="releaseDts" class="form-input border-bottom" placeholder="개봉 연도">
+		<span class="border-bottom-animation left"></span>
+		</div>
+		<a class="search_btn" href="#">검색</a>
+		</section>
+		</div>
+		
 		
 		<div class="search_container">
 		<div class="movie_info_container">
@@ -422,23 +561,29 @@ position: relative;
 		<textarea name="plotText"  id="plotText" rows="20" cols="65" name="plotText"  placeholder="${requestScope.movie.plotText }"></textarea>
 		</div>
 		</div>
+		
 		<section  class="layout">
-		<br>
 		<div class="setimgcontainer">
-		<c:forEach var="f" items="${requestScope.Filepath }">
 		<div>
-		<img id="preview${f.fno}" src="fileDown.do?fno=${f.fno}&mcode=${f.mcode}"><br>
-		<input type="file" id="imageFile${f.fno}" name="file">
-		<input type="hidden" value="${f.fno}" name="oldfile">
+		<img id="preview1" ><br>
+		<input type="file" id="imageFile1" name="file">
 		</div>
-		</c:forEach> 
+		<div>
+		<img id="preview2"><br>
+		<input type="file" id="imageFile2" name="file">
 		</div>
-		<br>
+		<div>
+		<img id="preview3"><br>
+		<input type="file" id="imageFile3" name="file">
+		</div>
+		</div>
 		<button type="button" id="plus">+</button> <button type="button" id="minus">-</button>
-		<p><input type="hidden" name="update" value=${requestScope.movie.mcode }></p>
-		<p><button>저장</button></p><p><button>뒤로가기</button></p>
-		</section>
-			</div>
+		<br>
+		<p><button style="width: 70px; height: 30px">업로드</button></p>
+			</section>
+		</div>
+	</form>
+	<form id='form'  method='post' target=POP>
 	</form>
 </body>
 </html>

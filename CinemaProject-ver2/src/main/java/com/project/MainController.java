@@ -479,6 +479,18 @@ public class MainController {
 		model.addAttribute("pagetitle", "영화 등록 페이지");
 		return "admin_index";
 	}
+	@RequestMapping("/insertmovie.do")
+	public String insert_Movie(HttpSession session, HttpServletResponse response, Model model, MovieDTO mdto,
+			String cinemacode, String name,String genre,String close) {
+		List<CinemaDTO> Cinemalist = movieservice.selectCinemaList();
+		session.setAttribute("cinemacode", cinemacode);
+		session.setAttribute("name", name);
+		model.addAttribute("Cinemalist", Cinemalist);
+		model.addAttribute("mdto", mdto);
+		model.addAttribute("page", "hh/insert_movie.jsp");
+		model.addAttribute("pagetitle", "영화 등록 페이지");
+		return "admin_index";
+	}
 	
 	@RequestMapping("/data.do")
 	public String data() {
