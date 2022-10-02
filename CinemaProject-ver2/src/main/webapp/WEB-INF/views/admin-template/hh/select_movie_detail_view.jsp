@@ -396,7 +396,7 @@ position: relative;
 		<span class="border-bottom-animation left"></span>
 		</div>
 		<div class="form-group" style="width: 41%">
-		<input type="text" name="trailer" id="trailer" value="${requestScope.movie.trailer }" class="form-input border-bottom" placeholder="예고편 링크">
+		<input type="text" name="trailer" id="trailer" value="https://youtu.be/${requestScope.movie.trailer }" class="form-input border-bottom" placeholder="예고편 링크 *유튜브 공유 버튼을 눌러 링크를 복사해주세요">
 		<span class="border-bottom-animation left"></span>
 		</div>
 		<div class="form-group">

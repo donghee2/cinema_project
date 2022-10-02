@@ -346,6 +346,7 @@ public class MainController {
 	public String uploadmovie(Model model, MovieDTO dto, ScreenMovieDTO scdto, MultipartHttpServletRequest request,
 			String close, String update, int[] newfileindex, int[] oldfile) {
 		System.out.println(dto);
+		dto.setTrailer(dto.getTrailer().substring(dto.getTrailer().lastIndexOf("/")+1));
 		if (update != null) {
 			dto.setMcode(update);
 			scdto.setmcode(update);

@@ -50,7 +50,7 @@
  		values(#{mcode},#{fno},#{path})
  	</insert>
  	<update id="updateMovie" parameterType="movie">
- 		 update MOVIEDB set title = #{title}, titleEng = #{titleEng}, directorNm = #{directorNm}, directorEnNm = #{directorEnNm}, actorNm=#{actorNm}, actorEnNm = #{actorEnNm}, company = #{company}, nation = #{nation}, genre = #{genre},rating=#{rating},runtime=#{runtime},REPRLSDATE=#{repRlsDate},KEYWORDS=#{keywords},PLOTTEXT=#{plotText},kmdbUrl=#{kmdbUrl} WHERE mcode = #{mcode}
+ 		 update MOVIEDB set title = #{title}, titleEng = #{titleEng}, directorNm = #{directorNm}, directorEnNm = #{directorEnNm}, actorNm=#{actorNm}, actorEnNm = #{actorEnNm}, company = #{company}, nation = #{nation}, genre = #{genre},rating=#{rating},runtime=#{runtime},REPRLSDATE=#{repRlsDate},KEYWORDS=#{keywords},PLOTTEXT=#{plotText},kmdbUrl=#{kmdbUrl},trailer=#{trailer} WHERE mcode = #{mcode}
  	</update> 
  	<update id="updateScreenMovie" parameterType="screenmovie">
  		update screen_movie set startdate = #{startdate}, enddate = #{enddate}  WHERE mcode = #{mcode}
