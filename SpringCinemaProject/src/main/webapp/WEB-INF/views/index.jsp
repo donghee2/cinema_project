@@ -354,7 +354,7 @@
         const reserveDate = document.querySelector(".reserve-date");
 		console.log(date.getDate());
 		console.log(lastDay.getDate());
-		$(".today").html(date.getFullYear() +"/"+ date.getMonth() +"/"+ date.getDate());
+		$(".today").html(date.getFullYear() +"/"+ (date.getMonth()+1) +"/"+ date.getDate());
 		console.log(date.getFullYear() +"/"+ date.getMonth() +"/"+ date.getDate());
       
             const weekOfDay = ["일", "월", "화", "수", "목", "금", "토"]

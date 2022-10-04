@@ -63,11 +63,40 @@
 </script>
 </head>
 <body>
-	<div>
-		<form id="frm">
-			${requestScope.tag }
-			<button type="button" class="booking">예매하기</button>
-		</form>
+	<div class="buster-light">
+		<div class="hero common-hero">
+			<div class="container">
+				<div class="row">
+					<div class="col-md-12">
+						<div class="hero-ct">
+							<h1>Movie Reservation - Special Experience</h1>
+							<ul class="breadcumb">
+								<li class="active"><a href="#">Home</a></li>
+								<li><span class="ion-ios-arrow-right"></span>movie reservation</li>
+							</ul>
+							<h2 class="today-word">TODAY</h2>
+							<h3 class="today"></h3>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+	<div class="page-single">
+		<div class="container">
+			<div class="row">
+				<div class="col-md-12 col-sm-12 col-xs-12">
+					<div class="topbar-filter fw">
+						<div class="reserve-container">
+							<form id="frm">
+								${tag }
+								<button type="button" class="booking">예매하기</button>
+							</form>
+					</div>
+				</div>
+			</div>
+			</div>
+		</div>
 	</div>
 	
 </body>
