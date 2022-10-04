@@ -87,21 +87,18 @@
             const month = date.getMonth() + 1;
             console.log(month);
             var count = 0;
-            for (i = date.getDate(); i <= lastDay.getDate(); i++) {
+            for (i = date.getDate(); i <= date.getDate() + 20; i++) {
 
                 const button = document.createElement("button");
                 const spanWeekOfDay = document.createElement("span");
                 const spanDay = document.createElement("span");
 
-                //class넣기
                 button.classList = "movie-date-wrapper"
                 spanWeekOfDay.classList = "movie-week-of-day";
                 spanDay.classList = "movie-day";
 
-                //weekOfDay[new Date(2020-03-날짜)]
                 const dayOfWeek = weekOfDay[new Date(year + "-" + month + "-" + i).getDay()];
 
-                //요일 넣기
                 if (dayOfWeek === "토") {
                     spanWeekOfDay.classList.add("saturday");
                     spanDay.classList.add("saturday");
@@ -117,12 +114,13 @@
                 //button.append(i);
                 reserveDate.append(button);
                 count++;
-
+				console.log("first count : " + count);
             }
             if(count <= 20){
             	const lastDay = new Date(date.getFullYear(), date.getMonth() + 1, 1);
             	console.log(lastDay.getDate());
-            	for (i = lastDay.getDate(); i <= lastDay.getDate() + 20 - count; i++) {
+            	console.log("second count : " + count);
+            	for (i = lastDay.getDate(); i <= lastDay.getDate() + (20 - count); i++) {
 					
                     const button = document.createElement("button");
                     const spanWeekOfDay = document.createElement("span");
@@ -154,7 +152,7 @@
                     reserveDate.append(button);
 
                 }
-            	
+            	console.log("last count : " + count);
             }
             
             var screenfirst = 0;
