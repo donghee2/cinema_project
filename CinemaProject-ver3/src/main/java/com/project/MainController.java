@@ -1043,7 +1043,7 @@ public class MainController {
 					+ "&quantity=" + String.valueOf(count)
 					+ "&total_amount=" + price + "&tax_free_amount=" + price
 					+ "&approval_url=http://localhost:9999/approval.do?bookingCode=" + bookingCode
-					+ "&cancel_url=http://localhost:9999/parchaseFail.do&fail_url=http://localhost:9999/parchaseFail.do";
+					+ "&cancel_url=http://localhost:9999/cancel.do&fail_url=http://localhost:9999/cancel.do";
 			
 			OutputStream os = con.getOutputStream();
 			DataOutputStream dos = new DataOutputStream(os);
@@ -1081,6 +1081,19 @@ public class MainController {
 		
 		try {
 			response.getWriter().write("<script>opener.document.location.href='parchaseResult.do?bookingCode="+bookingCode+"'; window.close(); </script>");
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+		
+	}
+	
+	@RequestMapping("/cancel.do")
+	public void cancel(Model model, HttpServletResponse response) {
+		// kakaopay 실패/취소 시 진입
+		System.out.println("cancel 진입");
+		
+		try {
+			response.getWriter().write("<script>opener.document.location.href='parchaseFail.do'; window.close(); </script>");
 		} catch (IOException e) {
 			e.printStackTrace();
 		}

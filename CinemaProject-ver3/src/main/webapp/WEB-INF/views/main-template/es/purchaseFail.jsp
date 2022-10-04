@@ -142,7 +142,7 @@
 							<div class="text-thank">예매를 다시 진행해주세요</div>
 							</div>
 							<div class="result-btn">
-								<a href="main.do" class="btn-move">HOME</a><a href="#" class="btn-reserve">다시 예매 하기</a>
+								<a href="main.do" class="btn-move">HOME</a><a href="reserveView.do" class="btn-reserve">다시 예매 하기</a>
 							</div>
 						</div>
 					</div>
