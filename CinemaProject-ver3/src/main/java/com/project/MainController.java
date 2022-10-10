@@ -29,6 +29,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.stream.Collectors;
 
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
@@ -864,7 +865,11 @@ public class MainController {
 	}
 	
 	@RequestMapping("/admin.do")
-	public String admin() {
+	public String admin(String cinemacode, String name, HttpSession session) {
+		List<CinemaDTO> Cinemalist = movieservice.selectCinemaList();
+		session.setAttribute("cinemacode", cinemacode);
+		session.setAttribute("name", name);
+		session.setAttribute("Cinemalist", Cinemalist);
 		return "admin_index";
 	}
 	
@@ -947,24 +952,24 @@ public class MainController {
 	@RequestMapping("/seatCreate.do")
 	public ResponseEntity<Integer> seatCreate(String screenCode, String timeCode, String mcode, Model model) {
 		System.out.println("seatView.do, screenCode : " + screenCode);
-		String seatType = bookingservice.selectSeatType(screenCode);
+		ScreenDTO seatdto = bookingservice.selectSeatType(screenCode);
 		List<String> bookedSeat = bookingservice.selectBookedSeat(timeCode);
 		tag ="";
-		String str = "";
-		FileReader fr;
-		try {
-			fr = new FileReader(seatType + ".txt");
-			BufferedReader br = new BufferedReader(fr);
-			while(true) {
-				String t = br.readLine();
-				if(t == null) break;
-				str += t;
-			}
-		} catch (FileNotFoundException e) {
-			e.printStackTrace();
-		} catch (IOException e) {
-			e.printStackTrace();
-		}
+		String str = seatdto.getSeatCode();
+//		FileReader fr;
+//		try {
+//			fr = new FileReader(seatType + ".txt");
+//			BufferedReader br = new BufferedReader(fr);
+//			while(true) {
+//				String t = br.readLine();
+//				if(t == null) break;
+//				str += t;
+//			}
+//		} catch (FileNotFoundException e) {
+//			e.printStackTrace();
+//		} catch (IOException e) {
+//			e.printStackTrace();
+//		}
 		System.out.println(str);
 		tag = "<input type='hidden' name='screenCode' value='"+screenCode+"'>"
 				+ "<input type='hidden' name='timeCode' value='"+timeCode+"'>"
@@ -1129,6 +1134,154 @@ public class MainController {
 	}
 	
 	///////////////////// 관리자단 ////////////////////////////
+	
+	@RequestMapping("/cinemaManagementView.do")
+	public String cinemaManagementView(@RequestParam(name = "pageNo",defaultValue = "1")int pageNo, Model model, String cinemacode) {
+		
+		List<ScreenDTO> list = screenservice.adminselectScreenList(cinemacode, pageNo);
+		for(int i=0;i<list.size();i++) {
+			int n = screenservice.selectAllSeat(list.get(i).getScreenCode());
+			list.get(i).setAllseat(n);
+		}
+		
+		//페이징 처리
+		int count = screenservice.selectAllCount(cinemacode);
+		PaggingVO vo = new PaggingVO(count, pageNo, 5, 3);
+		model.addAttribute("pagging", vo);
+		model.addAttribute("pageNo", pageNo);
+		
+		ScreenDTO dto = screenservice.selectCinemaInfo(cinemacode);
+		
+		model.addAttribute("dto", dto);
+		model.addAttribute("list", list);
+		model.addAttribute("name", dto.getCinemaName());
+		model.addAttribute("title", "지점 관리");
+		model.addAttribute("page", "es/cinemaManagementView.jsp");
+		
+		return "admin_index";
+	}
+	
+	
+	
+	@RequestMapping("/cinemaInsertView.do")
+	public String cinemaInsertView(Model model) {
+				
+		model.addAttribute("title", "지점 추가 하기");
+		model.addAttribute("page", "es/cinemaInsertView.jsp");
+		
+		return "admin_index";
+	}
+	
+	@RequestMapping("/cinemaUpdate.do")
+	public void cinemaUpdate(ScreenDTO dto, HttpServletResponse response, HttpServletRequest request) 
+			throws IOException {
+		
+		int result = screenservice.updateCinema(dto);
+		response.setContentType("text/html;charset=utf-8");
+		if(result == 1)
+			response.getWriter().write(
+					"<script>alert('수정이 완료되었습니다.');location.href='cinemaManagementView.do?cinemacode="+dto.getCinemaCode()+"';</script>");
+		else
+			response.getWriter().write(
+					"<script>alert('수정에 실패하였습니다.');</script>");
+	}
+	
+	@RequestMapping("/cinemaInsert.do")
+	public void cinemaInsert(ScreenDTO dto, HttpServletResponse response, HttpServletRequest request, HttpSession session) 
+			throws IOException {
+		
+		int result = screenservice.insertCinema(dto);
+		response.setContentType("text/html;charset=utf-8");
+		
+		// 지점 관리 리스트의 리스트 최신화
+		List<CinemaDTO> Cinemalist = movieservice.selectCinemaList();
+		session.setAttribute("Cinemalist", Cinemalist);
+		
+		if(result == 1)
+			response.getWriter().write(
+					"<script>alert('지점 등록이 완료되었습니다, 지점 관리 페이지로 이동합니다');location.href='cinemaManagementView.do?cinemacode="+dto.getCinemaCode()+"';</script>");
+		else
+			response.getWriter().write(
+					"<script>alert('지점 등록에 실패하였습니다.');</script>");
+	}
+	
+	@RequestMapping("/cinemaDelete.do")
+	public void cinemaDelete(String cinemacode, HttpServletResponse response, HttpServletRequest request, HttpSession session) 
+			throws IOException {
+		
+		int result = screenservice.deleteCinema(cinemacode);
+		response.setContentType("text/html;charset=utf-8");
+		
+		// 지점 관리 리스트의 리스트 최신화
+		List<CinemaDTO> Cinemalist = movieservice.selectCinemaList();
+		session.setAttribute("Cinemalist", Cinemalist);
+		
+		if(result == 1)
+			response.getWriter().write(
+					"<script>alert('지점 삭제가 완료되었습니다');location.href='admin.do';</script>");
+		else
+			response.getWriter().write(
+					"<script>alert('지점 삭제가 실패하였습니다.');</script>");
+	}
+	
+	@RequestMapping("/screenInsertView.do")
+	public String screenInsertView(String cinemacode, Model model) {
+		
+		//String seatType = bookingservice.selectSeatType(screencode);
+		List<ScreenDTO> seatlist = screenservice.selectTypeList();
+		
+		model.addAttribute("seatlist", seatlist);
+		model.addAttribute("cinemacode", cinemacode);
+		model.addAttribute("title", "지점 극장 등록");
+		model.addAttribute("page", "es/screenInsertView.jsp");
+		
+		return "admin_index";
+	}
+	
+	@RequestMapping("/screenInsert.do")
+	public void screenInsert(ScreenDTO dto, HttpServletResponse response, HttpServletRequest request) 
+			throws IOException {
+		String seatcode = screenservice.selectSeatCode(dto.getSeatType());
+		int seatcount = seatcode.split("\\*").length - 1;
+		System.out.println("seatcount : " + seatcount);
+		
+		//	Screen 등록
+		int result = screenservice.insertScreen(dto);
+		
+		//	Screen seat 등록
+		for(int i=0;i<seatcount;i++) {
+			int rs = screenservice.insertScreenSeat(dto.getScreenCode(), dto.getSeatType(), i+1);
+		}
+		
+		response.setContentType("text/html;charset=utf-8");
+		
+		if(result == 1)
+			response.getWriter().write(
+					"<script>alert('극장 등록이 완료되었습니다, 지점 관리 페이지로 이동합니다');location.href='cinemaManagementView.do?cinemacode="+dto.getCinemaCode()+"';</script>");
+		else
+			response.getWriter().write(
+					"<script>alert('극장 등록에 실패하였습니다.');</script>");
+	}
+	
+	@RequestMapping("/screenDelete.do")
+	public void screenDelete(String screencode, String cinemacode, HttpServletResponse response, HttpServletRequest request, HttpSession session) 
+			throws IOException {
+		
+		int result = screenservice.deleteScreen(screencode);
+		response.setContentType("text/html;charset=utf-8");
+		
+		// 지점 관리 리스트의 리스트 최신화
+		List<CinemaDTO> Cinemalist = movieservice.selectCinemaList();
+		session.setAttribute("Cinemalist", Cinemalist);
+		
+		if(result == 1)
+			response.getWriter().write(
+					"<script>alert('극장 삭제가 완료되었습니다');location.href='cinemaManagementView.do?cinemacode="+cinemacode+"';</script>");
+		else
+			response.getWriter().write(
+					"<script>alert('극장 삭제가 실패하였습니다.');</script>");
+	}
+	
 	
 	
 	/*--------------------------------------------------------------------------------------------------*/

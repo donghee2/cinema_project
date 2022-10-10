@@ -33,7 +33,7 @@
 				</div>
 				<!-- sidebar menu -->
 				<ul class="sidebar-menu" data-widget="tree">
-					<li class="header nav-small-cap">000시네마 관리 메뉴</li>
+					<li class="header nav-small-cap">Hello Movie Cinema Menu</li>
 					<c:if test="${sessionScope.grade == 0 }">
 					<li class="treeview"><a href="#"><i class="icon-people"></i><span>관리자 정보</span><span
 							class="pull-right-container"><i
@@ -50,29 +50,22 @@
 							<li class="movielist"><a href="insert_movie.do">영화 등록</a></li>
 							<li><a href="select_all_movielist.do">등록된 영화 목록</a></li>
 						</ul></li>
-					<li class="treeview"><a href="#"><i class="icon-people"></i><span>회원관리</span><span
+					<li class="treeview"><a href="#"><i class="icon-people"></i><span>회원 관리</span><span
 							class="pull-right-container"><i
 								class="fa fa-angle-right pull-right"></i></span></a>
 					<ul class="treeview-menu">
 							<li><a href="allMemberView">전체 회원관리</a></li>
 							<li><a href="allQnaView">전체 문의내역</a></li>
 						</ul></li>
-					<li class="treeview"><a href="#"><i class="icon-people"></i><span>샘플 메뉴</span><span
+					<li class="treeview"><a href="#"><i class="icon-people"></i><span>영화관 관리</span><span
 							class="pull-right-container"><i
 								class="fa fa-angle-right pull-right"></i></span></a>
 					<ul class="treeview-menu">
-						<c:if test="${sessionScope.cinemacode == null }">
 							<li><a id="modal-open" href="#">지점 관리</a></li>
-							<li><a href="blank.do">빈 샘플 메뉴</a></li>
-							<li><a href="blank.do">빈 샘플 메뉴</a></li>
-						</c:if>
-						<c:if test="${sessionScope.cinemacode != null }">
-							<li><a id="modal-open" href="#">지점 관리</a></li>
-							<a id="modal-open" class="collapse-item" href="#">상영관 관리</a>
-							<li><a href="blank.do">빈 샘플 메뉴</a></li>
-						</c:if>
-						</ul>
-						</li>
+							<li><a href="cinemaInsertView.do">지점 등록</a></li>
+							<li><a href="#">좌석 타입 관리</a></li>
+					</ul>
+					</li>
 					</ul>
 			</section>
 		</aside>

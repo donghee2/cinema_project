@@ -11,7 +11,7 @@
 <meta name="description" content="">
 <meta name="author" content="">
 <link rel="icon" href="../../../images/favicon.ico">
-<title>Crypto Admin - Dashboard Blank Page</title>
+<title>${title }</title>
 <!-- Bootstrap 4.0-->
 <link rel="stylesheet"
 	href="../../../assets/vendor_components/bootstrap/dist/css/bootstrap.min.css">
@@ -36,33 +36,9 @@
 		<!-- =============================================== -->
 		<!-- Content Wrapper. Contains page content -->
 		<div class="content-wrapper">
-			<!-- Content Header (Page header) -->
-			<section class="content-header">
-				<h1>${pagetitle }</h1>
-				<ol class="breadcrumb">
-					<li class="breadcrumb-item"><a href="#"><i
-							class="fa fa-dashboard"></i>Home</a></li>
-					<li class="breadcrumb-item"><a href="#">Examples</a></li>
-					<li class="breadcrumb-item active">Blank page</li>
-				</ol>
-			</section>
-			<!-- Main content -->
-			<section class="content">
-				<!-- Default box -->
-				<div class="box">
-					<!-- <div class="box-header with-border">
-						<h3 class="box-title">Title</h3>
-						<div class="box-tools pull-right">
-						</div>
-					</div> -->
+			
 					<div class="box-body"><jsp:include page="admin-template/${page }"></jsp:include> </div>
-					<!-- /.box-body -->
-					<div class="box-footer">Footer</div>
-					<!-- /.box-footer-->
-				</div>
-				<!-- /.box -->
-			</section>
-			<!-- /.content -->
+					
 		</div>
 		<!-- /.content-wrapper -->
                  <jsp:include page="admin-template/footer.jsp" flush="false"/> 

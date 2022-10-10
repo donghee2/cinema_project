@@ -8,15 +8,35 @@ public class ScreenDTO {
 	private String cinemaCode;
 	private String cinemaName;
 	private String screenName;
+	private String seatType;
+	private String seatCode;
+	private int allseat;
 	
 	public ScreenDTO() {	}
 	
-	public ScreenDTO(String screenCode, String cinemaCode, String cinemaName, String screenName) {
-		super();
-		this.screenCode = screenCode;
-		this.cinemaCode = cinemaCode;
-		this.cinemaName = cinemaName;
-		this.screenName = screenName;
+	
+	public String getSeatCode() {
+		return seatCode;
+	}
+
+	public void setSeatCode(String seatCode) {
+		this.seatCode = seatCode;
+	}
+
+	public String getSeatType() {
+		return seatType;
+	}
+
+	public void setSeatType(String seatType) {
+		this.seatType = seatType;
+	}
+
+	public int getAllseat() {
+		return allseat;
+	}
+
+	public void setAllseat(int allseat) {
+		this.allseat = allseat;
 	}
 
 	public String getScreenCode() {
@@ -51,12 +71,15 @@ public class ScreenDTO {
 		this.screenName = screenName;
 	}
 
+
 	@Override
 	public String toString() {
-		return "ScreenDTO [screenCode=" + screenCode + ", cinemaCode=" + cinemaCode + ", cinemaName=" + cinemaName + ", screenName=" + screenName
-				+ "]";
+		return "ScreenDTO [screenCode=" + screenCode + ", cinemaCode=" + cinemaCode + ", cinemaName=" + cinemaName
+				+ ", screenName=" + screenName + ", seatType=" + seatType + ", seatCode=" + seatCode + ", allseat="
+				+ allseat + "]";
 	}
+
 	
-	
+
 	
 }

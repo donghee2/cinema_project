@@ -11,4 +11,52 @@
 		where mcode = #{mcode} and <![CDATA[startdate <= #{sdate}]]> and enddate >= #{sdate})
 		sm where s.screencode = sm.screencode) ss where c.cinemacode = ss.cinemacode
 	</select>
+	
+	<select id="adminselectScreenList" parameterType="map" resultType="screen">
+		select * from(select ceil(rownum / 5) as pageNo, s.* from screen s where cinemacode = #{cinemacode} order by screencode asc) where pageNo = #{pageNo}
+	</select>
+	
+	<select id="selectAllSeat" parameterType="String" resultType="int">
+		select count(*) from seat where screencode = #{screencode}
+	</select>
+	
+	<select id="selectCinemaInfo" parameterType="String" resultType="screen">
+		select * from cinema where cinemacode = #{cinemacode}
+	</select>
+	
+	<update id="updateCinema" parameterType="screen">
+		update cinema set cinemaname = #{cinemaName} where cinemacode = #{cinemaCode}
+	</update>
+	
+	<insert id="insertCinema" parameterType="screen">
+		insert into cinema values(#{cinemaCode}, #{cinemaName})
+	</insert>
+	
+	<delete id="deleteCinema" parameterType="String">
+		delete from cinema where cinemacode = #{cinemaCode}
+	</delete>
+	
+	<select id="selectAllCount" parameterType="String" resultType="int">
+		select count(*) from screen where cinemacode = #{cinemacode}
+	</select>
+	
+	<insert id="insertScreen" parameterType="screen">
+		insert into screen values(#{screenCode}, #{cinemaCode}, #{screenName})
+	</insert>
+	
+	<delete id="deleteScreen" parameterType="String">
+		delete from screen where screencode = #{screencode}
+	</delete>
+	
+	<select id="selectTypeList" resultType="screen">
+		select * from seattype
+	</select>
+	
+	<select id="selectSeatCode" parameterType="String" resultType="String">
+		select seatcode from seattype where seattype = #{seatType}
+	</select>
+	
+	<insert id="insertScreenSeat" parameterType="map">
+		insert into seat values(SEAT_PK_SEQ.nextval, #{screenCode}, #{seatType}, #{seatNo})
+	</insert>
 </mapper>

@@ -40,10 +40,9 @@
 
 .popup {
 	width: 100%;
-	max-width: 400px;
+	max-width: 800px;
 	border-radius: 10px;
 	overflow: hidden;
-	background-color: #264db5;
 	box-shadow: 5px 10px 10px 1px rgba(0, 0, 0, .3);
 }
 
@@ -53,16 +52,21 @@
 	display: flex;
 	align-items: center;
 	justify-content: center;
+	color: white;
+	font-weight: bold;
+	font-size: 20px;
+	background-color: #fbae1c;
 }
 
 .popup-body {
-	width: 100%;
+	width: 800px;
 	background-color: #ffffff;
 }
 
 .body-content {
 	width: 100%;
 	padding: 30px;
+	margin: 0px;
 }
 
 .body-titlebox {
@@ -75,32 +79,72 @@
 .body-contentbox {
 	word-break: break-word;
 	overflow-y: auto;
-	min-height: 100px;
-	max-height: 200px;
+	min-height: 400px;
+	max-height: 800px;
 }
 
 .popup-foot {
 	width: 100%;
 	height: 50px;
+	background-color: white;
 }
 
 .pop-btn {
 	display: inline-flex;
-	width: 199px;
-	height: 100%;
+	width: 150px;
+	height: 30px;
 	justify-content: center;
 	align-items: center;
 	float: left;
 	color: #ffffff;
 	cursor: pointer;
+	font-size: 16px;
+	border-radius: 10px;
+	background-color: #fbae1c;
+	margin-left: 330px;
 }
 
 .pop-btn.confirm {
-	border-right: 1px solid #3b5fbf;
+	border: 1px solid #ffffff;
+	
+}
+.pop-btn.confirm:hover {
+	font-weight: bold;
 }
 
-.pop-btn.close {
-	border-right: 1px solid #3b5fbf;
+.cinemaView{
+	font-size: 14px;
+	margin: 5px;
+}
+.option-img{
+	width: 60px;
+}
+.option-div{
+	width: 740px;
+	display: flex;
+	flex-flow: row wrap;
+}
+.option-box{
+	width: 100px;
+}
+.box box-body{
+	display: inline-block;
+}
+.costom-box{
+	background: #fff;
+    border-radius: 5px;
+    box-shadow: 0px 0px 5px 0px rgb(142 139 133 / 32%);
+    transition: .5s;
+    display: flex;
+    flex-direction: column;
+    width: 150px;
+    height: 150px;
+    max-width: 150px;
+    min-width: 150px;
+    margin: 10px;
+}
+.delete-btn{
+	margin-top: -4px;
 }
 </style>
 </head>
@@ -114,16 +158,22 @@
 				<div class="popup-body">
 					<div class="body-content">
 						<div class="body-contentbox">
-							<c:forEach var="dto" items="${requestScope.Cinemalist }">
-								<a href="cinema-management.do?cinemacode=${dto.cinemacode }&name=${dto.cinemaname }">
-									${dto.cinemaname }</a>
-							</c:forEach>
+							<div class="option-div">
+								<c:forEach var="c" items="${sessionScope.Cinemalist }">
+									<div class="box-body costom-box">
+								      <h6><span class="text-uppercase"><a class="cinemaView text-warning" href="cinemaManagementView.do?cinemacode=${c.cinemacode }">${c.cinemaname }</a></span><span class="float-right">
+								      <a class="btn btn-xs btn-warning delete-btn" href="cinemaDelete.do?cinemacode=${c.cinemacode }">삭제</a></span></h6><br>
+								      <div class="option-box">
+								      	<a href="cinemaManagementView.do?cinemacode=${c.cinemacode }"><img class="option-img" alt="옵션 이미지" src="images/hellocinema_icon.png"></a>
+								      </div>
+								    </div>
+								</c:forEach>
+							</div>
 						</div>
 					</div>
 				</div>
 				<div class="popup-foot">
-					<span class="pop-btn confirm" id="confirm">확인</span> <span
-						class="pop-btn close" id="close">창 닫기</span>
+					<span class="pop-btn confirm" id="confirm">창닫기</span>
 				</div>
 			</div>
 		</div>

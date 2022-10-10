@@ -8,8 +8,12 @@
 		(select screenname from screen where screencode = #{screenCode}) 
 		screenname from time t where moviedate = #{sdate} and screencode = #{screenCode} and mcode = #{mcode}
 	</select>
-	<select id="selectSeatType" parameterType="String" resultType="String">
-		select distinct seattype from seat where screencode = #{screenCode}
+	<select id="selectSeatType" parameterType="String" resultType="screen">
+		select s.*, (select distinct seattype from seat st where st.screencode = #{screenCode}) as seattype,
+		(select distinct 
+		(select seatcode from seattype sp where sp.seattype = st.seattype)
+		from seat st where st.screencode = #{screenCode}) as seatcode
+		from screen s where screencode = #{screenCode}
 	</select>
 	
 	<insert id="insertBooking" parameterType="map">

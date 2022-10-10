@@ -6,6 +6,7 @@ import java.util.Map;
 import org.apache.ibatis.annotations.Mapper;
 
 import com.project.dto.BookingDTO;
+import com.project.dto.ScreenDTO;
 
 
 @Mapper
@@ -13,7 +14,7 @@ public interface BookingMapper {
 
 	List<BookingDTO> selectMovieList(Map<String, Object> map);
 	
-	String selectSeatType(String screenCode);
+	ScreenDTO selectSeatType(String screenCode);
 
 	int insertBooking(Map<String, Object> map);
 

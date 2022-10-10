@@ -8,6 +8,7 @@ import java.util.Map;
 import org.springframework.stereotype.Service;
 
 import com.project.dto.BookingDTO;
+import com.project.dto.ScreenDTO;
 import com.project.mapper.BookingMapper;
 
 @Service
@@ -65,7 +66,7 @@ public class BookingService {
 		return mapper.selectMovieList(map);
 	}
 
-	public String selectSeatType(String screenCode) {
+	public ScreenDTO selectSeatType(String screenCode) {
 		return mapper.selectSeatType(screenCode);
 	}
 
