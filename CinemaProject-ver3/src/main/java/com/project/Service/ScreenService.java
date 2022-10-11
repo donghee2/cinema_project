@@ -97,5 +97,20 @@ public class ScreenService {
 		return mapper.insertScreenSchedule(dto);
 	}
 
+	public List<ScreenDTO> selectAllSeatType() {
+		return mapper.selectAllSeatType();
+	}
+
+	public int insertSeatType(String seatType, String tag) {
+		Map<String, Object> map = new HashMap<String, Object>();
+		map.put("seatType", seatType);
+		map.put("seatCode", tag);
+		return mapper.insertSeatType(map);
+	}
+
+	public int deleteSeatType(String seatType) {
+		return mapper.deleteSeatType(seatType);
+	}
+
 	
 }

@@ -36,10 +36,12 @@
 							<div class="box-body">
 								<div class="row">
 									<div class="col-12">
-										<div class="form-group row"><label class="col-sm-2 col-form-label">Cinema Code</label>
+										<div class="form-group row"><label class="col-sm-2 col-form-label"><i
+													class="fa fa-check-circle text-muted hidden-md hidden-sm hidden-xs"></i>&nbsp; Cinema Code</label>
 				                      <div class="col-sm-5"><input class="form-control" type="text"name="cinemaCode" placeholder="ex) 20221OOO"></div>
 				                    </div>
-				                    <div class="form-group row"><label class="col-sm-2 col-form-label">Cinema Name</label>
+				                    <div class="form-group row"><label class="col-sm-2 col-form-label"><i
+													class="fa fa-check-circle text-muted hidden-md hidden-sm hidden-xs"></i>&nbsp; Cinema Name</label>
 				                      <div class="col-sm-5"><input class="form-control" type="text" name="cinemaName" placeholder="ex) OO지점"></div>
 				                    </div>
 				                    <div class="form-group row"><label class="col-sm-2 col-form-label"></label>

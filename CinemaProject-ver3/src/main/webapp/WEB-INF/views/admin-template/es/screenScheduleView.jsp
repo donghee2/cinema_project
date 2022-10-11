@@ -74,7 +74,7 @@
 					<li class="breadcrumb-item"><a href="#"><i
 							class="fa fa-dashboard"></i>Main</a></li>
 					<li class="breadcrumb-item"><a href="#">영화관 관리</a></li>
-					<li class="breadcrumb-item"><a href="#">지점 관리</a></li>
+					<li class="breadcrumb-item"><a href="#">${name } 지점 관리</a></li>
 					<li class="breadcrumb-item active">극장 상영작 관리</li>
 				</ol>
 			</section>

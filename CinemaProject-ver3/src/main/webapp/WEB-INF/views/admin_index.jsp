@@ -66,5 +66,78 @@
 	<script src="../../js/template.js"></script>
 	<!-- Crypto_Admin for demo purposes -->
 	<script src="../../js/demo.js"></script>
+	<script type="text/javascript">
+		var title = '${title }';
+	
+		console.log(title);
+		
+		$("ul[class='active']").removeClass("active");
+		$("li[class='active']").removeClass("active");
+		
+		if(title == "메인 페이지 :: Hello Movie Cinema"){
+			$("a[href^='/']").parent().addClass("active");
+		}
+		
+		else if(title == "지점 관리 :: Hello Movie Cinema"){
+			$("a[href^='#cinemaManage']").parent().addClass("active");
+			$("a[href^='#cinemaManage']").parent().parent().parent().addClass("active");
+		}
+		
+		else if(title == "극장 상영작 관리 :: Hello Movie Cinema"){
+			$("a[href^='#cinemaManage']").parent().addClass("active");
+			$("a[href^='#cinemaManage']").parent().parent().parent().addClass("active");
+		}
+		
+		else if(title == "지점 극장 등록 :: Hello Movie Cinema"){
+			$("a[href^='#cinemaManage']").parent().addClass("active");
+			$("a[href^='#cinemaManage']").parent().parent().parent().addClass("active");
+		}
+		
+		else if(title == "지점 추가 하기 :: Hello Movie Cinema"){
+			$("a[href^='cinemaInsertView.do']").parent().addClass("active");
+			$("a[href^='cinemaInsertView.do']").parent().parent().parent().addClass("active");
+		}
+		
+		else if(title == "좌석 타입 관리 :: Hello Movie Cinema"){
+			$("a[href^='seatTypeCreateView.do']").parent().addClass("active");
+			$("a[href^='seatTypeCreateView.do']").parent().parent().parent().addClass("active");
+		}
+		
+		else if(title == "영화 검색 :: Hello Movie Cinema"){
+			$("a[href^='select_movie_openAPI.do']").parent().addClass("active");
+			$("a[href^='select_movie_openAPI.do']").parent().parent().parent().addClass("active");
+		}
+		
+		else if(title == "영화 등록 :: Hello Movie Cinema"){
+			$("a[href^='insert_movie.do']").parent().addClass("active");
+			$("a[href^='insert_movie.do']").parent().parent().parent().addClass("active");
+		}
+		
+		else if(title == "영화 목록 :: Hello Movie Cinema"){
+			$("a[href^='select_all_movielist.do']").parent().addClass("active");
+			$("a[href^='select_all_movielist.do']").parent().parent().parent().addClass("active");
+		}
+		
+		else if(title == "전체 회원 관리 :: Hello Movie Cinema"){
+			$("a[href^='allMemberView']").parent().addClass("active");
+			$("a[href^='allMemberView']").parent().parent().parent().addClass("active");
+		}
+		
+		else if(title == "회원 정보 관리 :: Hello Movie Cinema"){
+			$("a[href^='allMemberView']").parent().addClass("active");
+			$("a[href^='allMemberView']").parent().parent().parent().addClass("active");
+		}
+		
+		else if(title == "전체 문의 내역 :: Hello Movie Cinema"){
+			$("a[href^='allQnaView']").parent().addClass("active");
+			$("a[href^='allQnaView']").parent().parent().parent().addClass("active");
+		}
+		
+		else if(title == "관리자 페이지 :: Hello Movie Cinema"){
+			$("a[href^='adminView.do']").parent().addClass("active");
+			$("a[href^='adminView.do']").parent().parent().parent().addClass("active");
+		}
+	
+	</script>
 </body>
 </html>

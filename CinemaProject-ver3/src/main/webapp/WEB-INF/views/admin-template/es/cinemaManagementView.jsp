@@ -8,8 +8,7 @@
 			<li class="breadcrumb-item"><a href="#"><i
 					class="fa fa-dashboard"></i>Main</a></li>
 			<li class="breadcrumb-item"><a href="#">영화관 관리</a></li>
-			<li class="breadcrumb-item"><a href="#">지점 관리</a></li>
-			<li class="breadcrumb-item active">${name } ${title }</li>
+			<li class="breadcrumb-item active">${name } 지점 관리</li>
 		</ol>
 	</section>
 	<!-- Main content -->
@@ -39,7 +38,8 @@
 												</td>
 												<td class="w-300">
 													<p class="mb-0 manage-text-sm">
-														<a href="#">${s.screenName }</a>
+														<a href="#"><i
+													class="fa fa-check-circle text-muted hidden-md hidden-sm hidden-xs"></i>&nbsp; ${s.screenName }</a>
 														<small class="sidetitle" name="sidetitle">ScreenCode - ${s.screenCode }</small>
 													</p>
 													<p class="mb-0 manage-text-sm">총 좌석수 - ${s.allseat }</p>
@@ -90,10 +90,12 @@
 							<div class="box-body"></div>
 				                <div class="row">
 				                  <div class="col-12">
-				                    <div class="form-group row"><label class="col-sm-2 col-form-label">Cinema Code</label>
+				                    <div class="form-group row"><label class="col-sm-2 col-form-label"><i
+													class="fa fa-check-circle text-muted hidden-md hidden-sm hidden-xs"></i>&nbsp; Cinema Code</label>
 				                      <div class="col-sm-5"><input class="form-control" readonly="readonly" type="text" value="${requestScope.dto.cinemaCode }" name="cinemaCode" placeholder="지점 코드"></div>
 				                    </div>
-				                    <div class="form-group row"><label class="col-sm-2 col-form-label">Cinema Name</label>
+				                    <div class="form-group row"><label class="col-sm-2 col-form-label"><i
+													class="fa fa-check-circle text-muted hidden-md hidden-sm hidden-xs"></i>&nbsp; Cinema Name</label>
 				                      <div class="col-sm-5"><input class="form-control" type="text" value="${requestScope.dto.cinemaName }" name="cinemaName" placeholder="지점명"></div>
 				                    </div>
 				                    <div class="form-group row"><label class="col-sm-2 col-form-label"></label>

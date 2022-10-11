@@ -294,6 +294,7 @@ public class MainController {
 		List<MovieDTO> movieList = movieservice.selectAllMovieList();
 		model.addAttribute("movieList", movieList);
 		System.out.println(movieList);
+		model.addAttribute("title", "영화 목록 :: Hello Movie Cinema");
 		model.addAttribute("page", "hh/select_all_movielist.jsp");
 		return "admin_index";
 	}
@@ -312,6 +313,7 @@ public class MainController {
 		session.setAttribute("cinemacode", cinemacode);
 		session.setAttribute("name", name);
 		/* model.addAttribute("Cinemalist", Cinemalist); */
+		model.addAttribute("title", "영화 검색 :: Hello Movie Cinema");
 		model.addAttribute("page", "hh/select_movie_openAPI.jsp");
 		return "admin_index";
 	}
@@ -481,6 +483,7 @@ public class MainController {
 		session.setAttribute("name", name);
 		model.addAttribute("Cinemalist", Cinemalist);
 		model.addAttribute("mdto", mdto);
+		model.addAttribute("title", "영화 등록 :: Hello Movie Cinema");
 		model.addAttribute("page", "hh/insert_movie.jsp");
 		model.addAttribute("pagetitle", "영화 등록 페이지");
 		return "admin_index";
@@ -735,6 +738,7 @@ public class MainController {
 			model.addAttribute("address2", arr[1]);
 			model.addAttribute("address3", arr[2]);
 		}
+		model.addAttribute("title", "전체 회원 관리 :: Hello Movie Cinema");
 		model.addAttribute("page", "dh/all_member_view.jsp");
 		model.addAttribute("list", list);
 		return "admin_index";
@@ -762,6 +766,7 @@ public class MainController {
 		model.addAttribute("address1", arr[0]);
 		model.addAttribute("address2", arr[1]);
 		model.addAttribute("address3", arr[2]);
+		model.addAttribute("title", "회원 정보 관리 :: Hello Movie Cinema");
 		model.addAttribute("page", "dh/member_profile.jsp");
 		return "admin_index";
 	}
@@ -819,6 +824,7 @@ public class MainController {
 		List<QnADTO> qlist = qnaservice.selectAllQnaView();
 		System.out.println(qlist);
 		model.addAttribute("qlist", qlist);
+		model.addAttribute("title", "전체 문의 내역 :: Hello Movie Cinema");
 		model.addAttribute("page", "dh/all_qna_view.jsp");
 		return "admin_index";
 	}
@@ -827,6 +833,7 @@ public class MainController {
 	public String adminView(Model model) {
 		List<AdminDTO> alist = service.selectAdminView();
 		model.addAttribute("alist", alist);
+		model.addAttribute("title", "관리자 페이지 :: Hello Movie Cinema");
 		model.addAttribute("page", "dh/all_admin_view.jsp");
 		return "admin_index";
 	}
@@ -868,6 +875,7 @@ public class MainController {
 	public String admin(String cinemacode, String name, HttpSession session) {
 		List<CinemaDTO> Cinemalist = movieservice.selectCinemaList();
 		session.setAttribute("cinemacode", cinemacode);
+		session.setAttribute("title", "메인 페이지 :: Hello Movie Cinema");
 		session.setAttribute("name", name);
 		session.setAttribute("Cinemalist", Cinemalist);
 		return "admin_index";
@@ -981,7 +989,7 @@ public class MainController {
 		
 		while(str.contains("*")) {
 			if(bookedSeat.contains(String.valueOf(seat))) {
-				str = str.replaceFirst("\\*", "<input type='button' value='" + seat +"' class='seat' disabled >");
+				str = str.replaceFirst("\\*", "<input type='button' value='" + seat + "' class='seat' disabled >");
 			}else {
 				str = str.replaceFirst("\\*", "<input type='button' value='" + seat + "' class='seat'>");
 			}
@@ -1136,7 +1144,7 @@ public class MainController {
 	///////////////////// 관리자단 ////////////////////////////
 	
 	@RequestMapping("/cinemaManagementView.do")
-	public String cinemaManagementView(@RequestParam(name = "pageNo",defaultValue = "1")int pageNo, Model model, String cinemacode) {
+	public String cinemaManagementView(@RequestParam(name = "pageNo",defaultValue = "1")int pageNo, Model model, String cinemacode, HttpSession session) {
 		
 		List<ScreenDTO> list = screenservice.adminselectScreenList(cinemacode, pageNo);
 		for(int i=0;i<list.size();i++) {
@@ -1152,9 +1160,9 @@ public class MainController {
 		
 		ScreenDTO dto = screenservice.selectCinemaInfo(cinemacode);
 		
+		session.setAttribute("name", dto.getCinemaName());
 		model.addAttribute("dto", dto);
 		model.addAttribute("list", list);
-		model.addAttribute("name", dto.getCinemaName());
 		model.addAttribute("title", "지점 관리 :: Hello Movie Cinema");
 		model.addAttribute("page", "es/cinemaManagementView.jsp");
 		
@@ -1334,5 +1342,63 @@ public class MainController {
 					"<script>alert('극장 상영 일정 등록에 실패하였습니다.');</script>");
 	}
 	
+	@RequestMapping("/seatTypeCreateView.do")
+	public String seatTypeCreateView(Model model) {
+		
+		List<ScreenDTO> seatlist = screenservice.selectAllSeatType();
+		
+		for(int i=0;i<seatlist.size();i++) {
+			String str = seatlist.get(i).getSeatCode();
+			str = str.replace("/", "<div class='empty'></div>");
+			str = str.replace("^", "<br>");
+			str = str.replace("*", "<input type='button' class='seat'>");
+			seatlist.get(i).setSeatCode(str);
+		}
+		
+		model.addAttribute("seatlist", seatlist);
+		model.addAttribute("title", "좌석 타입 관리 :: Hello Movie Cinema");
+		model.addAttribute("page", "es/seatTypeCreateView.jsp");
+		
+		return "admin_index";
+	}
+	
+	@RequestMapping("/insertSeatType.do")
+	public void insertSeatType(String tag, String seatType, HttpServletResponse response, HttpServletRequest request) 
+			throws IOException {
+		System.out.println("old tag: " + tag);
+		
+		tag = tag.replace("<div class='empty'></div>", "/");
+		tag = tag.replace("<br>", "^");
+		tag = tag.replace("<input type='button' class='seat'>", "*");
+		System.out.println("new tag: " + tag);
+		int result = screenservice.insertSeatType(seatType, tag);
+		
+		response.setContentType("text/html;charset=utf-8");
+		
+		if(result == 1)
+			response.getWriter().write(
+					"<script>alert('좌석 타입 등록이 완료되었습니다, 지점 관리 페이지로 이동합니다');location.href='seatTypeCreateView.do';</script>");
+		else
+			response.getWriter().write(
+					"<script>alert('좌석 타입 등록에 실패하였습니다.');</script>");
+	}
+	
+	@RequestMapping("/deleteSeatType.do")
+	public void deleteSeatType(String seatType, HttpServletResponse response, HttpServletRequest request) 
+			throws IOException {
+		
+		String arr[] = seatType.split(",");
+		
+		int result = screenservice.deleteSeatType(arr[0]);
+		
+		response.setContentType("text/html;charset=utf-8");
+		
+		if(result == 1)
+			response.getWriter().write(
+					"<script>alert('좌석 타입 삭제가 완료되었습니다');location.href='seatTypeCreateView.do';</script>");
+		else
+			response.getWriter().write(
+					"<script>alert('좌석 타입 삭제가 실패하였습니다.');</script>");
+	}
 	/*--------------------------------------------------------------------------------------------------*/
 }

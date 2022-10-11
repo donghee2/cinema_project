@@ -19,7 +19,7 @@
 					<li class="breadcrumb-item"><a href="admin.do"><i
 							class="fa fa-dashboard"></i>Main</a></li>
 					<li class="breadcrumb-item"><a href="#">영화관 관리</a></li>
-					<li class="breadcrumb-item active"><a href="insertHotelView.do">지점 관리</a></li>
+					<li class="breadcrumb-item active"><a href="insertHotelView.do">${name } 지점 관리</a></li>
 					<li class="breadcrumb-item"><a href="insertHotelView.do">지점 극장 등록</a></li>
 				</ol>
 			</section>
@@ -37,13 +37,16 @@
 							<div class="box-body">
 								<div class="row">
 									<div class="col-12">
-										<div class="form-group row"><label class="col-sm-2 col-form-label">Screen Code</label>
+										<div class="form-group row"><label class="col-sm-2 col-form-label"><i
+													class="fa fa-check-circle text-muted hidden-md hidden-sm hidden-xs"></i>&nbsp; Screen Code</label>
 				                      <div class="col-sm-5"><input class="form-control" type="text"name="screenCode" placeholder="ex) 20222OOO"><input type="hidden" name="cinemaCode" value="${cinemacode }"></div>
 				                    </div>
-				                    <div class="form-group row"><label class="col-sm-2 col-form-label">Screen Name</label>
+				                    <div class="form-group row"><label class="col-sm-2 col-form-label"><i
+													class="fa fa-check-circle text-muted hidden-md hidden-sm hidden-xs"></i>&nbsp; Screen Name</label>
 				                      <div class="col-sm-5"><input class="form-control" type="text" name="screenName" placeholder="ex) O관"></div>
 				                    </div>
-				                    <div class="form-group row"><label class="col-sm-2 col-form-label">Seat Type</label>
+				                    <div class="form-group row"><label class="col-sm-2 col-form-label"><i
+													class="mdi mdi-seat-recline-extra text-muted hidden-md hidden-sm hidden-xs"></i>&nbsp; Seat Type</label>
 				                      <div class="col-sm-5">
 											<select class="form-control select2 w-p100" name="seatType">
 												<c:forEach var="s" items="${requestScope.seatlist }">

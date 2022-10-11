@@ -47,4 +47,10 @@ public interface ScreenMapper {
 
 	int insertScreenSchedule(ScreenDTO dto);
 
+	List<ScreenDTO> selectAllSeatType();
+
+	int insertSeatType(Map<String, Object> map);
+
+	int deleteSeatType(String seatType);
+
 }
