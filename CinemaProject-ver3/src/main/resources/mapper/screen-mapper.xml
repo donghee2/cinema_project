@@ -59,4 +59,26 @@
 	<insert id="insertScreenSeat" parameterType="map">
 		insert into seat values(SEAT_PK_SEQ.nextval, #{screenCode}, #{seatType}, #{seatNo})
 	</insert>
+	
+	<select id="selectScreenSchedule" parameterType="String" resultType="screen">
+		select 
+		(select title from moviedb md where md.mcode = t.mcode) as title,
+		(select runtime from moviedb md where md.mcode = t.mcode) as runtime,
+		t.* from time t where screencode = #{screencode}
+	</select>
+	
+	<select id="selectScreenMovie" parameterType="String" resultType="screen">
+		select 
+		(select runtime from moviedb md where md.mcode = sm.mcode) as runtime,
+		(select title from moviedb md where md.mcode = sm.mcode) as title, 
+		sm.* from screen_movie sm where screencode = #{screencode} and <![CDATA[startdate < sysdate]]> and enddate > sysdate
+	</select>
+	
+	<update id="updateSchedule" parameterType="screen">
+		update time set moviedate = #{movieDate}, starttime = #{startTime}, endtime = #{endTime} where timecode = #{timeCode}
+	</update>
+	
+	<insert id="insertScreenSchedule" parameterType="screen">
+		insert into time values(TIME_PK_SEQ.nextval, #{startTime}, #{endTime}, #{movieDate}, 1, #{screenCode}, #{mcode})
+	</insert>
 </mapper>

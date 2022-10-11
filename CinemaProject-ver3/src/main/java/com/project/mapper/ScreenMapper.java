@@ -39,4 +39,12 @@ public interface ScreenMapper {
 
 	String selectSeatCode(String seatType);
 
+	List<ScreenDTO> selectScreenSchedule(String screencode);
+
+	List<ScreenDTO> selectScreenMovie(String screencode);
+
+	int updateSchedule(ScreenDTO dto);
+
+	int insertScreenSchedule(ScreenDTO dto);
+
 }

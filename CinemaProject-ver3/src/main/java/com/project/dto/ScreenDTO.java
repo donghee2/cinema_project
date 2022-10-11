@@ -12,9 +12,103 @@ public class ScreenDTO {
 	private String seatCode;
 	private int allseat;
 	
+	private String timeCode;
+	private String title;
+	private String mcode;
+	private String movieDate;
+	
+	private String startTime;
+	private String endTime;
+	private String runTime;
+	
 	public ScreenDTO() {	}
 	
 	
+	
+	public String getRunTime() {
+		return runTime;
+	}
+
+
+
+	public void setRunTime(String runTime) {
+		this.runTime = runTime;
+	}
+
+
+
+	public String getTimeCode() {
+		return timeCode;
+	}
+
+
+
+	public void setTimeCode(String timeCode) {
+		this.timeCode = timeCode;
+	}
+
+
+
+	public String getTitle() {
+		return title;
+	}
+
+
+
+	public void setTitle(String title) {
+		this.title = title;
+	}
+
+
+
+	public String getMcode() {
+		return mcode;
+	}
+
+
+
+	public void setMcode(String mcode) {
+		this.mcode = mcode;
+	}
+
+
+
+	public String getMovieDate() {
+		return movieDate;
+	}
+
+
+
+	public void setMovieDate(String movieDate) {
+		this.movieDate = movieDate;
+	}
+
+
+
+	public String getStartTime() {
+		return startTime;
+	}
+
+
+
+	public void setStartTime(String startTime) {
+		this.startTime = startTime;
+	}
+
+
+
+	public String getEndTime() {
+		return endTime;
+	}
+
+
+
+	public void setEndTime(String endTime) {
+		this.endTime = endTime;
+	}
+
+
+
 	public String getSeatCode() {
 		return seatCode;
 	}
@@ -71,15 +165,12 @@ public class ScreenDTO {
 		this.screenName = screenName;
 	}
 
-
 	@Override
 	public String toString() {
 		return "ScreenDTO [screenCode=" + screenCode + ", cinemaCode=" + cinemaCode + ", cinemaName=" + cinemaName
 				+ ", screenName=" + screenName + ", seatType=" + seatType + ", seatCode=" + seatCode + ", allseat="
-				+ allseat + "]";
+				+ allseat + ", timeCode=" + timeCode + ", title=" + title + ", mcode=" + mcode + ", movieDate="
+				+ movieDate + ", startTime=" + startTime + ", endTime=" + endTime + ", runTime=" + runTime + "]";
 	}
-
-	
-
 	
 }

@@ -39,14 +39,14 @@
 												</td>
 												<td class="w-300">
 													<p class="mb-0 manage-text-sm">
-														<a href="memberProfile.do?email=${s.screenCode }">${s.screenName }</a>
+														<a href="#">${s.screenName }</a>
 														<small class="sidetitle" name="sidetitle">ScreenCode - ${s.screenCode }</small>
 													</p>
 													<p class="mb-0 manage-text-sm">총 좌석수 - ${s.allseat }</p>
 												</td>
 												<td>
 													<nav class="nav mt-1 btn-array">
-														<a href="screenDetail.do" class="btn-warning btn-sm text-white">극장 상세 보기</a>
+														<a href="screenScheduleView.do?screenCode=${s.screenCode }" class="btn-warning btn-sm text-white">극장 상영작 관리</a>
 														&nbsp;
 														<a href="screenDelete.do?screencode=${s.screenCode }&cinemacode=${requestScope.dto.cinemaCode }" class="btn-delete btn-sm text-white">극장 정보 삭제</a>
 													</nav>
@@ -90,10 +90,10 @@
 							<div class="box-body"></div>
 				                <div class="row">
 				                  <div class="col-12">
-				                    <div class="form-group row"><label class="col-sm-2 col-form-label">지점 코드</label>
+				                    <div class="form-group row"><label class="col-sm-2 col-form-label">Cinema Code</label>
 				                      <div class="col-sm-5"><input class="form-control" readonly="readonly" type="text" value="${requestScope.dto.cinemaCode }" name="cinemaCode" placeholder="지점 코드"></div>
 				                    </div>
-				                    <div class="form-group row"><label class="col-sm-2 col-form-label">지점명</label>
+				                    <div class="form-group row"><label class="col-sm-2 col-form-label">Cinema Name</label>
 				                      <div class="col-sm-5"><input class="form-control" type="text" value="${requestScope.dto.cinemaName }" name="cinemaName" placeholder="지점명"></div>
 				                    </div>
 				                    <div class="form-group row"><label class="col-sm-2 col-form-label"></label>

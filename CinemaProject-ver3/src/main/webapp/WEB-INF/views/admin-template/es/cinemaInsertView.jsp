@@ -36,10 +36,10 @@
 							<div class="box-body">
 								<div class="row">
 									<div class="col-12">
-										<div class="form-group row"><label class="col-sm-2 col-form-label">지점 코드</label>
+										<div class="form-group row"><label class="col-sm-2 col-form-label">Cinema Code</label>
 				                      <div class="col-sm-5"><input class="form-control" type="text"name="cinemaCode" placeholder="ex) 20221OOO"></div>
 				                    </div>
-				                    <div class="form-group row"><label class="col-sm-2 col-form-label">지점명</label>
+				                    <div class="form-group row"><label class="col-sm-2 col-form-label">Cinema Name</label>
 				                      <div class="col-sm-5"><input class="form-control" type="text" name="cinemaName" placeholder="ex) OO지점"></div>
 				                    </div>
 				                    <div class="form-group row"><label class="col-sm-2 col-form-label"></label>

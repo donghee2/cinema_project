@@ -905,7 +905,7 @@ public class MainController {
 		
 		model.addAttribute("movielist", movielist);
 		model.addAttribute("screenlist", screenlist);
-		model.addAttribute("title", "영화 예매");
+		model.addAttribute("title", "영화 예매 :: Hello Movie Cinema");
 		model.addAttribute("page", "es/reserveView.jsp");
 		return "main_index";
 	}
@@ -996,7 +996,7 @@ public class MainController {
 	@RequestMapping("/seatView.do")
 	public String seatView(Model model) {
 		model.addAttribute("tag", tag);
-		model.addAttribute("title", "인원/좌석 선택");
+		model.addAttribute("title", "인원/좌석 선택 :: Hello Movie Cinema");
 		model.addAttribute("page", "es/seatView.jsp");
 		return "main_index";
 	}
@@ -1120,7 +1120,7 @@ public class MainController {
 		
 		System.out.println("result 부 날짜 형태 : " + list.get(0).getMovieDate());
 		model.addAttribute("resultlist", list);
-		model.addAttribute("title", "결제 성공");
+		model.addAttribute("title", "결제 성공 :: Hello Movie Cinema");
 		model.addAttribute("page", "es/purchaseResult.jsp");
 		return "main_index";
 	}
@@ -1128,7 +1128,7 @@ public class MainController {
 	@RequestMapping("/parchaseFail.do")
 	public String payfail(Model model, HttpServletResponse response) {
 		
-		model.addAttribute("title", "결제 실패");
+		model.addAttribute("title", "결제 실패 :: Hello Movie Cinema");
 		model.addAttribute("page", "es/purchaseFail.jsp");
 		return "main_index";
 	}
@@ -1155,7 +1155,7 @@ public class MainController {
 		model.addAttribute("dto", dto);
 		model.addAttribute("list", list);
 		model.addAttribute("name", dto.getCinemaName());
-		model.addAttribute("title", "지점 관리");
+		model.addAttribute("title", "지점 관리 :: Hello Movie Cinema");
 		model.addAttribute("page", "es/cinemaManagementView.jsp");
 		
 		return "admin_index";
@@ -1166,7 +1166,7 @@ public class MainController {
 	@RequestMapping("/cinemaInsertView.do")
 	public String cinemaInsertView(Model model) {
 				
-		model.addAttribute("title", "지점 추가 하기");
+		model.addAttribute("title", "지점 추가 하기 :: Hello Movie Cinema");
 		model.addAttribute("page", "es/cinemaInsertView.jsp");
 		
 		return "admin_index";
@@ -1180,10 +1180,10 @@ public class MainController {
 		response.setContentType("text/html;charset=utf-8");
 		if(result == 1)
 			response.getWriter().write(
-					"<script>alert('수정이 완료되었습니다.');location.href='cinemaManagementView.do?cinemacode="+dto.getCinemaCode()+"';</script>");
+					"<script>alert('지점 수정이 완료되었습니다.');location.href='cinemaManagementView.do?cinemacode="+dto.getCinemaCode()+"';</script>");
 		else
 			response.getWriter().write(
-					"<script>alert('수정에 실패하였습니다.');</script>");
+					"<script>alert('지점 수정에 실패하였습니다.');</script>");
 	}
 	
 	@RequestMapping("/cinemaInsert.do")
@@ -1232,7 +1232,7 @@ public class MainController {
 		
 		model.addAttribute("seatlist", seatlist);
 		model.addAttribute("cinemacode", cinemacode);
-		model.addAttribute("title", "지점 극장 등록");
+		model.addAttribute("title", "지점 극장 등록 :: Hello Movie Cinema");
 		model.addAttribute("page", "es/screenInsertView.jsp");
 		
 		return "admin_index";
@@ -1282,7 +1282,57 @@ public class MainController {
 					"<script>alert('극장 삭제가 실패하였습니다.');</script>");
 	}
 	
+	@RequestMapping("/screenScheduleView.do")
+	public String screenScheduleView(String screenCode, Model model) {
+		
+		List<ScreenDTO> timelist = screenservice.selectScreenSchedule(screenCode);
+		
+		for(int i=0;i<timelist.size();i++) {
+			timelist.get(i).setMovieDate(timelist.get(i).getMovieDate().substring(0, 10));
+		}
+		
+		List<ScreenDTO> screenlist = screenservice.selectScreenMovie(screenCode);
+		
+		model.addAttribute("timelist", timelist);
+		model.addAttribute("screenlist", screenlist);
+		model.addAttribute("title", "극장 상영작 관리 :: Hello Movie Cinema");
+		model.addAttribute("page", "es/screenScheduleView.jsp");
+		
+		return "admin_index";
+	}
 	
+	@RequestMapping("/updateSchedule.do")
+	public void updateSchedule(ScreenDTO dto, HttpServletResponse response, HttpServletRequest request) 
+			throws IOException {
+		
+		int result = screenservice.updateSchedule(dto);
+		response.setContentType("text/html;charset=utf-8");
+		if(result == 1)
+			response.getWriter().write(
+					"<script>alert('상영 일정 수정이 완료되었습니다.');location.href='screenScheduleView.do?screenCode="+dto.getScreenCode()+"';</script>");
+		else
+			response.getWriter().write(
+					"<script>alert('상영 일정 수정에 실패하였습니다.');</script>");
+	}
+	
+	@RequestMapping("/screenSchedulePlus.do")
+	public void screenSchedulePlus(ScreenDTO dto, HttpServletResponse response, HttpServletRequest request) 
+			throws IOException {
+		
+		String arr[] = dto.getMcode().split(",");
+		dto.setMcode(arr[0]);
+		
+		int result = screenservice.insertScreenSchedule(dto);
+		
+		response.setContentType("text/html;charset=utf-8");
+		
+		if(result == 1)
+			response.getWriter().write(
+					"<script>alert('극장 상영 일정 등록이 완료되었습니다, 지점 관리 페이지로 이동합니다');location.href='screenScheduleView.do?screenCode="+dto.getScreenCode()+"';</script>");
+		else
+			response.getWriter().write(
+					"<script>alert('극장 상영 일정 등록에 실패하였습니다.');</script>");
+	}
 	
 	/*--------------------------------------------------------------------------------------------------*/
 }

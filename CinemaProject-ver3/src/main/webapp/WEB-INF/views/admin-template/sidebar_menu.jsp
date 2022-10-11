@@ -35,14 +35,14 @@
 				<ul class="sidebar-menu" data-widget="tree">
 					<li class="header nav-small-cap">Hello Movie Cinema Menu</li>
 					<c:if test="${sessionScope.grade == 0 }">
-					<li class="treeview"><a href="#"><i class="icon-people"></i><span>관리자 정보</span><span
+					<li class="treeview"><a href="#"><i class="fa fa-address-card"></i><span>관리자 정보</span><span
 							class="pull-right-container"><i
 								class="fa fa-angle-right pull-right"></i></span></a>
 					<ul class="treeview-menu ">
 							<li class="api"><a href="adminView.do">관리자 페이지</a></li>
 						</ul></li>
 					</c:if>
-					<li class="treeview"><a href="#"><i class="icon-people"></i><span>영화 관리</span><span
+					<li class="treeview"><a href="#"><i class="glyphicon glyphicon-film"></i><span>영화 관리</span><span
 							class="pull-right-container"><i
 								class="fa fa-angle-right pull-right"></i></span></a>
 					<ul class="treeview-menu ">
@@ -50,14 +50,14 @@
 							<li class="movielist"><a href="insert_movie.do">영화 등록</a></li>
 							<li><a href="select_all_movielist.do">등록된 영화 목록</a></li>
 						</ul></li>
-					<li class="treeview"><a href="#"><i class="icon-people"></i><span>회원 관리</span><span
+					<li class="treeview"><a href="#"><i class="fa fa-address-card-o"></i><span>회원 관리</span><span
 							class="pull-right-container"><i
 								class="fa fa-angle-right pull-right"></i></span></a>
 					<ul class="treeview-menu">
 							<li><a href="allMemberView">전체 회원관리</a></li>
 							<li><a href="allQnaView">전체 문의내역</a></li>
 						</ul></li>
-					<li class="treeview"><a href="#"><i class="icon-people"></i><span>영화관 관리</span><span
+					<li class="treeview"><a href="#"><i class="fa fa-fw fa-hospital-o"></i><span>영화관 관리</span><span
 							class="pull-right-container"><i
 								class="fa fa-angle-right pull-right"></i></span></a>
 					<ul class="treeview-menu">

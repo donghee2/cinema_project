@@ -12,6 +12,7 @@
 <meta name="author" content="">
 <link rel="icon" href="../../../images/favicon.ico">
 <title>${title }</title>
+<link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/timepicker/1.3.5/jquery.timepicker.min.css">
 <!-- Bootstrap 4.0-->
 <link rel="stylesheet"
 	href="../../../assets/vendor_components/bootstrap/dist/css/bootstrap.min.css">
