@@ -907,7 +907,7 @@ public class MainController {
 		String mcode = movielist.get(0).getMcode();
 		
 		// sdate 임시 재설정
-		sdate = "22/07/02";
+//		sdate = "22/07/02";
 		// 해당 영화 상영 지점 출력
 		List<ScreenDTO> screenlist = screenservice.selectScreenList(mcode, sdate);
 		
@@ -923,7 +923,7 @@ public class MainController {
 		String sdate = LocalDate.now().format(formatter);
 		
 		// sdate 임시 재설정
-		sdate = "22/07/02";
+//		sdate = "22/07/02";
 				
 		System.out.println("screenListView, mcode : "+mcode);
 		System.out.println("movieListView, sdate : "+sdate);
@@ -935,9 +935,9 @@ public class MainController {
 	
 	@RequestMapping("/movieListView.do")
 	public ResponseEntity<List<BookingDTO>> MovieListView(String screenCode, String sdate, String mcode, Model model) {
-
+		
 		// sdate 임시 재설정
-		sdate = "22/07/02";
+//		sdate = "22/07/02";
 		
 		System.out.println("movieListView, screenCode : "+screenCode);
 		System.out.println("movieListView, sdate : "+sdate);
