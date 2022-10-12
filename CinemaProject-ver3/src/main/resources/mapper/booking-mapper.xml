@@ -11,8 +11,8 @@
 	<select id="selectSeatType" parameterType="String" resultType="screen">
 		select s.*, (select distinct seattype from seat st where st.screencode = #{screenCode}) as seattype,
 		(select distinct 
-		(select seatcode from seattype sp where sp.seattype = st.seattype)
-		from seat st where st.screencode = #{screenCode}) as seatcode
+		(select seattag from seattype sp where sp.seattype = st.seattype)
+		from seat st where st.screencode = #{screenCode}) as seattag
 		from screen s where screencode = #{screenCode}
 	</select>
 	

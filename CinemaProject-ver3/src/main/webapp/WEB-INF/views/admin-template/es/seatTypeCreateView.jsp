@@ -232,7 +232,7 @@
 												<td colspan="3">
 													<select class="seat-select form-control select2 w-p100" name="seatType">
 														<c:forEach var="s" items="${requestScope.seatlist }">
-															<option value="${s.seatType },${s.seatCode }">${s.seatType }</option>
+															<option value="${s.seatType },${s.seatTag }">${s.seatType }</option>
 														</c:forEach>
 													</select>
 												</td>
@@ -244,7 +244,7 @@
 									</div>
 						<div class="topbar-filter fw">
 						<div class="tag-div">
-								${requestScope.seatlist[0].seatCode }
+								${requestScope.seatlist[0].seatTag }
 						</div>
 						</div>
 							<!-- /.post -->
@@ -280,7 +280,7 @@
 									</table>
 									<div class="create-div">
 									</div>
-										<input class="tag" type="hidden" name="tag">
+										<input class="tag" type="hidden" name="seatTag">
 									<button type="submit" class="btn-typeDelete btn-danger btn-sm text-white">타입 등록하기</button>
 								</form>
 		              	</div>

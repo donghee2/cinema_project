@@ -10,6 +10,7 @@ public class ScreenDTO {
 	private String screenName;
 	private String seatType;
 	private String seatCode;
+	private String seatTag;
 	private int allseat;
 	
 	private String timeCode;
@@ -25,6 +26,18 @@ public class ScreenDTO {
 	
 	
 	
+	public String getSeatTag() {
+		return seatTag;
+	}
+
+
+
+	public void setSeatTag(String seatTag) {
+		this.seatTag = seatTag;
+	}
+
+
+
 	public String getRunTime() {
 		return runTime;
 	}
@@ -165,12 +178,17 @@ public class ScreenDTO {
 		this.screenName = screenName;
 	}
 
+
+
 	@Override
 	public String toString() {
 		return "ScreenDTO [screenCode=" + screenCode + ", cinemaCode=" + cinemaCode + ", cinemaName=" + cinemaName
-				+ ", screenName=" + screenName + ", seatType=" + seatType + ", seatCode=" + seatCode + ", allseat="
-				+ allseat + ", timeCode=" + timeCode + ", title=" + title + ", mcode=" + mcode + ", movieDate="
-				+ movieDate + ", startTime=" + startTime + ", endTime=" + endTime + ", runTime=" + runTime + "]";
+				+ ", screenName=" + screenName + ", seatType=" + seatType + ", seatCode=" + seatCode + ", seatTag="
+				+ seatTag + ", allseat=" + allseat + ", timeCode=" + timeCode + ", title=" + title + ", mcode=" + mcode
+				+ ", movieDate=" + movieDate + ", startTime=" + startTime + ", endTime=" + endTime + ", runTime="
+				+ runTime + "]";
 	}
+	
+	
 	
 }

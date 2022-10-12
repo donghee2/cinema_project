@@ -963,7 +963,7 @@ public class MainController {
 		ScreenDTO seatdto = bookingservice.selectSeatType(screenCode);
 		List<String> bookedSeat = bookingservice.selectBookedSeat(timeCode);
 		tag ="";
-		String str = seatdto.getSeatCode();
+		String str = seatdto.getSeatTag();
 //		FileReader fr;
 //		try {
 //			fr = new FileReader(seatType + ".txt");
@@ -1348,11 +1348,11 @@ public class MainController {
 		List<ScreenDTO> seatlist = screenservice.selectAllSeatType();
 		
 		for(int i=0;i<seatlist.size();i++) {
-			String str = seatlist.get(i).getSeatCode();
+			String str = seatlist.get(i).getSeatTag();
 			str = str.replace("/", "<div class='empty'></div>");
 			str = str.replace("^", "<br>");
 			str = str.replace("*", "<input type='button' class='seat'>");
-			seatlist.get(i).setSeatCode(str);
+			seatlist.get(i).setSeatTag(str);
 		}
 		
 		model.addAttribute("seatlist", seatlist);
@@ -1363,15 +1363,15 @@ public class MainController {
 	}
 	
 	@RequestMapping("/insertSeatType.do")
-	public void insertSeatType(String tag, String seatType, HttpServletResponse response, HttpServletRequest request) 
+	public void insertSeatType(String seatTag, String seatType, HttpServletResponse response, HttpServletRequest request) 
 			throws IOException {
-		System.out.println("old tag: " + tag);
+		System.out.println("old tag: " + seatTag);
 		
-		tag = tag.replace("<div class='empty'></div>", "/");
-		tag = tag.replace("<br>", "^");
-		tag = tag.replace("<input type='button' class='seat'>", "*");
-		System.out.println("new tag: " + tag);
-		int result = screenservice.insertSeatType(seatType, tag);
+		seatTag = seatTag.replace("<div class='empty'></div>", "/");
+		seatTag = seatTag.replace("<br>", "^");
+		seatTag = seatTag.replace("<input type='button' class='seat'>", "*");
+		System.out.println("new tag: " + seatTag);
+		int result = screenservice.insertSeatType(seatType, seatTag);
 		
 		response.setContentType("text/html;charset=utf-8");
 		

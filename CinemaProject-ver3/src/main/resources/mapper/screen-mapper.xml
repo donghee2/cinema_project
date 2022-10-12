@@ -87,7 +87,7 @@
 	</select>
 	
 	<insert id="insertSeatType" parameterType="map">
-		insert into seattype values(#{seatType}, #{seatCode})
+		insert into seattype values(#{seatType}, #{seatTag})
 	</insert>
 	
 	<delete id="deleteSeatType" parameterType="String">

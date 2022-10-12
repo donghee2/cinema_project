@@ -101,10 +101,10 @@ public class ScreenService {
 		return mapper.selectAllSeatType();
 	}
 
-	public int insertSeatType(String seatType, String tag) {
+	public int insertSeatType(String seatType, String seatTag) {
 		Map<String, Object> map = new HashMap<String, Object>();
 		map.put("seatType", seatType);
-		map.put("seatCode", tag);
+		map.put("seatTag", seatTag);
 		return mapper.insertSeatType(map);
 	}
 

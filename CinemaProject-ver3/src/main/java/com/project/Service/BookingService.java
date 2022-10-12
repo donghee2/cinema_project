@@ -28,6 +28,9 @@ public class BookingService {
 		map.put("totalPrice", totalPrice);
 		int result = 0;
 		mapper.insertBooking(map);
+		String bookingCode = mapper.selectBookingcode();
+		System.out.println("Booking bookingCode : " + bookingCode);
+		
 		System.out.println("Booking 테이블 등록 완료");
 			
 		for(int i=4;i<seatList.length;i++) {
@@ -39,8 +42,6 @@ public class BookingService {
 			System.out.println("Booking seatNo : " + map.get("seatNo"));
 			System.out.println("Booking seatCode : " + seatCode);
 			
-			String bookingCode = mapper.selectBookingcode();
-			System.out.println("Booking bookingCode : " + bookingCode);
 			
 			map.put("seatCode", seatCode);
 			map.put("bookingCode", bookingCode);
