@@ -71,7 +71,7 @@
 		select 
 		(select runtime from moviedb md where md.mcode = sm.mcode) as runtime,
 		(select title from moviedb md where md.mcode = sm.mcode) as title, 
-		sm.* from screen_movie sm where screencode = #{screencode} and <![CDATA[startdate < sysdate]]> and enddate > sysdate
+		sm.* from screen_movie sm where <![CDATA[startdate < sysdate]]> and enddate > sysdate
 	</select>
 	
 	<update id="updateSchedule" parameterType="screen">
